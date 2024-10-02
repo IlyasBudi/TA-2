@@ -41,7 +41,7 @@
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->category_bus->name }}</td>
-                                        <td>{{ $item->departure_date }}|{{ $item->arrival_date }}</td>
+                                        <td>{{ $item->departure_date }}|{{ $item->return_date }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td><a href="/admin/transaction/{{ $item->id }}"
                                                 class="btn btn-primary"><i class="bi bi-eye-fill text-white"></i></a>

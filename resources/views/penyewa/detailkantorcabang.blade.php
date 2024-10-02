@@ -28,7 +28,8 @@
 
     <style>
         #map {
-            height: 460px;
+            height: 310px;
+            width: 560px;
             z-index: 0;
         }
     </style>
@@ -172,7 +173,7 @@
     // nilai latitude dan longitude bisa di ambil dari google map
     var map = L.map('map', {
         center: [{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}],
-        zoom: 18,
+        zoom: 16,
         // maxZoom: 24,
         layers: [streets]
     });

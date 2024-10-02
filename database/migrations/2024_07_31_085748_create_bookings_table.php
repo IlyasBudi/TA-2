@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             // $table->string('destination');
+            $table->integer('total_price');
+            $table->integer('extra_charge');
             $table->date('departure_date');
-            $table->date('arrival_date');
+            $table->date('return_date');
             $table->time('pickup_time');
             $table->string('longitude');
             $table->string('latitude');
@@ -27,7 +29,7 @@ return new class extends Migration
             $table->foreignId('kantor_cabang_id');
             $table->foreign('kantor_cabang_id')->references('id')->on('kantor_cabangs')->onDelete('cascade');
             $table->foreignId('destination_id');
-            $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
+            $table->foreign('destination_id')->references(columns: 'id')->on('destinations')->onDelete('cascade');
             $table->foreignId('category_bus_id');
             $table->foreign('category_bus_id')->references('id')->on('category_buses')->onDelete('cascade');
             $table->foreignId('bus_id');

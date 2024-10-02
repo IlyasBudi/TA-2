@@ -28,7 +28,7 @@
 
     <style>
         #map {
-            height: 560px;
+            height: 260px;
             z-index: 0;
         }
     </style>
@@ -69,7 +69,7 @@
                                 </tr>
                                 <tr>
                                     <th>Destinasi</th>
-                                    <td>{{ $transaction->destination }}</td>
+                                    <td>{{ $transaction->destination->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Keberangkatan</th>
@@ -77,7 +77,7 @@
                                 </tr>
                                 <tr>
                                     <th>Tanggal Kepulangan</th>
-                                    <td>{{ $transaction->arrival_date }}</td>
+                                    <td>{{ $transaction->return_date }}</td>
                                 </tr>
                                 <tr>
                                     <th>Waktu Penjemputan</th>
