@@ -14,20 +14,20 @@ class TransactionController extends Controller
 {
     public function transaction()
     {
-        $transaction = booking::with(['user', 'category_bus'])->get();
+        $transaction = transaction::with(['user', 'category_bus'])->get();
 
         return view('admin.transaction.index', compact('transaction'));
     }
 
     public function destroy(string $id)
     {
-        booking::destroy($id);
+        transaction::destroy($id);
         return redirect('/admin/transaction');
     }
 
     public function show(string $id)
     {
-        $transaction = booking::with(['user', 'category_bus'])->findOrFail($id);
+        $transaction = transaction::with(['user', 'category_bus'])->findOrFail($id);
 
         // Hitung jumlah hari antara departure_date dan return_date
         $departureDate = Carbon::parse($transaction->departure_date);

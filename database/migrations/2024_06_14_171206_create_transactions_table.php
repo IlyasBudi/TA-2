@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->integer('total_price');
+            $table->integer('extra_charge');
+            // $table->string('transaction_status');
+            $table->date('departure_date');
+            $table->date('return_date');
+            $table->time('pickup_time');
+            $table->string('longitude');
+            $table->string('latitude');
             $table->foreignId('kantor_cabang_id');
             $table->foreign('kantor_cabang_id')->references('id')->on('kantor_cabangs')->onDelete('cascade');
             $table->foreignId('user_id');
@@ -24,17 +32,6 @@ return new class extends Migration
             $table->foreign('bus_id')->references('id')->on('buses')->onDelete('cascade');
             $table->foreignId('destination_id');
             $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
-            $table->string('destination');
-            $table->integer('total_price');
-            $table->integer('extra_charge');
-            $table->string('transaction_status');
-            // $table->string('location')->nullable(true);
-            $table->string('longitude');
-            $table->string('latitude');
-            $table->date('departure_date');
-            $table->date('return_date');
-            // $table->integer('down_payment');
-            // $table->integer('remaining_payment');
             $table->timestamps();
         });
     }
