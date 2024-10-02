@@ -29,10 +29,10 @@ class TransactionController extends Controller
     {
         $transaction = booking::with(['user', 'category_bus'])->findOrFail($id);
 
-        // Hitung jumlah hari antara departure_date dan arrival_date
+        // Hitung jumlah hari antara departure_date dan return_date
         $departureDate = Carbon::parse($transaction->departure_date);
-        $arrivalDate = Carbon::parse($transaction->arrival_date);
-        $daysDifference = $departureDate->diffInDays($arrivalDate);
+        $returnDate = Carbon::parse($transaction->return_date);
+        $daysDifference = $departureDate->diffInDays($returnDate);
         $jumlah_hari = $daysDifference + 1;
 
         // $category_bus = $transaction->category_bus;

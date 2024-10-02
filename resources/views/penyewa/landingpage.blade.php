@@ -144,14 +144,14 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Kantor Cabang</h2>
+        <h2><a href="">Kantor Cabang</a></h2>
         <p>Kunjungi kantor cabang kami yang tersebar di berbagai lokasi untuk mendapatkan informasi lengkap terkait pemesanan bus pariwisata.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
           
         <div class="row gy-4">
-          @foreach ($kantorcabangs as $kantorcabang)
+          @forelse ($kantorcabangs as $kantorcabang)
           <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <article>
 
@@ -165,11 +165,13 @@
 
               <p class="post-category">{{ $kantorcabang->address }}</p>
 
+              
             </article>
           </div><!-- End post list item -->
-
           
-          @endforeach
+          @empty
+              <p class="text-center">Belum ada data kantor cabang</p>
+          @endforelse
         </div><!-- End recent posts list -->
         
       </div>

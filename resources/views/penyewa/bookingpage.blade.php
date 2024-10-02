@@ -106,7 +106,7 @@
 
                     <div class="col-12">
                         <label class="label-form">Tanggal Kepulangan</label>
-                        <input type="date" class="form-control" name="arrival_date" placeholder="Tanggal Kepulangan" required>
+                        <input type="date" class="form-control" name="return_date" placeholder="Tanggal Kepulangan" required>
                     </div>
 
                     <div class="col-12">
@@ -324,19 +324,19 @@
     document.addEventListener('DOMContentLoaded', function () {
         const destinationSelect = document.getElementById('destination');
         const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const arrivalDateInput = document.querySelector('input[name="arrival_date"]');
+        const returnDateInput = document.querySelector('input[name="return_date"]');
         const bookingForm = document.querySelector('.booking-form');
 
         bookingForm.addEventListener('submit', function (event) {
             const destination = destinationSelect.value;
             const departureDate = new Date(departureDateInput.value);
-            const arrivalDate = new Date(arrivalDateInput.value);
+            const returnDate = new Date(returnDateInput.value);
 
             if (destination === 'Pelabuhan Ratu') {
-                const timeDifference = arrivalDate.getTime() - departureDate.getTime();
+                const timeDifference = returnDate.getTime() - departureDate.getTime();
                 const dayDifference = timeDifference / (1000 * 3600 * 24);
 
-                if (dayDifference < 2) {
+                if (dayDifference < 1) {
                     event.preventDefault();
                     alert('Minimal pemesanan untuk destinasi yang dipilih adalah 2 hari.');
                 }
@@ -348,19 +348,19 @@
     document.addEventListener('DOMContentLoaded', function () {
         const destinationSelect = document.getElementById('destination');
         const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const arrivalDateInput = document.querySelector('input[name="arrival_date"]');
+        const returnDateInput = document.querySelector('input[name="return_date"]');
         const bookingForm = document.querySelector('.booking-form');
 
         bookingForm.addEventListener('submit', function (event) {
             const destination = destinationSelect.value;
             const departureDate = new Date(departureDateInput.value);
-            const arrivalDate = new Date(arrivalDateInput.value);
+            const returnDate = new Date(returnDateInput.value);
 
             if (destination === 'Jogja' || destination === 'Semarang - Kudus' || destination === 'Malang' || destination === 'Dieng' || destination === 'Palembang') {
-                const timeDifference = arrivalDate.getTime() - departureDate.getTime();
+                const timeDifference = returnDate.getTime() - departureDate.getTime();
                 const dayDifference = timeDifference / (1000 * 3600 * 24);
 
-                if (dayDifference < 3) {
+                if (dayDifference < 2) {
                     event.preventDefault();
                     alert('Minimal pemesanan untuk destinasi yang dipilih adalah 3 hari.');
                 }
@@ -372,19 +372,19 @@
     document.addEventListener('DOMContentLoaded', function () {
         const destinationSelect = document.getElementById('destination');
         const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const arrivalDateInput = document.querySelector('input[name="arrival_date"]');
+        const returnDateInput = document.querySelector('input[name="return_date"]');
         const bookingForm = document.querySelector('.booking-form');
 
         bookingForm.addEventListener('submit', function (event) {
             const destination = destinationSelect.value;
             const departureDate = new Date(departureDateInput.value);
-            const arrivalDate = new Date(arrivalDateInput.value);
+            const returnDate = new Date(returnDateInput.value);
 
             if (destination === 'Ziarah') {
-                const timeDifference = arrivalDate.getTime() - departureDate.getTime();
+                const timeDifference = returnDate.getTime() - departureDate.getTime();
                 const dayDifference = timeDifference / (1000 * 3600 * 24);
 
-                if (dayDifference < 4) {
+                if (dayDifference < 3) {
                     event.preventDefault();
                     alert('Minimal pemesanan untuk destinasi yang dipilih adalah 4 hari.');
                 }
@@ -396,19 +396,19 @@
     document.addEventListener('DOMContentLoaded', function () {
         const destinationSelect = document.getElementById('destination');
         const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const arrivalDateInput = document.querySelector('input[name="arrival_date"]');
+        const returnDateInput = document.querySelector('input[name="return_date"]');
         const bookingForm = document.querySelector('.booking-form');
 
         bookingForm.addEventListener('submit', function (event) {
             const destination = destinationSelect.value;
             const departureDate = new Date(departureDateInput.value);
-            const arrivalDate = new Date(arrivalDateInput.value);
+            const returnDate = new Date(returnDateInput.value);
 
             if (destination === 'Bali') {
-                const timeDifference = arrivalDate.getTime() - departureDate.getTime();
+                const timeDifference = returnDate.getTime() - departureDate.getTime();
                 const dayDifference = timeDifference / (1000 * 3600 * 24);
 
-                if (dayDifference < 7) {
+                if (dayDifference < 6) {
                     event.preventDefault();
                     alert('Minimal pemesanan untuk destinasi yang dipilih adalah 7 hari.');
                 }
@@ -420,17 +420,17 @@
     document.addEventListener('DOMContentLoaded', function () {
         const pickUpTimeInput = document.querySelector('input[name="pickup_time"]');
         const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const arrivalDateInput = document.querySelector('input[name="arrival_date"]');
+        const returnDateInput = document.querySelector('input[name="return_date"]');
 
         // Set minimum date to today
         const today = moment().tz("Asia/Jakarta").format('YYYY-MM-DD');
         // const today = new Date().toISOString().split('T')[0];
         departureDateInput.setAttribute('min', today);
-        arrivalDateInput.setAttribute('min', today);
+        returnDateInput.setAttribute('min', today);
 
         departureDateInput.addEventListener('change', function () {
             const departureDate = this.value;
-            arrivalDateInput.setAttribute('min', departureDate);
+            returnDateInput.setAttribute('min', departureDate);
         });
     
         pickUpTimeInput.addEventListener('change', function () {

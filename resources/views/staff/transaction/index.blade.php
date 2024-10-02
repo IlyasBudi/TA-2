@@ -56,7 +56,7 @@
                                         <td>{{ $transaction->user->name }}</td>
                                         <td>{{ $transaction->category_bus->name }}</td>
                                         <td>{{ $transaction->destination->name }}</td>
-                                        <td>{{ $transaction->departure_date }} - {{ $transaction->arrival_date }}</td>
+                                        <td>{{ $transaction->departure_date }} - {{ $transaction->return_date }}</td>
                                         {{-- <td>{{ $transaction->transaction_status }}</td> --}}
                                         {{-- <td>{{ $transaction->created_at }}</td> --}}
                                         <td>
