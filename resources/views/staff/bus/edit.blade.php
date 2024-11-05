@@ -49,9 +49,10 @@
                                 <label class="col-sm-2 col-form-label">Category Bus</label>
                                 <div class="col-sm-10">
                                   <select class="form-select  @error('category_bus_id') is-invalid @enderror" aria-label="Default select example" name="category_bus_id" id='category_bus_id'>
-                                    <option selected>Pilih Kategori</option>
+                                    <!-- <option selected>Pilih Kategori</option> -->
                                     @foreach ($categorybus as $categorybus)
-                                    <option value="{{ $categorybus->id }}">{{ $categorybus->name }}</option>
+                                    <option value="{{ $categorybus->id }}"
+                                    {{ $categorybus->id == old('category_bus_id', $bus->category_bus_id) ? 'selected' : '' }}>{{ $categorybus->name }}</option>
                                     @endforeach
                                   </select>
                                 </div>
@@ -123,7 +124,7 @@
                                 <label class="col-sm-2 col-form-label">Status:</label>
                                 <div class="col-sm-10">
                                   <select class="form-select  @error('status') is-invalid @enderror" aria-label="Default select example" name="status" id='status'>
-                                    {{-- <option selected>Pilih Status</option> --}}
+                                    <option selected value="{{ $bus->status }}">{{ $bus->status }}</option>
                                     <option value="Tersedia">Tersedia</option>
                                     <option value="Tidak Tersedia">Tidak Tersedia</option>
                                   </select>

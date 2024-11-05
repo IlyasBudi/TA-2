@@ -52,7 +52,7 @@
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="/staff/laporan">
           <i class="bi bi-menu-button-wide"></i>
           <span>Laporan</span>
         </a>
