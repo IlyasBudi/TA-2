@@ -74,7 +74,7 @@
                                 <label for="phone_number" class="col-sm-2 col-form-label">Nomor Telepon</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
-                                        name="phone_number" value="{{ $kantorcabang->phone_number }}">
+                                        name="phone_number">
                                 </div>
                                 @error('phone_number')
                                     <div class="invalid-feedback">
@@ -108,7 +108,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <input type="text" class="form-control @error('longitude') is-invalid @enderror"
-                                            name="longitude" id="longitude" value="{{ $kantorcabang->longitude }}">
+                                            name="longitude" id="longitude">
                                         {{-- <button class="btn btn-success" type="button" onclick="addMarker();">Cek</button> --}}
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <input type="text" class="form-control @error('latitude') is-invalid @enderror"
-                                            name="latitude" id="latitude" value="{{ $kantorcabang->latitude }}">
+                                            name="latitude" id="latitude">
                                         {{-- <button class="btn btn-success" type="button" onclick="addMarker();">Cek</button> --}}
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@
         // Untuk nilai dari latitude longitude bisa disesuaikan dengan lokasi yang di inginkan 
         // nilai latitude dan longitude bisa di ambil dari google map
         var map = L.map('map', {
-            center: [{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}],
+            center: [-6.223011844553948, 106.6428825914336],
             zoom: 18,
             // maxZoom: 24,
             layers: [streets]
@@ -216,7 +216,7 @@
 
         // set koordinat lokasi ke dalam curLocation yang mana nilai dari curLocation juga akan
         // digunakan untuk menampilkan marker pada map
-        var curLocation = [{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}];
+        var curLocation = [-6.223011844553948, 106.6428825914336];
         map.attributionControl.setPrefix(false);
 
         var marker = new L.marker(curLocation, {
