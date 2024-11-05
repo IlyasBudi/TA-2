@@ -9,21 +9,20 @@ class transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'code',
         'kantor_cabang_id',
         'user_id',
         'category_bus_id',
         'bus_id',
         'destination_id',
-        'destination',
+        'code',
         'total_price',
         'extra_charge',
-        'transaction_status',
-        'location',
+        // 'transaction_status',
         'departure_date',
         'return_date',
-        'down_payment',
-        'remaining_payment',
+        'pickup_time',
+        'longitude',
+        'latitude',
     ];
 
     public function kantor_cabang()

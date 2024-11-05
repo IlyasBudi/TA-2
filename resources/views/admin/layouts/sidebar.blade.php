@@ -38,7 +38,7 @@
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="/admin/laporan">
           <i class="bi bi-menu-button-wide"></i>
           <span>Laporan</span>
         </a>

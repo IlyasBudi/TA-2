@@ -13,6 +13,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StaffTransactionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LaporanController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -147,6 +148,9 @@ Route::prefix('/admin')->middleware('auth:admin')->group(function () {
         Route::get('/transaction', [TransactionController::class, 'transaction']);
         Route::get('/transaction/{id}', [TransactionController::class, 'show']);
         // Route::get('/transaction/{id}/delete', [TransactionController::class, 'destroy']);
+
+        // LAPORAN
+        Route::get('/laporan', [AdminController::class, 'laporanAdmin']);
     }
 );
 
@@ -194,6 +198,8 @@ Route::prefix('/staff')->middleware('auth:staff')->group(
         Route::get("/profile/{id}",[StaffController::class, "staffProfile"]);
         Route::put("/profile/{id}", [StaffController::class, "staffUpdate"]);
         
+        // LAPORAN
+        Route::get('/laporan', [LaporanController::class, 'index']);
         
     }
 );

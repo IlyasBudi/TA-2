@@ -51,9 +51,9 @@
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="tab-pane fade show active p-3">
-                                <h5>Transaksi</h5>
+                            <div class="tab-pane fade show active p-3  id="one" role="tabpanel" aria-labelledby="one-tab">
                                 {{-- @if ($profile->transactions->isNotEmpty()) --}}
+                                    <h5>Transaksi</h5>
                                     <p class="card-text">Daftar semua transaksi yang pernah kamu lakukan</p>
                                     {{-- @foreach ($profile->transactions as $transaction) --}}
                                         <div class="my-3 p-4 rounded shadow">
@@ -63,14 +63,13 @@
                                                     <p class="mb-0"></p>
                                                 </div>
                                                 <p class="mb-0 bg-dark px-2 py-1 rounded badge">
-                                                    </p>
+                                                    Lunas</p>
                                             </div>
                                             <hr>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <p class="mb-0 meta">Total Belanja:</p>
-                                                    <p class="fw-bold mb-0">Rp
-                                                    </p>
+                                                    <p class="fw-bold mb-0">Rp</p>
                                                 </div>
                                                 <a href="/profile/transaction/"
                                                     class="btn btn-sm btn-primary">Detail Transaksi</a>
@@ -78,7 +77,7 @@
                                         </div>
                                     {{-- @endforeach --}}
                                 {{-- @else --}}
-                                    {{-- <p class="text-center">Kamu belum memiliki transaksi</p> --}}
+                                    <!-- <p class="text-center">Kamu belum memiliki transaksi</p> -->
                                 {{-- @endif --}}
                             </div>
                         </div>

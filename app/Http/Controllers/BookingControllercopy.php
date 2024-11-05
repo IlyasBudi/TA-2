@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
+use App\Models\admin;
 use App\Models\booking;
 use App\Models\category_bus;
 use App\Models\bus;
 use App\Models\destination;
+use App\Models\User;
 use App\Models\kantor_cabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
-use App\Models\transaction;
+use Carbon\Carbon;
 
 
 
-class BookingController extends Controller
+class BookingControllercopy extends Controller
 {
     private function generateUniqueCode()
     {
         do {
             $code = 'TRANS-' . mt_rand(000, 999);
-        } while (transaction::where('code', $code)->exists());
+        } while (Booking::where('code', $code)->exists());
 
         return $code;
     }
@@ -88,7 +90,7 @@ class BookingController extends Controller
         $return_date = $validated['return_date'];
         // $bus_id = $bus_id;
 
-        $existingBookings = transaction::where('bus_id', $bus_id)
+        $existingBookings = booking::where('bus_id', $bus_id)
             ->where(function ($query) use ($departure_date, $return_date) {
                 $query->whereBetween('departure_date', [$departure_date, $return_date])
                     ->orWhereBetween('return_date', [$departure_date, $return_date])
@@ -104,7 +106,7 @@ class BookingController extends Controller
                                     ->where('category_bus_id', $validated['category_bus_id'])
                                     ->where('status', 'Tersedia')
                                     ->where('id', '!=', $bus_id)
-                                    ->whereDoesntHave('transaction', function ($query) use ($departure_date, $return_date) {
+                                    ->whereDoesntHave('booking', function ($query) use ($departure_date, $return_date) {
                                         $query->whereBetween('departure_date', [$departure_date, $return_date])
                                             ->orWhereBetween('return_date', [$departure_date, $return_date])
                                             ->orWhere(function ($query) use ($departure_date, $return_date) {
@@ -128,7 +130,7 @@ class BookingController extends Controller
                             $alternativeBus = bus::where('kantor_cabang_id', $kantorcabang->id)
                                                 ->where('category_bus_id', $validated['category_bus_id'])
                                                 ->where('status', 'Tersedia')
-                                                ->whereDoesntHave('transaction', function ($query) use ($departure_date, $return_date) {
+                                                ->whereDoesntHave('booking', function ($query) use ($departure_date, $return_date) {
                                                     $query->whereBetween('departure_date', [$departure_date, $return_date])
                                                         ->orWhereBetween('return_date', [$departure_date, $return_date])
                                                         ->orWhere(function ($query) use ($departure_date, $return_date) {
@@ -191,7 +193,7 @@ class BookingController extends Controller
             $total_price = $bus_price + $total_destination_price + $extra_charge;
 
             try {
-                $booking = transaction::create([
+                $booking = booking::create([
                     'code' => $code,
                     'admin_id' => $admin_id,
                     'user_id' => $user_id,
