@@ -73,15 +73,15 @@
                                 </tr>
                                 <tr>
                                     <th>Tanggal Keberangkatan</th>
-                                    <td>{{ date('d-m-Y', strtotime($transaction->departure_date)) }}</td>
+                                    <td>{{ $transaction->departure_date }}</td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Kepulangan</th>
-                                    <td>{{ date('d-m-Y', strtotime($transaction->return_date)) }}</td>
+                                    <td>{{ $transaction->return_date }}</td>
                                 </tr>
                                 <tr>
                                     <th>Waktu Penjemputan</th>
-                                    <td>{{ date('H:i', strtotime($transaction->pickup_time)) }}</td>
+                                    <td>{{ $transaction->pickup_time }}</td>
                                 </tr>
                                 {{-- <tr>
                                     <th>Jumlah Hari</th>
@@ -90,12 +90,8 @@
                                 
                                 <tr>
                                 <tr>
-                                    <th>Tanggal Pemesanan</th>
-                                    <td>{{ \Carbon\Carbon::parse($transaction->create_at)->format('d-m-Y H:i') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Total Harga</th>
-                                    <td>Rp{{ number_format($transaction->total_price) }}</td>
+                                    <th>Tanggal</th>
+                                    <td>{{ $transaction->created_at }}</td>
                                 </tr>
 
                                 <tr>
@@ -188,7 +184,7 @@
     // nilai latitude dan longitude bisa di ambil dari google map
     var map = L.map('map', {
         center: [{{ $transaction->latitude }}, {{ $transaction->longitude }}],
-        zoom: 16,
+        zoom: 18,
         // maxZoom: 24,
         layers: [streets]
     });

@@ -83,7 +83,6 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'name' => 'string',
-            'phone_number' => 'string',
             'image' => 'string',
             'address' => 'string',
             // 'location' => 'string',
@@ -102,11 +101,8 @@ class AdminController extends Controller
 
         $staff_id = $kantorcabang->staff->id;
 
-        dd($validated);
-
         kantor_cabang::where('id', $id)->update([
             "name" => $validated["name"],
-            'phone_number' => $validated['phone_number'],
             "image" => $newImage["image"],
             "address" => $validated["address"],
             // "location" => $validated["location"],
@@ -125,10 +121,5 @@ class AdminController extends Controller
         return view('admin.transaction.index', compact('transaction'));
     }
 
-    public function laporanAdmin()
-    {
-        $kantorcabangs = kantor_cabang::all();
-        return view('admin.laporan.index', compact('kantorcabangs'));
-    }
 
 }
