@@ -13,10 +13,10 @@ class detail_transaction extends Model
         'bus_id',
         'destination_id',
         'total_price',
-        'remaining_payment',
-        'transaction_status',
-        'departure_date',
-        'return_date',
+        // 'remaining_payment',
+        // 'transaction_status',
+        // 'departure_date',
+        // 'return_date',
     ];
 
     public function transaction()

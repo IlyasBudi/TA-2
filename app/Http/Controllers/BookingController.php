@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Exception;
 use App\Models\transaction;
+use App\Models\detail_transaction;
+use Midtrans\Snap;
+use Midtrans\Config;
+use Midtrans\Notification;
 
 
 
@@ -45,7 +50,7 @@ class BookingController extends Controller
 
         $validated = $request->validate([
             'code' => 'required',
-            'admin_id' => 'required',
+            // 'admin_id' => 'required',
             'user_id' => 'required',
             'category_bus_id' => 'required',
             'destination' => 'required',
@@ -189,11 +194,13 @@ class BookingController extends Controller
 
             // Hitung total_price (harga total)
             $total_price = $bus_price + $total_destination_price + $extra_charge;
+            
+            $validated['transaction_status'] = 'Pending';
 
             try {
                 $booking = transaction::create([
                     'code' => $code,
-                    'admin_id' => $admin_id,
+                    // 'admin_id' => $admin_id,
                     'user_id' => $user_id,
                     'kantor_cabang_id' => $kantorcabang_id,
                     'destination_id' => $destination_id,
@@ -202,17 +209,54 @@ class BookingController extends Controller
                     // 'destination' => $validated['destination'],
                     'total_price' => $total_price,
                     'extra_charge' => $extra_charge,
+                    'transaction_status' => $validated['transaction_status'],
                     'departure_date' => $validated['departure_date'],
                     'return_date' => $validated['return_date'],
                     'pickup_time' => $validated['pickup_time'],
                     'longitude' => $validated['longitude'],
                     'latitude' => $validated['latitude'],
                 ]);
+
+                detail_transaction::create([
+                    'transaction_id' => $booking->id,
+                    'bus_id' => $booking->bus_id,
+                    'destination_id' => $booking->destination_id,
+                    'total_price' => $booking->total_price,
+                    'transaction_status' => 'Pending',
+                ]);
+
+                // Midtrans Configuration
+                Config::$serverKey = config('config.midtrans.serverKey');
+                Config::$isProduction = config('config.midtrans.isProduction');
+                Config::$isSanitized = config('config.midtrans.isSanitized');
+                Config::$is3ds = config('config.midtrans.is3ds');
+
+                //Buat array untuk dikirim ke midtrans
+                $midtrans = [
+                    'transaction_details' => [
+                        'order_id' => $booking->id,
+                        'gross_amount' => $booking->total_price,
+                    ],
+                    'customer_details' => [
+                        'first_name' => Auth::user()->name,
+                        'email' => Auth::user()->email,
+                        'phone' => Auth::user()->phone,
+                        'address' => Auth::user()->address,
+                    ],
+                    'vtweb' => []
+                ];
+
+                // get Snap Payment Page URL
+                $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+
+                // Commit the transaction and decrement stock only if it was successful
+                DB::commit();
     
                 // $booking->save();
                 // dd($booking);
-                return redirect('/')->with('Success', 'Booking berhasil dibuat!');
+                return redirect($paymentUrl)->with('Success', 'Booking berhasil dibuat!');
             } catch (\Exception $e) {
+                // dd($booking);
                 return back()->withInput()->withErrors(['error', 'Terjadi kesalahan saat membuat booking. Periksa kembali data yang dimasukkan.']);
             }
         }else{
@@ -243,6 +287,58 @@ class BookingController extends Controller
         $distance = $earthRadius * $c;
     
         return $distance;
+    }
+
+    public function callback(Request $request)
+    {
+        // Set Konfigurasi Midtrans
+        Config::$serverKey = config('config.midtrans.serverKey');
+        Config::$isProduction = config('config.midtrans.isProduction');
+        Config::$isSanitized = config('config.midtrans.isSanitized');
+        Config::$is3ds = config('config.midtrans.is3ds');
+
+        // Buat instance midtrans notification
+        $notification = new Notification();
+
+        // Assign ke variable untuk memudahkan penulisan code
+        $status = $notification->transaction_status;
+        $type = $notification->payment_type;
+        $fraud = $notification->fraud_status;
+        $order_id = $notification->order_id;
+
+        // Cari transaksi berdasarkan ID
+        $transaction = transaction::findOrFail($order_id);
+
+        // Handle notification status
+        if ($status == 'capture') {
+            if ($type == 'credit_cart') {
+                if ($fraud == 'challenge') {
+                    $transaction->transaction_status = 'PENDING';
+                    $transaction->update(['transaction_status' => 'Pending']);
+                } else {
+                    $transaction->transaction_status = 'SUCCESS';
+                    $transaction->update(['transaction_status' => 'Lunas']);
+                }
+            }
+        } else if ($status == 'settlement') {
+            $transaction->transaction_status = 'SUCCESS';
+            $transaction->update(['transaction_status' => 'Lunas']);
+        } else if ($status == 'pending') {
+            $transaction->transaction_status = 'PENDING';
+            $transaction->update(['transaction_status' => 'Pending']);
+        } else if ($status == 'deny') {
+            $transaction->transaction_status = 'CANCELLED';
+            $transaction->update(['transaction_status' => 'Cancelled']);
+        } else if ($status == 'expire') {
+            $transaction->transaction_status = 'CANCELLED';
+            $transaction->update(['transaction_status' => 'Cancelled']);
+        } else if ($status == 'cancel') {
+            $transaction->transaction_status = 'CANCELLED';
+            $transaction->update(['transaction_status' => 'Cancelled']);
+        }
+
+        // Simpan transaksi
+        $transaction->save();
     }
 
 }

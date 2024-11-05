@@ -21,9 +21,9 @@ return new class extends Migration
             $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
             $table->integer('total_price');
             // $table->integer('remaining_payment');
-            $table->string('transaction_status');
-            $table->date('departure_date');
-            $table->date('return_date');
+            // $table->string('transaction_status');
+            // $table->date('departure_date');
+            // $table->date('return_date');
             $table->timestamps();
         });
     }

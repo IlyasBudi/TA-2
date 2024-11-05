@@ -124,10 +124,10 @@
                         <input type="text" class="form-control" id="latitude" name="latitude"  required>
                     </div>
 
-                    <div class="col-12">
-                        {{-- <label class="label-form">Admin</label> --}}
+                    <!-- <div class="col-12">
+                        <label class="label-form">Admin</label>
                         <input type="hidden" class="form-control" name="admin_id" value="{{ $admin_id }}" readonly required>
-                    </div>
+                    </div> -->
 
                     <div class="col-12">
                         {{-- <label class="label-form">Code</label> --}}

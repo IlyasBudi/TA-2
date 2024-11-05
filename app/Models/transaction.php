@@ -17,7 +17,7 @@ class transaction extends Model
         'code',
         'total_price',
         'extra_charge',
-        // 'transaction_status',
+        'transaction_status',
         'departure_date',
         'return_date',
         'pickup_time',
