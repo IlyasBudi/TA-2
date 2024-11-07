@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kantor_cabang extends Model
+class KantorCabang extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'image',
@@ -21,31 +22,31 @@ class kantor_cabang extends Model
 
     public function staff()
     {
-        return $this->belongsTo(staff::class);
+        return $this->belongsTo(Staff::class);
     }
 
-    public function category_bus()
+    public function categoryBus()
     {
-        return $this->hasMany(category_bus::class);
+        return $this->hasMany(CategoryBus::class);
     }
 
     public function bus()
     {
-        return $this->hasMany(bus::class);
+        return $this->hasMany(Bus::class);
     }
 
     public function destination()
     {
-        return $this->hasMany(destination::class);
+        return $this->hasMany(Destination::class);
     }
 
     public function transaction()
     {
-        return $this->hasMany(transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     public function booking()
     {
-        return $this->hasMany(booking::class);
+        return $this->hasMany(Booking::class);
     }
 }

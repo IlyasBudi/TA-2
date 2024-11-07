@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class booking extends Model
+
+class Booking extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         // 'admin_id',
         'user_id',
@@ -28,7 +30,7 @@ class booking extends Model
 
     public function admin()
     {
-        return $this->belongsTo(admin::class);
+        return $this->belongsTo(Admin::class);
     }
 
     public function user()
@@ -36,23 +38,23 @@ class booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function kantor_cabang()
+    public function kantorCabang()
     {
-        return $this->belongsTo(kantor_cabang::class);
+        return $this->belongsTo(KantorCabang::class);
     }
 
-    public function category_bus()
+    public function categoryBus()
     {
-        return $this->belongsTo(category_bus::class);
+        return $this->belongsTo(CategoryBus::class);
     }
 
     public function bus()
     {
-        return $this->belongsTo(bus::class);
+        return $this->belongsTo(Bus::class);
     }
 
     public function destination()
     {
-        return $this->belongsTo(destination::class);
+        return $this->belongsTo(Destination::class);
     }
 }

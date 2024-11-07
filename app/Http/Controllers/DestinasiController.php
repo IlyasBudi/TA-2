@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KantorCabang;
 use App\Models\Staff;
-use App\Models\kantor_cabang;
-use App\Models\destination;
+use App\Models\Destination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -16,9 +16,9 @@ class DestinasiController extends Controller
     {
         $staff_id = Auth::id();
 
-        $kantorcabang_id = kantor_cabang::where("staff_id", $staff_id)->first()->id;
+        $kantorcabang_id = KantorCabang::where("staff_id", $staff_id)->first()->id;
 
-        $destinations = destination::where("kantor_cabang_id", $kantorcabang_id)->get();
+        $destinations = Destination::where("kantor_cabang_id", $kantorcabang_id)->get();
         return view("staff.destination.index", ["destination" => $destinations]);
     }
 
@@ -40,9 +40,9 @@ class DestinasiController extends Controller
         // $saveImage['image'] = Storage::putFile('public/image', $request->file('image'));
 
         $staff_id = Auth::id();
-        $kantorcabang_id = kantor_cabang::where("staff_id", $staff_id)->first()->id;
+        $kantorcabang_id = KantorCabang::where("staff_id", $staff_id)->first()->id;
 
-        destination::create([
+        Destination::create([
             'name' => $validated['name'],
             // 'description' => $validated['description'],
             'price' => $validated['price'],
@@ -56,20 +56,20 @@ class DestinasiController extends Controller
     
     public function show(String $id)
     {
-        $destination = destination::find($id);
+        $destination = Destination::find($id);
 
         return view("staff.destination.show", ["destination" => $destination]);
     }
 
     public function edit(string $id)
     {
-        $destination = destination::findOrFail($id);
+        $destination = Destination::findOrFail($id);
         return view("staff.destination.edit", ["destination" => $destination]);
     }
 
     public function update(Request $request, string $id)
     {
-        $destination = destination::findOrFail($id);
+        $destination = Destination::findOrFail($id);
 
         $validated = $request->validate([
             "name" => "required|string",
@@ -98,7 +98,7 @@ class DestinasiController extends Controller
 
     public function destroy(string $id)
     {
-        destination::destroy($id);
+        Destination::destroy($id);
         return redirect('/staff/destination');
     }
 }

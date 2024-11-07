@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class bus extends Model
+class Bus extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
@@ -18,33 +19,28 @@ class bus extends Model
         'category_bus_id',
     ];
 
-    public function kantor_cabang()
+    public function kantorCabang()
     {
-        return $this->belongsTo(kantor_cabang::class);
+        return $this->belongsTo(KantorCabang::class);
     }
 
-    public function category_bus()
+    public function categoryBus()
     {
-        return $this->belongsTo(category_bus::class);
+        return $this->belongsTo(CategoryBus::class);
     }
 
     public function transaction()
     {
-        return $this->hasMany(transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
-    public function detail_transaction()
+    public function detailTransaction()
     {
-        return $this->hasMany(detail_transaction::class);
+        return $this->hasMany(DetailTransaction::class);
     }
 
     public function booking()
     {
-        return $this->hasMany(booking::class);
+        return $this->hasMany(Booking::class);
     }
-
-    // public function getIsReadyAttribute($value)
-    // {
-    // return $value ? 'Tersedia' : 'Tidak Tersedia';
-    // }
 }

@@ -5,8 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\RekeningController;
-use App\http\Controllers\AdminController;
-use App\http\Controllers\PenyewaController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\KantorCabangController;
 use App\Http\Controllers\TransactionController;
@@ -59,7 +59,7 @@ Route::post('/forgot-password', function (Request $request) {
 
     $user = User::where('email', $request->email)->first();
     $admin = Admin::where('email', $request->email)->first();
-    $staff = staff::where('email', $request->email)->first();
+    $staff = Staff::where('email', $request->email)->first();
 
     if ($user) {
         $status = Password::sendResetLink(
@@ -91,7 +91,7 @@ Route::post('/reset-password', function (Request $request) {
 
     $user = User::where('email', $request->email)->first();
     $admin = Admin::where('email', $request->email)->first();
-    $staff = staff::where('email', $request->email)->first();
+    $staff = Staff::where('email', $request->email)->first();
 
     if ($user) {
         $status = Password::reset(
@@ -109,7 +109,7 @@ Route::post('/reset-password', function (Request $request) {
     } elseif ($staff) {
         $status = Password::broker('staff')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (staff $staff, string $password) {
+            function (Staff $staff, string $password) {
                 $staff->forceFill([
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));

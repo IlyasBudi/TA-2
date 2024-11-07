@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\staff;
-use App\Models\bus;
-use App\Models\destination;
+use App\Models\KantorCabang;
+use App\Models\Staff;
+use App\Models\Bus;
+use App\Models\Destination;
 use App\Models\user;
-use App\Models\kantor_cabang;
-use App\Models\transaction;
-use App\Models\detail_transaction;
-use App\Models\booking;
+// use App\Models\kantor_cabang;
+use App\Models\Transaction;
+use App\Models\DetailTransaction;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Storage;
 
@@ -23,13 +24,13 @@ class AdminController extends Controller
     // Staff
     public function staff()
     {
-        $staff = staff::orderBy("created_at", "desc")->get();
+        $staff = Staff::orderBy("created_at", "desc")->get();
         return view("admin.staff.index", compact("staff"));
     }
 
     public function showStaff($id)
     {
-        $staff = staff::with(['kantor_cabang', 'rekening'])->findOrFail($id);
+        $staff = Staff::with(['kantorcabang', 'rekening'])->findOrFail($id);
         return view("admin.staff.show", compact("staff"));
     }
 
@@ -49,37 +50,37 @@ class AdminController extends Controller
     // Kantor Cabang
     public function kantorcabang()
     {
-        $kantorcabangs = kantor_cabang::orderBy("created_at", "desc")->get();
+        $kantorcabangs = KantorCabang::orderBy("created_at", "desc")->get();
         return view("admin.kantorcabang.index", compact("kantorcabangs"));
     }
 
     public function showKantorCabang($id)
     {
-        $kantorcabang = kantor_cabang::with(['staff', 'bus'])->findOrFail($id);
+        $kantorcabang = KantorCabang::with(['staff', 'bus'])->findOrFail($id);
         return view("admin.kantorcabang.show", compact("kantorcabang"));
     }
 
     public function showBus(Request $request, $id)
     {
-        $bus = bus::findOrFail($id);
+        $bus = Bus::findOrFail($id);
         return view("admin.kantorcabang.busdetail", compact("bus"));
     }
 
     public function showDestination(Request $request, $id)
     {
-        $destination = destination::findOrFail($id);
+        $destination = Destination::findOrFail($id);
         return view("admin.kantorcabang.destinationdetail", compact("destination"));
     }
 
     public function editKantorCabang($id)
     {
-        $kantorcabang = kantor_cabang::findOrFail($id);
+        $kantorcabang = KantorCabang::findOrFail($id);
         return view("admin.kantorcabang.edit", compact("kantorcabang"));
     }
 
     public function updateKantorCabang(Request $request, $id)
     {
-        $kantorcabang = kantor_cabang::with(['staff'])->findOrFail($id);
+        $kantorcabang = KantorCabang::with(['staff'])->findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'string',
@@ -104,7 +105,7 @@ class AdminController extends Controller
 
         dd($validated);
 
-        kantor_cabang::where('id', $id)->update([
+        KantorCabang::where('id', $id)->update([
             "name" => $validated["name"],
             'phone_number' => $validated['phone_number'],
             "image" => $newImage["image"],
@@ -120,14 +121,14 @@ class AdminController extends Controller
 
     public function transaction()
     {
-        $transaction = booking::with(['user'])->get();
+        $transaction = Booking::with(['user'])->get();
 
         return view('admin.transaction.index', compact('transaction'));
     }
 
     public function laporanAdmin()
     {
-        $kantorcabangs = kantor_cabang::all();
+        $kantorcabangs = KantorCabang::all();
         return view('admin.laporan.index', compact('kantorcabangs'));
     }
 

@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Model;
+use Illuminate\Notifications\Notifiable;
 
 class Staff extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable, CanResetPassword;
+
     protected $fillable = [
         'name',
         'email',
@@ -17,13 +19,18 @@ class Staff extends Model
         'address',
     ];
 
-    public function kantor_cabang()
+    public function getEmailForPasswordReset()
     {
-        return $this->hasOne(kantor_cabang::class);
+        return $this->email;
+    }
+
+    public function kantorCabang()
+    {
+        return $this->hasOne(KantorCabang::class);
     }
 
     public function rekening()
     {
-        return $this->hasOne(rekening::class);
+        return $this->hasOne(Rekening::class);
     }
 }

@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <th>Kategori Bus</th>
-                                    <td>{{ $transaction->category_bus->name }}</td>
+                                    <td>{{ $transaction->categorybus->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Destinasi</th>

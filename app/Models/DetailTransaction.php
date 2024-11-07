@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class detail_transaction extends Model
+class DetailTransaction extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'transaction_id',
         'bus_id',
@@ -21,16 +22,16 @@ class detail_transaction extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(transaction::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     public function bus()
     {
-        return $this->belongsTo(bus::class);
+        return $this->belongsTo(Bus::class);
     }
 
     public function destination()
     {
-        return $this->belongsTo(destination::class);
+        return $this->belongsTo(Destination::class);
     }
 }

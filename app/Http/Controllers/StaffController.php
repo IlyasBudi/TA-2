@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\staff;
-use App\Models\kantor_cabang;
-use App\Models\detail_transaction;
-use App\Models\transaction;
-use App\Models\bus;
-use App\Models\destination;
+use App\Models\Staff;
+// use App\Models\transaction;
+// use App\Models\bus;
+// use App\Models\destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\validation\Rule;
@@ -35,14 +33,14 @@ class StaffController extends Controller
 
     public function staffProfile()
     {
-        $profile = staff::with(['kantor_cabang'])->findOrFail(Auth::user()->id);
+        $profile = Staff::with(['kantor_cabang'])->findOrFail(Auth::user()->id);
 
         return view("staff.profile.index", compact("profile"));
     }
 
     public function staffUpdate(Request $request, $id)
     {
-        $staff = staff::findOrFail($id);
+        $staff = Staff::findOrFail($id);
 
         $validated = $request->validate([
             'name' => ['string', 'max:100'],

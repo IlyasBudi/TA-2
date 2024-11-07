@@ -58,14 +58,14 @@
                         <!-- Table with stripped rows -->
                         <table class="table table-hover">
                             <tbody>
-                                @if ($staff->kantor_cabang)
+                                @if ($staff->kantorcabang)
                                     <tr>
                                         <th>Nama Kantor Cabang</th>
-                                        <td>{{ $staff->kantor_cabang->name }}</td>
+                                        <td>{{ $staff->kantorcabang->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Gambar Kantor Cabang</th>
-                                        <td><img src="{{ Storage::url($staff->kantor_cabang->image) }}" alt=""
+                                        <td><img src="{{ Storage::url($staff->kantorcabang->image) }}" alt=""
                                                 style="height:200px; width:250px; object-fit: cover;"></td>
                                     </tr>
                                     {{-- <tr>
@@ -74,15 +74,15 @@
                                     </tr> --}}
                                     <tr>
                                         <th>Lokasi Kantor Cabang (Lang, Lat)</th>
-                                        <td>{{ $staff->kantor_cabang->location }}</td>
+                                        <td>{{ $staff->kantorcabang->location }}</td>
                                     </tr>
                                     <tr>
                                         <th>Alamat Lengkap Kantor Cabang</th>
-                                        <td>{{ $staff->kantor_cabang->phone_number }}</td>
+                                        <td>{{ $staff->kantorcabang->phone_number }}</td>
                                     </tr>
                                     <tr>
                                         <th>Alamat Lengkap Kantor Cabang</th>
-                                        <td>{{ $staff->kantor_cabang->address }}</td>
+                                        <td>{{ $staff->kantorcabang->address }}</td>
                                     </tr>
                                 @else
                                     <tr>
@@ -93,7 +93,7 @@
                         </table>
                         <!-- End Table with stripped rows -->
 
-                        <h5 class="card-title">Rekening Kantor Cabang {{ $staff->kantor_cabang->name }}</h5>
+                        <h5 class="card-title">Rekening Kantor Cabang {{ $staff->kantorcabang->name }}</h5>
                         <!-- Table with stripped rows -->
                         <table class="table table-hover">
                             <tbody>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KantorCabang;
 use App\Models\Staff;
-use App\Models\kantor_cabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +14,7 @@ class KantorCabangController extends Controller
     {
         $staff_id = Auth::id();
 
-        $kantorcabangs  = kantor_cabang::where('staff_id', $staff_id)->get();
+        $kantorcabangs  = KantorCabang::where('staff_id', $staff_id)->get();
 
         return view('staff.kantorcabang.index', ['kantorcabangs' => $kantorcabangs]);
     }
@@ -42,7 +42,7 @@ class KantorCabangController extends Controller
 
         $staff_id = Auth::id();
 
-        Kantor_cabang::create([
+        KantorCabang::create([
             'name' => $validated['name'],
             'image' => $saveImage['image'],
             'phone_number' => $validated['phone_number'],
@@ -58,19 +58,19 @@ class KantorCabangController extends Controller
 
     public function show(string $id)
     {
-        $kantorcabang = kantor_cabang::with('staff')->findOrFail($id);
+        $kantorcabang = KantorCabang::with('staff')->findOrFail($id);
         return view('staff.kantorcabang.show', ['kantorcabang' => $kantorcabang]);
     }
 
     public function edit(string $id)
     {
-        $kantorcabang = kantor_cabang::findOrFail($id);
+        $kantorcabang = KantorCabang::findOrFail($id);
         return view('staff.kantorcabang.edit', ['kantorcabang' => $kantorcabang]);
     }
     
     public function update(Request $request, string $id)
     {
-        $kantorcabang = kantor_cabang::findOrFail($id);
+        $kantorcabang = KantorCabang::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string',
@@ -97,7 +97,7 @@ class KantorCabangController extends Controller
         $staff_id = Auth::id();
         
         // update data
-        kantor_cabang::where('id', $id)->update([
+        KantorCabang::where('id', $id)->update([
             'name' => $validated['name'],
             'image' => $newImage['image'],
             'phone_number' => $validated['phone_number'],
@@ -113,7 +113,7 @@ class KantorCabangController extends Controller
 
     public function destroy(string $id)
     {
-        kantor_cabang::destroy($id);
+        KantorCabang::destroy($id);
         return redirect('/staff/kantorcabang');
     }
 }

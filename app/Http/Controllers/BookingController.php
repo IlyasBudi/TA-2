@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\BookingStatus;
-use App\Models\booking;
-use App\Models\category_bus;
+// use App\Enums\BookingStatus;
+// use App\Models\Booking;
 use App\Models\bus;
-use App\Models\destination;
-use App\Models\kantor_cabang;
+use App\Models\CategoryBus;
+use App\Models\Destination;
+use App\Models\DetailTransaction;
+use App\Models\KantorCabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 use Exception;
-use App\Models\transaction;
-use App\Models\detail_transaction;
+use App\Models\Transaction;
 use Midtrans\Snap;
 use Midtrans\Config;
 use Midtrans\Notification;
@@ -27,7 +27,7 @@ class BookingController extends Controller
     {
         do {
             $code = 'TRANS-' . mt_rand(000, 999);
-        } while (transaction::where('code', $code)->exists());
+        } while (Transaction::where('code', $code)->exists());
 
         return $code;
     }
@@ -37,7 +37,7 @@ class BookingController extends Controller
         $code = $this->generateUniqueCode();
         $admin_id = 1;
         $user_id = Auth::id();
-        $categorybus = category_bus::all();
+        $categorybus = CategoryBus::all();
 
         return view('penyewa.bookingpage', ['categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
     }
@@ -69,7 +69,7 @@ class BookingController extends Controller
         $longitude = $validated['longitude'];
         $category_bus_id = $validated['category_bus_id'];
         //get distance
-        $kantorcabang = kantor_cabang::all();
+        $kantorcabang = KantorCabang::all();
         // looping cari data kantor cabang terdekat
         $minDistance = PHP_FLOAT_MAX;
         $closestLocationId = null;
@@ -82,7 +82,7 @@ class BookingController extends Controller
             }
         }
         // cek by category_bus_id
-        $existingBus = bus::where('category_bus_id', $category_bus_id)->where('kantor_cabang_id', $closestLocationId)->where('status', 'Tersedia')->first();
+        $existingBus = Bus::where('category_bus_id', $category_bus_id)->where('kantor_cabang_id', $closestLocationId)->where('status', 'Tersedia')->first();
         if($existingBus){
             // $kantor_cabang_id = $existingBus['kantor_cabang_id'];
             // $kantorcabang_id = $closestLocationId;
@@ -93,7 +93,7 @@ class BookingController extends Controller
         $return_date = $validated['return_date'];
         // $bus_id = $bus_id;
 
-        $existingBookings = transaction::where('bus_id', $bus_id)
+        $existingBookings = Transaction::where('bus_id', $bus_id)
             ->where(function ($query) use ($departure_date, $return_date) {
                 $query->whereBetween('departure_date', [$departure_date, $return_date])
                     ->orWhereBetween('return_date', [$departure_date, $return_date])
@@ -105,7 +105,7 @@ class BookingController extends Controller
 
             if ($existingBookings) {
                 // Cari bus_id yang berbeda dari kantor cabang yang sama
-                $alternativeBus = bus::where('kantor_cabang_id', $kantorcabang_id)
+                $alternativeBus = Bus::where('kantor_cabang_id', $kantorcabang_id)
                                     ->where('category_bus_id', $validated['category_bus_id'])
                                     ->where('status', 'Tersedia')
                                     ->where('id', '!=', $bus_id)
@@ -130,7 +130,7 @@ class BookingController extends Controller
     
                     foreach ($sortedBranches as $kantorcabang) {
                         if ($kantorcabang->id != $kantorcabang_id) {
-                            $alternativeBus = bus::where('kantor_cabang_id', $kantorcabang->id)
+                            $alternativeBus = Bus::where('kantor_cabang_id', $kantorcabang->id)
                                                 ->where('category_bus_id', $validated['category_bus_id'])
                                                 ->where('status', 'Tersedia')
                                                 ->whereDoesntHave('transaction', function ($query) use ($departure_date, $return_date) {
@@ -159,7 +159,7 @@ class BookingController extends Controller
             }
 
             // Dapatkan destination_id berdasarkan destination yang dipilih
-            $destination = destination::where('name', $validated['destination'])
+            $destination = Destination::where('name', $validated['destination'])
             ->where('kantor_cabang_id', $kantorcabang_id)
             ->first();
 
@@ -198,7 +198,7 @@ class BookingController extends Controller
             $validated['transaction_status'] = 'Pending';
 
             try {
-                $booking = transaction::create([
+                $booking = Transaction::create([
                     'code' => $code,
                     // 'admin_id' => $admin_id,
                     'user_id' => $user_id,
@@ -217,7 +217,7 @@ class BookingController extends Controller
                     'latitude' => $validated['latitude'],
                 ]);
 
-                detail_transaction::create([
+                DetailTransaction::create([
                     'transaction_id' => $booking->id,
                     'bus_id' => $booking->bus_id,
                     'destination_id' => $booking->destination_id,
@@ -307,7 +307,7 @@ class BookingController extends Controller
         $order_id = $notification->order_id;
 
         // Cari transaksi berdasarkan ID
-        $transaction = transaction::findOrFail($order_id);
+        $transaction = Transaction::findOrFail($order_id);
 
         // Handle notification status
         if ($status == 'capture') {

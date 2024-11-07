@@ -40,7 +40,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->user->name }}</td>
-                                        <td>{{ $item->category_bus->name }}</td>
+                                        <td>{{ $item->categorybus->name }}</td>
                                         <td>{{ $item->departure_date }}|{{ $item->return_date }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td><a href="/admin/transaction/{{ $item->id }}"

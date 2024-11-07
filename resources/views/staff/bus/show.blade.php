@@ -35,7 +35,7 @@
                                 </tr>
                                 <tr>
                                     <th>Category Bus</th>
-                                    <td>{{ $bus->category_bus->name }}</td>
+                                    <td>{{ $bus->categorybus->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Gambar bus</th>

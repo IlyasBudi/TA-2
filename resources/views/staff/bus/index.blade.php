@@ -45,7 +45,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         {{-- <td>{{ $bus->code }}</td> --}}
                                         <td>{{ $bus->name }}</td>
-                                        <td>{{ $bus->category_bus->name }}</td>
+                                        <td>{{ $bus->categorybus->name }}</td>
                                         <td>{{ $bus->description }}</td>
                                         <td><img src="{{ Storage::url($bus->image) }}" alt=""
                                                 style="height:40px; width:60px; object-fit: cover;">

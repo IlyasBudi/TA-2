@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kantor_cabang;
-use App\Models\category_bus;
+use App\Models\CategoryBus;
 use App\Models\bus;
+use App\Models\KantorCabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,15 +15,15 @@ class BusController extends Controller
     public function index()
     {
         $staff_id = Auth::id();
-        $kantorcabang_id = kantor_cabang::where('staff_id', $staff_id)->first()->id;
+        $kantorcabang_id = KantorCabang::where('staff_id', $staff_id)->first()->id;
 
-        $bus = bus::where('kantor_cabang_id', $kantorcabang_id)->get();
+        $bus = Bus::where('kantor_cabang_id', $kantorcabang_id)->get();
         return view('staff.bus.index', ['bus' => $bus]);
     }
 
     public function create()
     {
-        $categorybus = category_bus::all();
+        $categorybus = CategoryBus::all();
         return view('staff.bus.add', ['categorybus' => $categorybus]);
     }
 
@@ -44,7 +44,7 @@ class BusController extends Controller
 
         // kantor cabang id
         $staff_id = Auth::id();
-        $kantorcabang_id = kantor_cabang::where('staff_id', $staff_id)->first()->id;
+        $kantorcabang_id = KantorCabang::where('staff_id', $staff_id)->first()->id;
 
         Bus::create([
             'category_bus_id' => $validated['category_bus_id'],
@@ -64,21 +64,21 @@ class BusController extends Controller
 
     public function show(string $id)
     {
-        $bus = bus::find($id);
+        $bus = Bus::find($id);
         return view('staff.bus.show', ['bus' => $bus]);
     }
 
     public function edit(string $id)
     {
-        $categorybus = category_bus::all();
-        $bus = bus::findOrfail($id);
+        $categorybus = CategoryBus::all();
+        $bus = Bus::findOrfail($id);
         return view('staff.bus.edit', ['bus' => $bus], ['categorybus' => $categorybus]);
     }
 
     public function update(Request $request, string $id)
     {
         
-        $bus = bus::findOrfail($id);
+        $bus = Bus::findOrfail($id);
 
         $validated = $request->validate([
             'category_bus_id' => 'required',
@@ -111,7 +111,7 @@ class BusController extends Controller
 
     public function destroy(string $id)
     {
-        bus::destroy($id);
+        Bus::destroy($id);
         return redirect('/staff/bus');
     }
 }
