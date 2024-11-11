@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryBus;
-use App\Models\bus;
+use App\Models\Bus;
 use App\Models\KantorCabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

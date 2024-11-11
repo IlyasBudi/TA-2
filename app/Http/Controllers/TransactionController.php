@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\KantorCabang;
 use App\Models\transaction;
-use App\Models\booking;
-use App\Models\admin;
-use App\Models\kantor_cabang;
+use App\Models\Booking;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;

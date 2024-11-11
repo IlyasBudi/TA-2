@@ -42,7 +42,14 @@ class BookingController extends Controller
         return view('penyewa.bookingpage', ['categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
     }
 
-   
+    public function __construct()
+    {
+        // Set konfigurasi Midtrans
+        Config::$serverKey = config('services.midtrans.serverKey');
+        Config::$isProduction = config('services.midtrans.isProduction');
+        Config::$isSanitized = config('services.midtrans.isSanitized');
+        Config::$is3ds = config('services.midtrans.is3ds');
+    }
 
     public function booking(Request $request)
     {
@@ -61,7 +68,7 @@ class BookingController extends Controller
             'latitude' => 'required|string',
         ]);
 
-        $admin_id = 1;
+        // $admin_id = 1;
         $user_id = Auth::id();
 
         //select kantor cabang terdekat [dengan kondisi data lebih dari satu maka menghitung latlong jika tidak maka ambil data pertama]
@@ -198,6 +205,7 @@ class BookingController extends Controller
             $validated['transaction_status'] = 'Pending';
 
             try {
+                DB::beginTransaction();
                 $booking = Transaction::create([
                     'code' => $code,
                     // 'admin_id' => $admin_id,
@@ -243,6 +251,9 @@ class BookingController extends Controller
                         'phone' => Auth::user()->phone,
                         'address' => Auth::user()->address,
                     ],
+                    'enabled_payments' => [
+                    'gopay', 'permata_va', 'bank_transfer'
+                    ],
                     'vtweb' => []
                 ];
 
@@ -256,8 +267,11 @@ class BookingController extends Controller
                 // dd($booking);
                 return redirect($paymentUrl)->with('Success', 'Booking berhasil dibuat!');
             } catch (\Exception $e) {
-                // dd($booking);
-                return back()->withInput()->withErrors(['error', 'Terjadi kesalahan saat membuat booking. Periksa kembali data yang dimasukkan.']);
+                // dd($e);
+                DB::rollback();
+                
+                echo $e->getMessage();
+                // return back()->withInput()->withErrors(['error', 'Terjadi kesalahan saat membuat booking. Periksa kembali data yang dimasukkan.']);
             }
         }else{
             return back()->withInput()->withErrors(['error', 'Type Bus tidak tersedia di lokasi kantor cabang terdekat. silahkan pilih type bus lain nya']);

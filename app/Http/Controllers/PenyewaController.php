@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bus;
+use App\Models\Bus;
 use App\Models\Destination;
 use App\Models\KantorCabang;
 use Illuminate\Http\Request;

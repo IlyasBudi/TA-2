@@ -7,7 +7,6 @@ use App\Models\Staff;
 use App\Models\Bus;
 use App\Models\Destination;
 use App\Models\user;
-// use App\Models\kantor_cabang;
 use App\Models\Transaction;
 use App\Models\DetailTransaction;
 use App\Models\Booking;
@@ -103,7 +102,7 @@ class AdminController extends Controller
 
         $staff_id = $kantorcabang->staff->id;
 
-        dd($validated);
+        // dd($validated);
 
         KantorCabang::where('id', $id)->update([
             "name" => $validated["name"],

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kantor_cabang;
 use App\Models\KantorCabang;
 use App\Models\transaction;
-use App\Models\booking;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

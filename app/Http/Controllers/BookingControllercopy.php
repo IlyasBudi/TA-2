@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
-use App\Models\admin;
-use App\Models\booking;
-use App\Models\category_bus;
-use App\Models\bus;
-use App\Models\destination;
+use App\Models\Admin;
+use App\Models\Booking;
+use App\Models\Bus;
+use App\Models\CategoryBus;
+use App\Models\Destination;
+use App\Models\KantorCabang;
 use App\Models\User;
-use App\Models\kantor_cabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +34,7 @@ class BookingControllercopy extends Controller
         $code = $this->generateUniqueCode();
         $admin_id = 1;
         $user_id = Auth::id();
-        $categorybus = category_bus::all();
+        $categorybus = CategoryBus::all();
 
         return view('penyewa.bookingpage', ['categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
     }
@@ -66,7 +66,7 @@ class BookingControllercopy extends Controller
         $longitude = $validated['longitude'];
         $category_bus_id = $validated['category_bus_id'];
         //get distance
-        $kantorcabang = kantor_cabang::all();
+        $kantorcabang = KantorCabang::all();
         // looping cari data kantor cabang terdekat
         $minDistance = PHP_FLOAT_MAX;
         $closestLocationId = null;
@@ -79,7 +79,7 @@ class BookingControllercopy extends Controller
             }
         }
         // cek by category_bus_id
-        $existingBus = bus::where('category_bus_id', $category_bus_id)->where('kantor_cabang_id', $closestLocationId)->where('status', 'Tersedia')->first();
+        $existingBus = Bus::where('category_bus_id', $category_bus_id)->where('kantor_cabang_id', $closestLocationId)->where('status', 'Tersedia')->first();
         if($existingBus){
             // $kantor_cabang_id = $existingBus['kantor_cabang_id'];
             // $kantorcabang_id = $closestLocationId;
@@ -90,7 +90,7 @@ class BookingControllercopy extends Controller
         $return_date = $validated['return_date'];
         // $bus_id = $bus_id;
 
-        $existingBookings = booking::where('bus_id', $bus_id)
+        $existingBookings = Booking::where('bus_id', $bus_id)
             ->where(function ($query) use ($departure_date, $return_date) {
                 $query->whereBetween('departure_date', [$departure_date, $return_date])
                     ->orWhereBetween('return_date', [$departure_date, $return_date])
@@ -102,7 +102,7 @@ class BookingControllercopy extends Controller
 
             if ($existingBookings) {
                 // Cari bus_id yang berbeda dari kantor cabang yang sama
-                $alternativeBus = bus::where('kantor_cabang_id', $kantorcabang_id)
+                $alternativeBus = Bus::where('kantor_cabang_id', $kantorcabang_id)
                                     ->where('category_bus_id', $validated['category_bus_id'])
                                     ->where('status', 'Tersedia')
                                     ->where('id', '!=', $bus_id)
@@ -127,7 +127,7 @@ class BookingControllercopy extends Controller
     
                     foreach ($sortedBranches as $kantorcabang) {
                         if ($kantorcabang->id != $kantorcabang_id) {
-                            $alternativeBus = bus::where('kantor_cabang_id', $kantorcabang->id)
+                            $alternativeBus = Bus::where('kantor_cabang_id', $kantorcabang->id)
                                                 ->where('category_bus_id', $validated['category_bus_id'])
                                                 ->where('status', 'Tersedia')
                                                 ->whereDoesntHave('booking', function ($query) use ($departure_date, $return_date) {
@@ -156,7 +156,7 @@ class BookingControllercopy extends Controller
             }
 
             // Dapatkan destination_id berdasarkan destination yang dipilih
-            $destination = destination::where('name', $validated['destination'])
+            $destination = Destination::where('name', $validated['destination'])
             ->where('kantor_cabang_id', $kantorcabang_id)
             ->first();
 
@@ -193,7 +193,7 @@ class BookingControllercopy extends Controller
             $total_price = $bus_price + $total_destination_price + $extra_charge;
 
             try {
-                $booking = booking::create([
+                $booking = Booking::create([
                     'code' => $code,
                     'admin_id' => $admin_id,
                     'user_id' => $user_id,
