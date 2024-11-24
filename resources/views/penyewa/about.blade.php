@@ -11,7 +11,7 @@
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-8">
                 <h1>About Us</h1>
-                <p class="mb-0">Gambaran Umum PT Haryanto Motor Indonesia.</p>
+                <p class="mb-0">Gambaran Umum PT XYZ Indonesia.</p>
               </div>
             </div>
           </div>
@@ -64,33 +64,29 @@
             </div> --}}
   
             <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-            <h1>PT HARYANTO MOTOR INDONESIA</h1>
-              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/logo-hr.svg" alt="" class="img-fluid services-img">
-              <h3>Sejarah PO Haryanto</h3>
+            <h1>PO XYZ INDONESIA</h1>
+              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-XYZ.svg" alt="" class="img-fluid services-img">
+              <h3>Tentang PT XYZ</h3>
               <p>
-                PO Haryanto didirikan pada tahun 2002 oleh H. Haryanto asal Kudus, Jawa Tengah setelah purna bertugas di Batalyon Artileri Pertahanan Udara Ringan 1/Kostrad TNI Angkatan Darat di Tangerang. Sebelumnya, ia adalah seorang tentara yang memiliki berbagai pekerjaan sampingan, salah satunya adalah agen tiket bus.
-
-                    Dengan mendapatkan pinjaman dari bank, ia membeli enam buah bus dan menggunakan armadanya tersebut untuk trayek perkotaan dengan rute Cikarang-Cimone.
+              PO XYZ Indonesia adalah perusahaan penyewaan bus pariwisata yang berdiri di Indonesia untuk memenuhi kebutuhan transportasi masyarakat yang mengutamakan kenyamanan, keselamatan, dan pelayanan terbaik. 
+              Sejak awal berdiri, kami telah berkembang menjadi salah satu penyedia jasa transportasi yang terpercaya di Indonesia, melayani berbagai keperluan perjalanan mulai dari wisata lokal, kunjungan kerja, hingga perjalanan lintas provinsi.
               </p>
               <p>
-                Tetapi setelah beberapa waktu, rute tersebut dianggap kurang menguntungkan dikarenakan sepinya penumpang. Akhirnya ia mengubah armada tersebut menjadi kelas eksekutif dan mengalihkan trayeknya ke trayek antarkota dengan rute Jakarta-Kudus, Jakarta-Pati dan Jakarta-Jepara.
-                Mulai saat itulah perusahaan busnya mulai berkembang. Pada tahun 2009, PO Haryanto melakukan ekspansi bisnis pertamanya di luar Muria Raya dan juga di luar Pulau Jawa, yakni di Pulau Madura dengan trayek Jakarta-Pamekasan-Sumenep.
+              Sebagai perusahaan yang berfokus pada kepuasan pelanggan, kami terus meningkatkan kualitas layanan melalui pembaruan armada, pelatihan staf, dan penerapan teknologi terkini. 
+              Dengan moto <strong>"Perjalanan Nyaman, Kenangan Indah"</strong>, kami berkomitmen untuk memberikan pengalaman perjalanan yang menyenangkan dan berkesan bagi setiap pelanggan kami.
               </p>
               <p>
-                Tiga tahun kemudian tepatnya di tahun 2012, PO Haryanto kembali melakukan ekspansi bisnisnya, kali ini berada di jalur selatan jawa dengan trayek pertama yakni Jakarta-Solo-Ponorogo, serta kota-kota lain di sekitar Solo Raya seperti Klaten dan Gemolong.
-
-                Di tahun yang sama pula, PO Haryanto juga merintis trayek menuju Bojonegoro dan Purwodadi dengan bantuan adiknya, H. Annas. Saat ini, PO Haryanto telah melayani lebih dari 20 kota di Pulau Jawa dengan beberapa divisi.
+              Kami memahami bahwa setiap perjalanan adalah cerita baru yang berharga, dan karena itu, kami berusaha memastikan setiap detail layanan kami memenuhi kebutuhan pelanggan. 
+              Mulai dari proses pemesanan yang mudah, fasilitas bus yang lengkap, hingga pelayanan sopir yang ramah, semua kami siapkan untuk memastikan Anda mendapatkan pengalaman terbaik bersama PO XYZ Indonesia.
               </p>
-              <h3>Ciri Khas PO Haryanto</h3>
+              <h3>Sejarah PO XYZ</h3>
               <p>
-                PO Haryanto dikenal dengan penggunaan skema warna bodi bus yang beragam dan meriah, serta mengangkat potensi pariwisata Kudus. Masjid Menara Kudus menjadi ikon dari bus-bus Haryanto, ditempel pada bodi samping bus. Rian Mahendra selaku Direktur Operasional (pada waktu itu) mengatakan bahwa dalam menjalankan bisnisnya, Haryanto memanfaatkan filosofi "ilmu langit", maksudnya "nilai-nilai keagamaan Islam dijadikan acuan dalam berbisnis (bus)". Untuk mewujudkan misi korporatnya itu, kaligrafi sholawat "ṣalā-llāhu ʿala Muḥammad" ditempel di seluruh armada bus Haryanto.
-
-                Sebagian armada (khususnya armada keluaran 2018 keatas) juga dilengkapi dengan gambar wayang kulit, biasanya bergambar Werkudara atau Rama dan Sinta.
+              PO XYZ didirikan, PO XYZ mempunyai visi besar untuk mendukung pertumbuhan pariwisata di Indonesia. Dimulai dengan hanya beberapa armada bus, 
+              perusahaan ini kini telah berkembang menjadi salah satu pemain utama dalam industri transportasi pariwisata dengan ratusan armada modern dan jaringan operasional yang luas.
               </p>
               <p>
-                Selain ciri khas dalam armada, Haryanto juga memiliki ciri khas dalam pelayanan. Seperti peraturan untuk berhenti melaksanakan ibadah sholat (hanya khusus untuk yang Muslim) ketika dalam perjalanan, atau uang tiket konsumen yang dimana akan disumbangkan kepada yang membutuhkan sebesar 2,5 persen.
-
-                Manajemen Haryanto juga memiliki tradisi untuk memberangkatkan para anak buahnya untuk melaksanakan haji/umrah yang masih tetap dipertahankan hingga sekarang.
+              Kami bangga telah menjadi bagian dari banyak momen berharga pelanggan kami, dari perjalanan wisata keluarga, rombongan sekolah, hingga acara korporasi. 
+              Kepercayaan yang telah kami bangun selama bertahun-tahun adalah bukti dedikasi kami untuk memberikan layanan terbaik.
               </p>
             </div>
   

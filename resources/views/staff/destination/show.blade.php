@@ -43,6 +43,10 @@
                                     <td>{{ $destination->description }}</td>
                                 </tr> --}}
                                 <tr>
+                                    <th>Minimal Sewa</th>
+                                    <td>{{ $destination->min_hari }} Hari</td>
+                                </tr>
+                                <tr>
                                     <th>Harga</th>
                                     <td>Rp{{ number_format($destination->price) }}</td>
                                 </tr>

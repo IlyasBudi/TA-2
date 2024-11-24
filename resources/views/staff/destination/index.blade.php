@@ -32,6 +32,7 @@
                                     <th scope="col">Nama</th>
                                     {{-- <th scope="col">Deskripsi</th> --}}
                                     <th scope="col">Harga</th>
+                                    <th scope="col">Minimal Sewa</th>
                                     {{-- <th scope="col">Gambar</th> --}}
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -44,6 +45,7 @@
                                         <td>{{ $destination->name }}</td>
                                         {{-- <td>{{ $destination->description }}</td> --}}
                                         <td>{{ $destination->price }}</td>
+                                        <td>{{ $destination->min_hari }} Hari</td>
                                         {{-- <td><img src="{{ Storage::url($destination->image) }}" alt=""
                                                 style="height:40px; width:60px; object-fit: cover;">
                                         </td> --}}

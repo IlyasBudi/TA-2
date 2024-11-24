@@ -7,12 +7,13 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-        <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/hr-hero.jpeg" alt="" data-aos="fade-in">
+        <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/xyz-hero.png" alt="" data-aos="fade-in">
   
         <div class="container">
           <div class="row">
             <div class="col-lg-10">
-              <h2 data-aos="fade-up" data-aos-delay="100">Selamat Datang di PO Haryanto Pariwisata</h2>
+              <h2 data-aos="fade-up" data-aos-delay="100">Selamat Datang di PO XYZ</h2>
+              <h2 data-aos="fade-up" data-aos-delay="100">Pariwisata</h2>
               <p data-aos="fade-up" data-aos-delay="200">Nikmati perjalanan yang nyaman dan mewah dengan layanan kelas atas dari kami.</p>
             </div>
             <div class="col-lg-5" data-aos="fade-up" data-aos-delay="300">
@@ -98,7 +99,7 @@
   
           <div class="row gy-4 align-items-stretch justify-content-between features-item ">
             <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/hw08-yudhistira.png" class="img-fluid" alt="">
+              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Bigbus Seat 46.png" class="img-fluid" alt="">
             </div>
             <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
               <h3>BIG BUS Seat 46 2-2 Toilet</h3>
@@ -112,13 +113,13 @@
               <p>Capacity 59 Seat, Konf 2 - 3, Non Toilet, Full AC, Reclining Seat, TV, Radio, Karaoke, Charging port (Not Suitable for Powerbank), Bantal/Selimut, Extra Luggage, Emergency Door, APAR Ready, Glass Breaker, Ambient Light.</p>
             </div>
             <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-                <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/hw19-satrio-piningit.png" class="img-fluid" alt="">
+                <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Bigbus Seat 59.png" class="img-fluid" alt="">
               </div>
           </div><!-- Features Item -->
 
           <div class="row gy-4 align-items-stretch justify-content-between features-item ">
             <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/hw17-rengganis.png" class="img-fluid" alt="">
+              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Bigbus Seat 50.png" class="img-fluid" alt="">
             </div>
             <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
               <h3>BIG BUS Seat 50 2-2 Non Toilet</h3>
@@ -128,11 +129,31 @@
 
           <div class="row gy-4 align-items-stretch justify-content-between features-item ">
             <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
-              <h3>Medium Bus Seat 35/39 2-2</h3>
-              <p>Capacity 35/39 Seat, Konf 2 - 2, Non Toilet, Full AC, Reclining Seat, Arm rest, Leg rest (Optional), TV, Radio, Karaoke, Charging port (Not Suitable for Powerbank), Bantal/Selimut, Extra Luggage, Emergency Door, APAR Ready, Glass Breaker, Ambient Light.</p>
+              <h3>Medium Bus Seat 35 2-2</h3>
+              <p>Capacity 35 Seat, Konf 2 - 2, Non Toilet, Full AC, Reclining Seat, Arm rest, Leg rest (Optional), TV, Radio, Karaoke, Charging port (Not Suitable for Powerbank), Bantal/Selimut, Extra Luggage, Emergency Door, APAR Ready, Glass Breaker, Ambient Light.</p>
             </div>
             <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-                <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/md06.png" class="img-fluid" alt="">
+                <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Medium Bus.png" class="img-fluid" alt="">
+              </div>
+          </div><!-- Features Item -->
+
+          <div class="row gy-4 align-items-stretch justify-content-between features-item ">
+            <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+              <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Microbus-ELF.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+              <h3>Micro Bus ELF 18 Seat</h3>
+              <p>Capacity 18 seat, Full AC, Charging Port (Not Suitable for Powerbank), TV, Radio, Karaoke, APAR Ready, Ambient Light.</p>
+            </div>
+          </div><!-- Features Item -->
+
+          <div class="row gy-4 align-items-stretch justify-content-between features-item ">
+            <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+              <h3>Micro Bus Hiace 14 Seat</h3>
+              <p>Capacity 14 Seat, Full AC, Charging Port (Not Suitable for Powerbank), TV, Radio, Karaoke, APAR Ready, Ambient Light.</p>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+                <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/Microbus-Hiace.png" class="img-fluid" alt="">
               </div>
           </div><!-- Features Item -->
   
@@ -249,7 +270,7 @@
     <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section dark-background">
 
-        <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/hr-hero.jpeg" alt="">
+        <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/xyz-hero.png" alt="">
   
         <div class="container">
           <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">

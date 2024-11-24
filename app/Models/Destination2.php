@@ -14,6 +14,7 @@ class Destination extends Model
         'description',
         'image',
         'price',
+        'min_hari',
         'kantor_cabang_id',
     ];
 

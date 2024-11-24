@@ -17,6 +17,7 @@ return new class extends Migration
             // $table->longText('description')->nullable();
             // $table->string('image')->nullable();
             $table->integer('price');
+            $table->integer('min_hari');
             $table->foreignId('kantor_cabang_id');
             $table->foreign('kantor_cabang_id')->references('id')->on('kantor_cabangs')->onDelete('cascade');
             $table->timestamps();

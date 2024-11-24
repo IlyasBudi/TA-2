@@ -38,17 +38,9 @@ class BookingController extends Controller
         $admin_id = 1;
         $user_id = Auth::id();
         $categorybus = CategoryBus::all();
+        $destinations = Destination::select('name')->distinct()->get();
 
-        return view('penyewa.bookingpage', ['categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
-    }
-
-    public function __construct()
-    {
-        // Set konfigurasi Midtrans
-        Config::$serverKey = config('services.midtrans.serverKey');
-        Config::$isProduction = config('services.midtrans.isProduction');
-        Config::$isSanitized = config('services.midtrans.isSanitized');
-        Config::$is3ds = config('services.midtrans.is3ds');
+        return view('penyewa.bookingpage', ['destinations' => $destinations, 'categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
     }
 
     public function booking(Request $request)
@@ -173,7 +165,18 @@ class BookingController extends Controller
             if ($destination) {
                 $destination_id = $destination->id;
             } else {
-                return back()->withErrors(['destination' => 'No destination found for the selected branch.']);
+                return back()->withErrors(['destination' => 'Destinasi yang anda pilih tidak tersedia untuk saat ini.']);
+            }
+
+            // Periksa minimal penyewaan hari
+            $min_hari = $destination->min_hari;
+            $departure = new DateTime($departure_date);
+            $return = new DateTime($return_date);
+            $interval = $departure->diff($return);
+            $jumlah_hari = $interval->days + 1;
+
+            if ($jumlah_hari < $min_hari) {
+                return back()->withInput()->withErrors(['error' => 'Minimal penyewaan untuk destinasi ini adalah ' . $min_hari . ' hari.']);
             }
 
             $roundedDistance = floor($distance);
@@ -233,39 +236,39 @@ class BookingController extends Controller
                     'transaction_status' => 'Pending',
                 ]);
 
-                // Midtrans Configuration
-                Config::$serverKey = config('config.midtrans.serverKey');
-                Config::$isProduction = config('config.midtrans.isProduction');
-                Config::$isSanitized = config('config.midtrans.isSanitized');
-                Config::$is3ds = config('config.midtrans.is3ds');
+                // // Midtrans Configuration
+                // Config::$serverKey = config('config.midtrans.serverKey');
+                // Config::$isProduction = config('config.midtrans.isProduction');
+                // Config::$isSanitized = config('config.midtrans.isSanitized');
+                // Config::$is3ds = config('config.midtrans.is3ds');
 
-                //Buat array untuk dikirim ke midtrans
-                $midtrans = [
-                    'transaction_details' => [
-                        'order_id' => $booking->id,
-                        'gross_amount' => $booking->total_price,
-                    ],
-                    'customer_details' => [
-                        'first_name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'phone' => Auth::user()->phone,
-                        'address' => Auth::user()->address,
-                    ],
-                    'enabled_payments' => [
-                    'gopay', 'permata_va', 'bank_transfer'
-                    ],
-                    'vtweb' => []
-                ];
+                // //Buat array untuk dikirim ke midtrans
+                // $midtrans = [
+                //     'transaction_details' => [
+                //         'order_id' => $booking->id,
+                //         'gross_amount' => $booking->total_price,
+                //     ],
+                //     'customer_details' => [
+                //         'first_name' => Auth::user()->name,
+                //         'email' => Auth::user()->email,
+                //         'phone' => Auth::user()->phone,
+                //         'address' => Auth::user()->address,
+                //     ],
+                //     'enabled_payments' => [
+                //     'gopay', 'permata_va', 'bank_transfer'
+                //     ],
+                //     'vtweb' => []
+                // ];
 
-                // get Snap Payment Page URL
-                $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+                // // get Snap Payment Page URL
+                // $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
                 // Commit the transaction and decrement stock only if it was successful
                 DB::commit();
     
                 // $booking->save();
                 // dd($booking);
-                return redirect($paymentUrl)->with('Success', 'Booking berhasil dibuat!');
+                return view('/success')->with('Success', 'Booking berhasil dibuat!');
             } catch (\Exception $e) {
                 // dd($e);
                 DB::rollback();

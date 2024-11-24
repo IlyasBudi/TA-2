@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-hr.svg" rel="icon">
-  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-hr2.svg" rel="icon">
+  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-xyz.svg" rel="icon">
+  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-xyz2.svg" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -59,8 +59,8 @@
 
                 <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/logo-hr.svg" alt="">
+                  <div class="pt-4 pb-2 text-center">
+                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="">
                     <h5 class="card-title text-center pb-0 fs-4">Selamat Datang Kembali</h5>
                     <p class="text-center small">Masukan datamu untuk melanjutkan perjalananmu</p>
                   </div>

@@ -34,6 +34,7 @@ class DestinasiController extends Controller
             "name" => "required|string",
             // "description" => "required|string|max:65535",
             "price" => "required|integer",
+            "min_hari" => "required|integer",
             // "image" => "mimes:jpg, jpeg, png|max:10240",
         ]);
 
@@ -46,6 +47,7 @@ class DestinasiController extends Controller
             'name' => $validated['name'],
             // 'description' => $validated['description'],
             'price' => $validated['price'],
+            'min_hari' => $validated['min_hari'],
             // 'image' => $saveImage['image'],
             'kantor_cabang_id' => $kantorcabang_id,
         ]);
@@ -75,6 +77,7 @@ class DestinasiController extends Controller
             "name" => "required|string",
             // "description" => "required|string|max:65535",
             "price" => "required|integer",
+            "min_hari" => "required|integer",
             // "image" =>"mimes:jpg, jpeg, png|max:10240",
         ]);
 
@@ -90,6 +93,7 @@ class DestinasiController extends Controller
             "name" => $validated["name"],
             // "description" => $validated["description"],
             "price" => $validated["price"],
+            "min_hari" => $validated["min_hari"],
             // "image" => $newImage["image"],
         ]);
 

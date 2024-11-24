@@ -68,24 +68,9 @@
                         <label class="label-form">Destinasi</label>
                         <select class="form-select" name="destination" id='destination'>
                             <option selected disabled>Pilih Destinasi</option>
-                            <option value="Jakarta - TM. Mini - Ancol">Jakarta - TM. Mini - Ancol</option>
-                            <option value="Bogor">Bogor</option>
-                            <option value="Bandung">Bandung</option>
-                            <option value="Pelabuhan Ratu">Pelabuhan Ratu</option>
-                            <option value="Tasik - Garut">Tasik - Garut</option>
-                            <option value="Cirebon">Cirebon</option>
-                            <option value="Tegal">Tegal</option>
-                            <option value="Pekalongan">Pekalongan</option>
-                            <option value="Semarang - Kudus">Semarang - Kudus</option>
-                            <option value="Jogja">Jogja</option>
-                            <option value="Dieng">Dieng</option>
-                            <option value="Malang">Malang</option>
-                            <option value="Ziarah">Ziarah</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Lampung">Lampung</option>
-                            <option value="Palembang">Palembang</option>
-
-                            
+                            @foreach ($destinations as $destination)
+                            <option value="{{ $destination->name }}">{{ $destination->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -322,7 +307,7 @@
     }
 </script>
 
-<script>
+<!-- <script>
     // Minimal penyewaan 2 hari
     document.addEventListener('DOMContentLoaded', function () {
         const destinationSelect = document.getElementById('destination');
@@ -418,7 +403,7 @@
             }
         });
     });
-</script>
+</script> -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const pickUpTimeInput = document.querySelector('input[name="pickup_time"]');

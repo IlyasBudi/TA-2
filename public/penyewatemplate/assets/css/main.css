@@ -2910,7 +2910,7 @@ section,
   display: none;
   position: absolute;
   top: 100%; /* Membuat dropdown muncul tepat di bawah tombol Get Started */
-  left: 1150; //Menjaga dropdown agar sejajar dengan sisi kiri tombol
+  left: 1110px !important; //Menjaga dropdown agar sejajar dengan sisi kiri tombol
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -2933,6 +2933,8 @@ section,
   margin-left: .255em;
   vertical-align: .255em;
   content: "";
+  /* top: 100%; // Membuat dropdown muncul tepat di bawah tombol Get Started  */
+  /* left: 1150; //Menjaga dropdown agar sejajar dengan sisi kiri tombol */
   border-top: .3em solid;
   border-right: .3em solid transparent;
   border-bottom: 0;

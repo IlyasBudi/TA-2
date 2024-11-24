@@ -1,9 +1,9 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-         <img src="{{ asset('/penyewatemplate') }}/assets/img/baru/logo-hr.svg" alt=""> 
+         <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt=""> 
         {{-- <h1 class="sitename">Append</h1><span>.</span> --}}
       </a>
 

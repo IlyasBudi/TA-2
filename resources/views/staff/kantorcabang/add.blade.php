@@ -193,7 +193,7 @@
         // Untuk nilai dari latitude longitude bisa disesuaikan dengan lokasi yang di inginkan 
         // nilai latitude dan longitude bisa di ambil dari google map
         var map = L.map('map', {
-            center: [-6.223011844553948, 106.6428825914336],
+            center: [-6.222681248182865, 106.64406586555071],
             zoom: 18,
             // maxZoom: 24,
             layers: [streets]
@@ -224,7 +224,7 @@
 
         // set koordinat lokasi ke dalam curLocation yang mana nilai dari curLocation juga akan
         // digunakan untuk menampilkan marker pada map
-        var curLocation = [-6.223011844553948, 106.6428825914336];
+        var curLocation = [-6.222681248182865, 106.64406586555071];
         map.attributionControl.setPrefix(false);
 
         var marker = new L.marker(curLocation, {

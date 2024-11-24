@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-hr.svg" rel="icon">
-  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru/icon-hr2.svg" rel="icon">
+  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru2/icon-xyz.svg" rel="icon">
+  <link href="{{ asset('/penyewatemplate') }}/assets/img/baru2/icon-xyz2.svg" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -59,8 +59,8 @@
 
                 <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    <img src="{{ asset('/landingpagetemplate') }}/assets/images/baru/logo-hr.svg" alt="">
+                  <div class="pt-4 text-center pb-2">
+                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="">
                     <h5 class="card-title text-center pb-0 fs-4">Lupa Password?</h5>
                     <p class="text-center small">Masukan emailmu untuk perbarui password</p>
                   </div>

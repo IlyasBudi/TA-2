@@ -33,7 +33,7 @@ class StaffController extends Controller
 
     public function staffProfile()
     {
-        $profile = Staff::with(['kantor_cabang'])->findOrFail(Auth::user()->id);
+        $profile = Staff::with(['kantorcabang'])->findOrFail(Auth::user()->id);
 
         return view("staff.profile.index", compact("profile"));
     }
