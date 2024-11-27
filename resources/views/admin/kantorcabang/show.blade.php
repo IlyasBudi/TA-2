@@ -176,11 +176,12 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         {{-- <td>{{ $bus->code }}</td> --}}
                                         <td>{{ $destination->name }}</td>
-                                        <td>{{ $destination->description }}</td>
+                                        <!-- <td>{{ $destination->description }}</td> -->
                                         <td>{{ $destination->price }}</td>
-                                        <td><img src="{{ Storage::url($destination->image) }}" alt=""
+                                        <td>{{ $destination->min_hari }} Hari</td>
+                                        <!-- <td><img src="{{ Storage::url($destination->image) }}" alt=""
                                                 style="height:40px; width:60px; object-fit: cover;">
-                                        </td>
+                                        </td> -->
                                         <td>
                                             
                                             <a href="/admin/kantorcabang/destination/{{ $destination->id }}" class="btn btn-primary"><i

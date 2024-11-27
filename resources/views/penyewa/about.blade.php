@@ -11,7 +11,7 @@
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-8">
                 <h1>About Us</h1>
-                <p class="mb-0">Gambaran Umum PT XYZ Indonesia.</p>
+                <p class="mb-0">Gambaran Umum PO XYZ Pariwisata.</p>
               </div>
             </div>
           </div>
@@ -64,11 +64,11 @@
             </div> --}}
   
             <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-            <h1>PO XYZ INDONESIA</h1>
+            <h1>PO XYZ Pariwisata</h1>
               <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-XYZ.svg" alt="" class="img-fluid services-img">
-              <h3>Tentang PT XYZ</h3>
+              <h3>Tentang PO XYZ</h3>
               <p>
-              PO XYZ Indonesia adalah perusahaan penyewaan bus pariwisata yang berdiri di Indonesia untuk memenuhi kebutuhan transportasi masyarakat yang mengutamakan kenyamanan, keselamatan, dan pelayanan terbaik. 
+              PO XYZ Pariwisata adalah perusahaan penyewaan bus pariwisata yang berdiri di Indonesia untuk memenuhi kebutuhan transportasi masyarakat yang mengutamakan kenyamanan, keselamatan, dan pelayanan terbaik. 
               Sejak awal berdiri, kami telah berkembang menjadi salah satu penyedia jasa transportasi yang terpercaya di Indonesia, melayani berbagai keperluan perjalanan mulai dari wisata lokal, kunjungan kerja, hingga perjalanan lintas provinsi.
               </p>
               <p>
@@ -77,7 +77,7 @@
               </p>
               <p>
               Kami memahami bahwa setiap perjalanan adalah cerita baru yang berharga, dan karena itu, kami berusaha memastikan setiap detail layanan kami memenuhi kebutuhan pelanggan. 
-              Mulai dari proses pemesanan yang mudah, fasilitas bus yang lengkap, hingga pelayanan sopir yang ramah, semua kami siapkan untuk memastikan Anda mendapatkan pengalaman terbaik bersama PO XYZ Indonesia.
+              Mulai dari proses pemesanan yang mudah, fasilitas bus yang lengkap, hingga pelayanan sopir yang ramah, semua kami siapkan untuk memastikan Anda mendapatkan pengalaman terbaik bersama PO XYZ Pariwisata.
               </p>
               <h3>Sejarah PO XYZ</h3>
               <p>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Enums\BookingStatus;
 // use App\Models\Booking;
-use App\Models\bus;
+use App\Models\Bus;
 use App\Models\CategoryBus;
 use App\Models\Destination;
 use App\Models\DetailTransaction;
@@ -179,7 +179,11 @@ class BookingController extends Controller
                 return back()->withInput()->withErrors(['error' => 'Minimal penyewaan untuk destinasi ini adalah ' . $min_hari . ' hari.']);
             }
 
-            $roundedDistance = floor($distance);
+            // Hitung jarak antara kantor cabang dan lokasi user
+            $closestKantorCabang = KantorCabang::find($closestLocationId);
+            $roundedDistance = round($this->haversineDistance($latitude, $longitude, $closestKantorCabang->latitude, $closestKantorCabang->longitude));
+            // $cekDistance = $this->haversineDistance($latitude, $longitude, $kantorcabang->latitude, $kantorcabang->longitude);
+            // $roundedDistance = floor($distance);
 
             // Tentukan extra_charge berdasarkan jarak
             if ($roundedDistance < 25) {
@@ -237,38 +241,38 @@ class BookingController extends Controller
                 ]);
 
                 // Midtrans Configuration
-                Config::$serverKey = config('config.midtrans.serverKey');
-                Config::$isProduction = config('config.midtrans.isProduction');
-                Config::$isSanitized = config('config.midtrans.isSanitized');
-                Config::$is3ds = config('config.midtrans.is3ds');
+                // Config::$serverKey = config('config.midtrans.serverKey');
+                // Config::$isProduction = config('config.midtrans.isProduction');
+                // Config::$isSanitized = config('config.midtrans.isSanitized');
+                // Config::$is3ds = config('config.midtrans.is3ds');
 
                 //Buat array untuk dikirim ke midtrans
-                $midtrans = [
-                    'transaction_details' => [
-                        'order_id' => $booking->id,
-                        'gross_amount' => $booking->total_price,
-                    ],
-                    'customer_details' => [
-                        'first_name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'phone' => Auth::user()->phone,
-                        'address' => Auth::user()->address,
-                    ],
-                    'enabled_payments' => [
-                    'gopay', 'permata_va', 'bank_transfer'
-                    ],
-                    'vtweb' => []
-                ];
+                // $midtrans = [
+                //     'transaction_details' => [
+                //         'order_id' => $booking->id,
+                //         'gross_amount' => $booking->total_price,
+                //     ],
+                //     'customer_details' => [
+                //         'first_name' => Auth::user()->name,
+                //         'email' => Auth::user()->email,
+                //         'phone' => Auth::user()->phone,
+                //         'address' => Auth::user()->address,
+                //     ],
+                //     'enabled_payments' => [
+                //     'gopay', 'permata_va', 'bank_transfer'
+                //     ],
+                //     'vtweb' => []
+                // ];
 
                 // get Snap Payment Page URL
-                $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+                // $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
                 // Commit the transaction and decrement stock only if it was successful
                 DB::commit();
     
                 // $booking->save();
                 // dd($booking);
-                return redirect($paymentUrl)->with('Success', 'Booking berhasil dibuat!');
+                return redirect("/")->with('Success', 'Booking berhasil dibuat!');
             } catch (\Exception $e) {
                 // dd($e);
                 DB::rollback();

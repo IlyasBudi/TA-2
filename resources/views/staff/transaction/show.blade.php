@@ -60,12 +60,8 @@
                                     <td>{{ $transaction->user->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Nomor Telepon Penyewa</th>
-                                    <td>{{ $transaction->user->phone_number }}</td>
-                                </tr>
-                                <tr>
                                     <th>Kategori Bus</th>
-                                    <td>{{ $transaction->category_bus->name }}</td>
+                                    <td>{{ $transaction->categorybus->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Destinasi</th>
@@ -90,6 +86,14 @@
                                     <td>{{ \Carbon\Carbon::parse($transaction->create_at)->format('d-m-Y H:i') }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Jarak (Kantor Cabang ke titik jemput)</th>
+                                    <td>{{ number_format($distance) }} km</td>
+                                </tr>
+                                <tr>
+                                    <th>Extra Charge</th>
+                                    <td>Rp{{ number_format($transaction->extra_charge) }}</td>
+                                </tr>
+                                <tr>
                                     <th>Total Harga</th>
                                     <td>Rp{{ number_format($transaction->total_price) }}</td>
                                 </tr>
@@ -102,6 +106,30 @@
                                 </tr>
 
             
+                            </tbody>
+                        </table>
+
+                        <!-- Profile Penyewa -->
+                        <h5 class="card-title">Detail Profile {{ $transaction->user->name }}</h5>
+                        <h6>Data Penyewa</h6>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Nama</th>
+                                    <td>{{ $transaction->user->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ $transaction->user->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>{{ $transaction->user->phone_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat Lengkap</th>
+                                    <td>{{ $transaction->user->address }}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <!-- Table with stripped rows -->

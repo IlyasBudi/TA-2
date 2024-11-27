@@ -38,6 +38,34 @@ class StaffTransactionController extends Controller
         // $kantor_cabang = kantor_cabang::with('staff')->findOrFail($id);
         $transaction = Transaction::find($id);
 
-        return view('staff.transaction.show',['transaction' => $transaction]);
+        // Hitung jarak menggunakan rumus Haversine
+        $distance = $this->haversineDistance($transaction->latitude, $transaction->longitude, $transaction->kantorCabang->latitude, $transaction->kantorCabang->longitude);
+
+        return view('staff.transaction.show',['transaction' => $transaction, 'distance' => $distance]);
+    }
+
+    public function haversineDistance($lat1, $lon1, $lat2, $lon2) {
+        $earthRadius = 6371;  // Earth's radius in kilometers
+    
+        // Convert degrees to radians
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+    
+        // Haversine formula
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+    
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+             cos($lat1) * cos($lat2) * 
+             sin($dLon / 2) * sin($dLon / 2);
+    
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    
+        // Distance in kilometers
+        $distance = $earthRadius * $c;
+    
+        return $distance;
     }
 }

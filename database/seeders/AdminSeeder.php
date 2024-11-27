@@ -33,12 +33,18 @@ class AdminSeeder extends Seeder
         // [
         //     'name' => 'Medium Bus Seat 30 2-2',
         // ],
-        [
-            'name' => 'Medium Bus Seat 35 2-2',
-        ],
+        // [
+        //     'name' => 'Medium Bus Seat 35 2-2',
+        // ],
         [
             'name' => 'Medium Bus Seat 39 2-2',
         ],
+        [
+            'name' => 'Micro Bus ELF 18 Seat',
+        ],
+        [
+            'name' => 'Micro Bus Hiace 14 Seat',
+        ]
     ]);
     }
 }
