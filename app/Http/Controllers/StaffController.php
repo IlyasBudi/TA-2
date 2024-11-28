@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
-// use App\Models\transaction;
-// use App\Models\bus;
-// use App\Models\destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\validation\Rule;
