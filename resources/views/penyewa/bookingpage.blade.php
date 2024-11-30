@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="col-12">
-                        <button id="pay-button" class="booking-submit" type="submit">Submit</button>
+                        <button class="booking-submit" type="submit">Submit</button>
                         
                     </div>
                     

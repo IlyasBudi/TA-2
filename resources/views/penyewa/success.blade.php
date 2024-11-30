@@ -89,7 +89,7 @@
                 <div class="col">
                     <div class="text-center">
                         <h1>Transaksi Berhasil</h1>
-                        <p>Terima kasih sudah mempercayakan perjalanan wisata anda di Po Haryanto Pariwisata</p>
+                        <p>Terima kasih sudah mempercayakan perjalanan wisata anda di PO XYZ Pariwisata</p>
                     </div>
                 </div>
             </div>

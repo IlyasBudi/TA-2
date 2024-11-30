@@ -703,6 +703,11 @@ h6 {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
+.page-title .confirm-payment {
+  display: flex;
+  justify-content: space-between;
+}
+
 /*--------------------------------------------------------------
 # Global Sections
 --------------------------------------------------------------*/

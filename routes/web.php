@@ -212,6 +212,7 @@ Route::get('/bookingpage', [BookingController::class, 'bookingpage']);
 // Route::get('/bookingpage', [PenyewaController::class, 'bookingpage'])->middleware('auth');
 Route::post('/booking', [BookingController::class, 'booking'])->name('booking');
 // Route::get('/success', [BookingController::class], 'success');
+Route::get('/transaction/{id}/delete', [PenyewaController::class, 'destroy']);
 
 Route::middleware('auth:web')->group(function () {
     // Profile
@@ -219,3 +220,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::put('/profile/{id}', [ProfileController::class, 'updateProfile']);
 });
+
+
+Route::post('/midtrans/notification', [BookingController::class, 'callback']);

@@ -43,6 +43,15 @@ class BookingController extends Controller
         return view('penyewa.bookingpage', ['destinations' => $destinations, 'categorybus' => $categorybus, 'user_id' => $user_id, 'admin_id' => $admin_id, 'code' => $code]);
     }
 
+    public function __construct()
+    {
+        // Set konfigurasi Midtrans
+        Config::$serverKey = config('config.midtrans.serverKey');
+        Config::$isProduction = config('config.midtrans.isProduction');
+        Config::$isSanitized = config('config.midtrans.isSanitized');
+        Config::$is3ds = config('config.midtrans.is3ds');
+    }
+
     public function booking(Request $request)
     {
         $code = 'TRANS-' . mt_rand(000, 999);
@@ -247,32 +256,34 @@ class BookingController extends Controller
                 Config::$is3ds = config('config.midtrans.is3ds');
 
                 //Buat array untuk dikirim ke midtrans
-                $midtrans = [
-                    'transaction_details' => [
-                        'order_id' => $booking->id,
-                        'gross_amount' => $booking->total_price,
-                    ],
-                    'customer_details' => [
-                        'first_name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'phone' => Auth::user()->phone,
-                        'address' => Auth::user()->address,
-                    ],
-                    'enabled_payments' => [
-                    'gopay', 'permata_va', 'bank_transfer'
-                    ],
-                    'vtweb' => []
+                $transactionDetails = [
+                    'order_id' => $booking->id,
+                    'gross_amount' => $total_price,
                 ];
 
+                $customerDetails = [
+                    'first_name' => $booking->user->name,
+                    'email' => $booking->user->email,
+                    'phone' => $booking->user->phone_number,
+                    'address' => $booking->user->address,
+                ];
+
+                $params = [
+                    'transaction_details' => $transactionDetails,
+                    'customer_details' => $customerDetails,
+                ];
+
+                $transaction = Transaction::findOrFail($booking->id);
+
                 // get Snap Payment Page URL
-                $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+                $snapToken = Snap::getSnapToken($params);
 
                 // Commit the transaction and decrement stock only if it was successful
                 DB::commit();
     
                 // $booking->save();
                 // dd($booking);
-                return redirect($paymentUrl)->with('Success', 'Booking berhasil dibuat!');
+                return view('penyewa.payment', compact('snapToken', 'transaction'))->with('Success', 'Booking berhasil dibuat!');
             } catch (\Exception $e) {
                 // dd($e);
                 DB::rollback();
@@ -360,6 +371,13 @@ class BookingController extends Controller
 
         // Simpan transaksi
         $transaction->save();
+    }
+
+    public function destroy(string $id)
+    {
+        Transaction::destroy($id);
+        DetailTransaction::where('transaction_id', $id)->delete();
+        return redirect('/bookingpage');
     }
 
 }
