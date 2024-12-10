@@ -10,8 +10,10 @@ use App\Models\user;
 use App\Models\Transaction;
 use App\Models\DetailTransaction;
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Storage;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -104,18 +106,22 @@ class AdminController extends Controller
 
         // dd($validated);
 
-        KantorCabang::where('id', $id)->update([
-            "name" => $validated["name"],
-            'phone_number' => $validated['phone_number'],
-            "image" => $newImage["image"],
-            "address" => $validated["address"],
-            // "location" => $validated["location"],
-            'longitude' => $validated['longitude'],
-            'latitude' => $validated['latitude'],
-            "staff_id" => $staff_id,
-        ]);
+        try {
+            KantorCabang::where('id', $id)->update([
+                "name" => $validated["name"],
+                'phone_number' => $validated['phone_number'],
+                "image" => $newImage["image"],
+                "address" => $validated["address"],
+                // "location" => $validated["location"],
+                'longitude' => $validated['longitude'],
+                'latitude' => $validated['latitude'],
+                "staff_id" => $staff_id,
+            ]);
 
-        return redirect('admin/kantorcabang');
+            return redirect('admin/kantorcabang')->with('success', 'Kantor Cabang berhasil diperbarui!');
+        } catch (Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
+        }
     }
 
     public function transaction()
@@ -131,4 +137,39 @@ class AdminController extends Controller
         return view('admin.laporan.index', compact('kantorcabangs'));
     }
 
+    public function getLaporanAdmin(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $kantorcabang_id = $request->input('kantorcabang_id');
+
+        // Validasi Tanggal
+        if ($startDate > $endDate) {
+            return response()->json(['error' => 'Tanggal awal tidak boleh lebih besar dari tanggal akhir'], 400);
+        }
+
+        // Get transactions within the specified range
+        $laporanSewa = Transaction::whereBetween('created_at', [$startDate, $endDate])
+            ->where('kantor_cabang_id', $kantorcabang_id)
+            ->where('transaction_status', 'lunas')
+            ->get();
+
+        // Group transactions by formatted date
+        $groupedTransactions = $laporanSewa->groupBy(function ($transaction) {
+            return Carbon::parse($transaction->created_at)->isoFormat('D MMMM YYYY');
+        });
+
+        // Merge the generated date range with the actual transactions
+        $mergedData = $groupedTransactions->map(function ($transactions, $date) {
+            $total = $transactions->sum('total_price');
+
+            return [
+                'date' => $date,
+                'total' => $total,
+                'transactions' => $transactions
+            ];
+        });
+
+        return response()->json($mergedData->values());
+    }
 }

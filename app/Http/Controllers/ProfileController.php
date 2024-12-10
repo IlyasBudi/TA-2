@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProfileController extends Controller
 {
     public function profile()
     {
-        $profile = User::findOrfail(Auth::user()->id);
+        $profile = User::with(['transaction' => function ($query) {
+            $query->with('detailtransaction')->orderBy('created_at', 'desc');
+        }])->findOrFail(Auth::user()->id);
 
         return view('penyewa.profile.index', compact("profile"));
     }
@@ -53,4 +57,17 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'Gagal mengubah profile. Silakan coba lagi.');
         }
     }
+
+    public function detailTransaction(Transaction $transaction)
+    {
+        $details = $transaction->detailtransaction()->with('bus', 'destination')->get();
+        return view("penyewa.profile.detailtransaction", compact("transaction", "details"));
+    }
+
+    // public function exportPdf(Transaction $transaction)
+    //     {
+    //         $details = $transaction->detailtransaction()->with('bus', 'destination')->get();
+    //         $pdf = PDF::loadView('penyewa.profile.detailpdf', compact('transaction', 'details'));
+    //         return $pdf->stream('invoice_sewa.pdf');
+    //     }
 }

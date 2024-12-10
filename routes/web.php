@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
@@ -151,6 +152,7 @@ Route::prefix('/admin')->middleware('auth:admin')->group(function () {
 
         // LAPORAN
         Route::get('/laporan', [AdminController::class, 'laporanAdmin']);
+        Route::get('/laporan/get-data-admin', [AdminController::class, 'getLaporanAdmin'])->name('laporan.getLaporanAdmin');
     }
 );
 
@@ -200,7 +202,11 @@ Route::prefix('/staff')->middleware('auth:staff')->group(
         
         // LAPORAN
         Route::get('/laporan', [LaporanController::class, 'index']);
+        Route::get('/laporan/get-data', [LaporanController::class, 'getData'])->name('laporan.getData');
+        Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
         
+        // PENCAIRAN
+
     }
 );
 
@@ -208,18 +214,20 @@ Route::prefix('/staff')->middleware('auth:staff')->group(
 Route::get('/', [PenyewaController::class, 'landingpage']);
 Route::get('/about', [PenyewaController::class, 'about']);
 Route::get('/kantorcabang/{id}', [PenyewaController::class, 'detailkantorcabang']);
-Route::get('/bookingpage', [BookingController::class, 'bookingpage']);
-// Route::get('/bookingpage', [PenyewaController::class, 'bookingpage'])->middleware('auth');
+// Route::get('/bookingpage', [BookingController::class, 'bookingpage']);
+Route::get('/bookingpage', [BookingController::class, 'bookingpage'])->middleware('auth');
 Route::post('/booking', [BookingController::class, 'booking'])->name('booking');
-// Route::get('/success', [BookingController::class], 'success');
+Route::get('/success', [PenyewaController::class, 'success']);
 Route::get('/transaction/{id}/delete', [PenyewaController::class, 'destroy']);
 
 Route::middleware('auth:web')->group(function () {
     // Profile
     Route::get('/profile/{id}', [ProfileController::class, 'profile']);
+    Route::get('/profile/transaction/{transaction}', [ProfileController::class, 'detailTransaction']);
+    // Route::get('/profile/transaction/{transaction}/pdf', [ProfileController::class, 'exportPdf'])->name('profile.transaction.pdf');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::put('/profile/{id}', [ProfileController::class, 'updateProfile']);
 });
 
 
-Route::post('/midtrans/notification', [BookingController::class, 'callback']);
+Route::post('/midtrans/notification', [BookingController::class, 'notification']);

@@ -46,10 +46,10 @@ class BookingController extends Controller
     public function __construct()
     {
         // Set konfigurasi Midtrans
-        Config::$serverKey = config('config.midtrans.serverKey');
-        Config::$isProduction = config('config.midtrans.isProduction');
-        Config::$isSanitized = config('config.midtrans.isSanitized');
-        Config::$is3ds = config('config.midtrans.is3ds');
+        Config::$serverKey = config('midtrans.midtrans.server_key');
+        Config::$isProduction = config('midtrans.midtrans.is_production');
+        Config::$isSanitized = config('midtrans.midtrans.is_sanitized');
+        Config::$is3ds = config('midtrans.midtrans.is_3ds');
     }
 
     public function booking(Request $request)
@@ -250,14 +250,14 @@ class BookingController extends Controller
                 ]);
 
                 // Midtrans Configuration
-                Config::$serverKey = config('config.midtrans.serverKey');
-                Config::$isProduction = config('config.midtrans.isProduction');
-                Config::$isSanitized = config('config.midtrans.isSanitized');
-                Config::$is3ds = config('config.midtrans.is3ds');
+                Config::$serverKey = config('midtrans.midtrans.server_key');
+                Config::$isProduction = config('midtrans.midtrans.is_production');
+                Config::$isSanitized = config('midtrans.midtrans.is_sanitized');
+                Config::$is3ds = config('midtrans.midtrans.is_3ds');
 
                 //Buat array untuk dikirim ke midtrans
                 $transactionDetails = [
-                    'order_id' => $booking->id,
+                    'order_id' => $booking->code,
                     'gross_amount' => $total_price,
                 ];
 
@@ -324,10 +324,10 @@ class BookingController extends Controller
     public function callback(Request $request)
     {
         // Set Konfigurasi Midtrans
-        Config::$serverKey = config('config.midtrans.serverKey');
-        Config::$isProduction = config('config.midtrans.isProduction');
-        Config::$isSanitized = config('config.midtrans.isSanitized');
-        Config::$is3ds = config('config.midtrans.is3ds');
+        Config::$serverKey = config('midtrans.midtrans.server_key');
+        Config::$isProduction = config('midtrans.midtrans.is_production');
+        Config::$isSanitized = config('midtrans.midtrans.is_sanitized');
+        Config::$is3ds = config('midtrans.midtrans.is_3ds');
 
         // Buat instance midtrans notification
         $notification = new Notification();
@@ -339,7 +339,8 @@ class BookingController extends Controller
         $order_id = $notification->order_id;
 
         // Cari transaksi berdasarkan ID
-        $transaction = Transaction::findOrFail($order_id);
+        // $transaction = Transaction::findOrFail($order_id);
+        $transaction = Transaction::where('code', $order_id)->firstOrFail();
 
         // Handle notification status
         if ($status == 'capture') {

@@ -42,6 +42,11 @@ class PenyewaController extends Controller
     //     return view('penyewa.payment', ['transaction' => $transaction]);
     // }
 
+    public function success()
+    {
+        return view('penyewa.success');
+    }
+
     public function destroy(string $id)
     {
         Transaction::destroy($id);

@@ -52,33 +52,33 @@
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="tab-pane fade show active p-3  id="one" role="tabpanel" aria-labelledby="one-tab">
-                                {{-- @if ($profile->transactions->isNotEmpty()) --}}
+                                @if ($profile->transaction->isNotEmpty())
                                     <h5>Transaksi</h5>
                                     <p class="card-text">Daftar semua transaksi yang pernah kamu lakukan</p>
-                                    {{-- @foreach ($profile->transactions as $transaction) --}}
+                                    @foreach ($profile->transaction as $transaction)
                                         <div class="my-3 p-4 rounded shadow">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <p class="fw-bold mb-0"></p>
-                                                    <p class="mb-0"></p>
+                                                    <p class="fw-bold mb-0">{{ $transaction->code }}</p>
+                                                    <p class="mb-0">{{ $transaction->created_at }}</p>
                                                 </div>
                                                 <p class="mb-0 bg-dark px-2 py-1 rounded badge">
-                                                    Lunas</p>
+                                                {{ $transaction->transaction_status }}</p>
                                             </div>
                                             <hr>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <p class="mb-0 meta">Total Belanja:</p>
-                                                    <p class="fw-bold mb-0">Rp</p>
+                                                    <p class="fw-bold mb-0">Rp{{ number_format($transaction->total_price) }}</p>
                                                 </div>
-                                                <a href="/profile/transaction/"
+                                                <a href="/profile/transaction/{{ $transaction->id }}"
                                                     class="btn btn-sm btn-primary">Detail Transaksi</a>
                                             </div>
                                         </div>
-                                    {{-- @endforeach --}}
-                                {{-- @else --}}
-                                    <!-- <p class="text-center">Kamu belum memiliki transaksi</p> -->
-                                {{-- @endif --}}
+                                    @endforeach
+                                @else
+                                    <p class="text-center">Kamu belum memiliki transaksi</p>
+                                @endif
                             </div>
                         </div>
                     </div>
