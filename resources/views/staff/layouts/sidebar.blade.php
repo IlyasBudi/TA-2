@@ -58,6 +58,13 @@
         </a>
       </li><!-- End Blank Page Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/staff/pencairan">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Pencairan</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
       {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="pages-blank.html">
           <i class="bi bi-menu-button-wide"></i>

@@ -90,15 +90,16 @@
                                         <th>Biaya Tambahan</th>
                                         <td>Rp {{ number_format($transaction->extra_charge) }}</td>
                                     </tr>
-                                    <tr>
-                                        <th>Total Harga</th>
-                                        <td>Rp{{ number_format($transaction->total_price) }}</td>
-                                    </tr>
+                                    
                                     <tr>
                                         <th>Lokasi Penjemputan</th>
                                         <td>
                                             <div id="map"></div>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Harga</th>
+                                        <th>Rp{{ number_format($transaction->total_price) }}</th>
                                     </tr>
                                 </tbody>
                             </table>

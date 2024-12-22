@@ -100,13 +100,13 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="label-form">Longitude</label>
-                        <input type="text" class="form-control" id="longitude" name="longitude" required>
+                        <!-- <label class="label-form">Longitude</label> -->
+                        <input type="hidden" class="form-control" id="longitude" name="longitude" required>
                     </div>
 
                     <div class="col-12">
-                        <label class="label-form">Latitude</label>
-                        <input type="text" class="form-control" id="latitude" name="latitude"  required>
+                        <!-- <label class="label-form">Latitude</label> -->
+                        <input type="hidden" class="form-control" id="latitude" name="latitude"  required>
                     </div>
 
                     <!-- <div class="col-12">

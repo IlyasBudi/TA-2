@@ -25,6 +25,26 @@ class Transaction extends Model
         'latitude',
     ];
 
+    public static function mapMidtransStatus($midtransStatus)
+    {
+        switch ($midtransStatus) {
+            case 'capture':
+                return 'SUCCESS';
+            case 'settlement':
+                return 'SUCCESS';
+            case 'pending':
+                return 'PENDING';
+            case 'deny':
+                return 'CANCELLED';
+            case 'expire':
+                return 'CANCELLED';
+            case 'cancel':
+                return 'CANCELLED';
+            default:
+                return 'UNKNOWN'; // Handle any other status accordingly
+        }
+    }
+
     public function kantorCabang()
     {
         return $this->belongsTo(KantorCabang::class);

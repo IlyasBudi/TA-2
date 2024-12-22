@@ -25,15 +25,15 @@
                     <div class="card info-card sales-card">
     
                     <div class="card-body">
-                        <h5 class="card-title">Jumlah Transaksi Hari ini</h5>
+                        <h5 class="card-title">Bus</h5>
     
                         <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="bi bi-cart"></i>
+                            <i class="bi bi-bus-front"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>0</h6>
-                            <span class="text-muted small pt-2 ps-1">Jumlah Transaksi Hari Ini</span>
+                            <h6>{{ $total_bus }}</h6>
+                            <span class="text-muted small pt-2 ps-1">Bus</span>
     
                         </div>
                         </div>
@@ -47,6 +47,28 @@
                     <div class="card info-card revenue-card">
     
                     <div class="card-body">
+                        <h5 class="card-title">Jumlah Transaksi Hari Ini</h5>
+    
+                        <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{ $total_transaction }}</h6>
+                            <span class="text-muted small pt-2 ps-1">Jumlah Transaksi Hari Ini</span>
+    
+                        </div>
+                        </div>
+                    </div>
+    
+                    </div>
+                </div><!-- End Revenue Card -->
+
+                <!-- Revenue Card -->
+                <div class="col-xxl-4 col-xl-12">
+                    <div class="card info-card revenue-card">
+    
+                    <div class="card-body">
                         <h5 class="card-title">Pendapatan Hari Ini</h5>
     
                         <div class="d-flex align-items-center">
@@ -54,7 +76,7 @@
                             <i class="bi bi-currency-dollar"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>Rp0</h6>
+                            <h6>Rp{{ number_format($total_pendapatan) }}</h6>
                             <span class="text-muted small pt-2 ps-1">Pendapatan Hari Ini</span>
     
                         </div>

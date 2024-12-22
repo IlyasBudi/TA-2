@@ -64,10 +64,10 @@ class ProfileController extends Controller
         return view("penyewa.profile.detailtransaction", compact("transaction", "details"));
     }
 
-    // public function exportPdf(Transaction $transaction)
-    //     {
-    //         $details = $transaction->detailtransaction()->with('bus', 'destination')->get();
-    //         $pdf = PDF::loadView('penyewa.profile.detailpdf', compact('transaction', 'details'));
-    //         return $pdf->stream('invoice_sewa.pdf');
-    //     }
+    public function exportPdf(Transaction $transaction)
+        {
+            $details = $transaction->detailtransaction()->with('bus', 'destination')->get();
+            $pdf = PDF::loadView('penyewa.profile.pdf', compact('transaction', 'details'));
+            return $pdf->stream('invoice_sewa.pdf');
+        }
 }

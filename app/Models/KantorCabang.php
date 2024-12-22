@@ -45,8 +45,13 @@ class KantorCabang extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function booking()
+    // public function booking()
+    // {
+    //     return $this->hasMany(Booking::class);
+    // }
+
+    public function pencairan()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Pencairan::class);
     }
 }

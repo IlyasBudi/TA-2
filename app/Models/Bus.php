@@ -39,8 +39,8 @@ class Bus extends Model
         return $this->hasMany(DetailTransaction::class);
     }
 
-    public function booking()
-    {
-        return $this->hasMany(Booking::class);
-    }
+    // public function booking()
+    // {
+    //     return $this->hasMany(Booking::class);
+    // }
 }

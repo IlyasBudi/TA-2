@@ -14,7 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'https://oishii.my.id/midtrans/notification',
-        'https://df4d-180-254-64-157.ngrok-free.app/midtrans/notification',
+        'https://769e-61-5-25-207.ngrok-free.app/midtrans/notification',
         'raven-touched-ghastly.ngrok-free.app/midtrans/notification',
     ];
 }

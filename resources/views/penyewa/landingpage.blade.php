@@ -184,7 +184,7 @@
                 <a href="/kantorcabang/{{ $kantorcabang->id }}">{{ $kantorcabang->name }}</a>
               </h2>
 
-              <p class="post-category">{{ $kantorcabang->address }}</p>
+              <p class="post-category">{{ substr($kantorcabang->address, 0, 65) }}{{ strlen($kantorcabang->address) > 65 ? '...' : '' }}</p>
 
               
             </article>

@@ -44,6 +44,13 @@
         </a>
       </li><!-- End Login Page Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin/pencairan">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Pencairan</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+
     </ul>
 
   </aside><!-- End Sidebar-->

@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\PencairanController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PenyewaController;
@@ -130,8 +131,8 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 // Admin
-Route::prefix('/admin')->middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', [PageController::class, 'admin']);
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+        Route::get('/dashboard', [adminController::class, 'dashboard']);
         // Staff
         Route::get('/staff', [AdminController::class, 'staff']);
         Route::get('/staff/{id}', [AdminController::class, 'showStaff']);
@@ -153,13 +154,21 @@ Route::prefix('/admin')->middleware('auth:admin')->group(function () {
         // LAPORAN
         Route::get('/laporan', [AdminController::class, 'laporanAdmin']);
         Route::get('/laporan/get-data-admin', [AdminController::class, 'getLaporanAdmin'])->name('laporan.getLaporanAdmin');
+
+        // PENCAIRAN
+        Route::get('/pencairan', [PencairanController::class, 'index']);
+        Route::get('/pencairan/{id}/add', [PencairanController::class, 'create']);
+        Route::post('/pencairan', [PencairanController::class, 'store']);
+        Route::get('/pencairan/{id}/edit', [PencairanController::class, 'edit']);
+        Route::get('/pencairan/{id}', [PencairanController::class, 'show']);
+        Route::put('/pencairan/{id}', [PencairanController::class, 'update'])->name("update-pencairan");
     }
 );
 
 // Staff
-Route::prefix('/staff')->middleware('auth:staff')->group(
+Route::prefix('staff')->middleware('auth:staff')->group(
     function () {
-        Route::get('/dashboard', [PageController::class, 'staff']);
+        Route::get('/dashboard', [StaffController::class, 'dashboard']);
         // Kantor_cabang
         Route::get('/kantorcabang', [KantorCabangController::class, 'index']);
         Route::get('/kantorcabang/add', [KantorCabangController::class, 'create']);
@@ -206,7 +215,8 @@ Route::prefix('/staff')->middleware('auth:staff')->group(
         Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
         
         // PENCAIRAN
-
+        Route::get('/pencairan', [StaffController::class, 'pencairanStaff']);
+        Route::get('/pencairan/{id}', [StaffController::class, 'detailPencairanStaff']);
     }
 );
 
@@ -224,7 +234,7 @@ Route::middleware('auth:web')->group(function () {
     // Profile
     Route::get('/profile/{id}', [ProfileController::class, 'profile']);
     Route::get('/profile/transaction/{transaction}', [ProfileController::class, 'detailTransaction']);
-    // Route::get('/profile/transaction/{transaction}/pdf', [ProfileController::class, 'exportPdf'])->name('profile.transaction.pdf');
+    Route::get('/profile/transaction/{transaction}/pdf', [ProfileController::class, 'exportPdf'])->name('profile.transaction.pdf');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::put('/profile/{id}', [ProfileController::class, 'updateProfile']);
 });

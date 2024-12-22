@@ -1,6 +1,6 @@
 @extends('staff.layouts.app')
 
-@section('title', 'Bus')
+@section('title', 'Laporan')
 
 @section('header')
     <div class="pagetitle">
@@ -150,7 +150,7 @@
                     } else {
                         // Tampilkan pesan jika tidak ada data
                         var emptyRow =
-                            '<tr><td colspan="3" class="text-center">Tidak ada data penjualan dalam rentang tanggal yang diminta</td></tr>';
+                            '<tr><td colspan="3" class="text-center">Tidak ada data transaksi dalam rentang tanggal yang diminta</td></tr>';
                         $('table tbody.bodyLaporan').append(emptyRow);
 
                         // Nonaktifkan tombol unduh PDF jika tidak ada data

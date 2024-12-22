@@ -3055,6 +3055,8 @@ section,
 
 .booking-submit:hover {
   background-color: color-mix(in srgb, var(--accent-color), transparent 10%);
+  text-decoration: none;
+  color: var(--contrast-color);
 }
 
 

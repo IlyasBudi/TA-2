@@ -27,10 +27,10 @@ class CategoryBus extends Model
         return $this->hasMany(Bus::class);
     }
 
-    public function booking()
-    {
-        return $this->hasMany(Booking::class);
-    }
+    // public function booking()
+    // {
+    //     return $this->hasMany(Booking::class);
+    // }
 
     public function transaction()
     {

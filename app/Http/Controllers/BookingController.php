@@ -89,7 +89,7 @@ class BookingController extends Controller
                 $kantorcabang_id = $closestLocationId;
             }
         }
-        // cek by category_bus_id
+        // dapatkan bus, cek by category_bus_id dan status tersedia
         $existingBus = Bus::where('category_bus_id', $category_bus_id)->where('kantor_cabang_id', $closestLocationId)->where('status', 'Tersedia')->first();
         if($existingBus){
             // $kantor_cabang_id = $existingBus['kantor_cabang_id'];
@@ -112,7 +112,7 @@ class BookingController extends Controller
             })->exists();
 
             if ($existingBookings) {
-                // Cari bus_id yang berbeda dari kantor cabang yang sama
+                // Jika tidak tersedia, cari bus_id yang berbeda dari kantor cabang yang sama
                 $alternativeBus = Bus::where('kantor_cabang_id', $kantorcabang_id)
                                     ->where('category_bus_id', $validated['category_bus_id'])
                                     ->where('status', 'Tersedia')
@@ -188,7 +188,7 @@ class BookingController extends Controller
                 return back()->withInput()->withErrors(['error' => 'Minimal penyewaan untuk destinasi ini adalah ' . $min_hari . ' hari.']);
             }
 
-            // Hitung jarak antara kantor cabang dan lokasi user
+            // Hitung jarak antara kantor cabang dan titik penjemputan
             $closestKantorCabang = KantorCabang::find($closestLocationId);
             $roundedDistance = round($this->haversineDistance($latitude, $longitude, $closestKantorCabang->latitude, $closestKantorCabang->longitude));
             // $cekDistance = $this->haversineDistance($latitude, $longitude, $kantorcabang->latitude, $kantorcabang->longitude);
@@ -292,7 +292,7 @@ class BookingController extends Controller
                 // return back()->withInput()->withErrors(['error', 'Terjadi kesalahan saat membuat booking. Periksa kembali data yang dimasukkan.']);
             }
         }else{
-            return back()->withInput()->withErrors(['error', 'Type Bus tidak tersedia di lokasi kantor cabang terdekat. silahkan pilih type bus lain nya']);
+            return back()->withInput()->withErrors(['error', 'Terjadi kesalahan saat membuat booking. Periksa kembali data yang dimasukkan.']);
         }
     }
 

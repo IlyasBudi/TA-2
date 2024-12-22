@@ -221,7 +221,7 @@
                                     <p class="mb-1 text-bold">Total Keseluruhan Rp{{ number_format($transaction->total_price) }}</p>
                                 </div>
                                 <div class="col-lg-6 mt-3">
-                                    <h6 class="mb-3">Informasi Pembeli</h6>
+                                    <h6 class="mb-3">Informasi Penyewa</h6>
                                     <p class="mb-1">{{ $transaction->user->name }}</p>
                                     <p class="mb-1">{{ $transaction->user->email }}</p>
                                     <p class="mb-1">{{ $transaction->user->phone_number }}</p>
@@ -280,7 +280,7 @@
                                     </tr>
                                     <tr>
                                         <th>Total Harga</th>
-                                        <td>Rp {{ number_format($transaction->total_price) }}</td>
+                                        <th>Rp {{ number_format($transaction->total_price) }}</th>
                                     </tr>
                                     <tr>
                                         <th>Lokasi Penjemputan</th>
@@ -292,11 +292,11 @@
                             </table>
                         </div>
                     </div>
-                    {{-- <div>
+                    <div class="text-center mt-1">
                         <a class="booking-submit" href="{{ route('profile.transaction.pdf', $transaction->id) }}" type="button">
                         Unduh PDF
                         </a>
-                    </div> --}}
+                    </div>
 
                     
                 </div>

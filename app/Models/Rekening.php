@@ -21,8 +21,8 @@ class Rekening extends Model
         return $this->belongsTo(Staff::class);
     }
 
-    // public function pencairans()
-    // {
-    //     return $this->hasMany(Pencairan::class);
-    // }
+    public function pencairan()
+    {
+        return $this->hasMany(Pencairan::class);
+    }
 }

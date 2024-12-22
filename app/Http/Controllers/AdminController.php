@@ -19,7 +19,12 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view("admin.dashbaord");
+        $users = User::count();
+        $staff = Staff::count();
+        $kantorcabang = KantorCabang::count();
+        $transaction = Transaction::count();
+        
+        return view("admin.dashboard", compact("users", "staff", "kantorcabang", "transaction"));
     }
 
     // Staff
