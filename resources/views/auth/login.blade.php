@@ -96,7 +96,7 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12 text-center">
-                      <a class="small mb-0" href="{{ route('password.request') }}">Lupa Password?</a>
+                      <!-- <a class="small mb-0" href="{{ route('password.request') }}">Lupa Password?</a> -->
                     
                       <p class="small mb-0">Belum punya akun? <a href="{{ route('penyewaregister') }}">buat akun baru</a></p>
                     </div>

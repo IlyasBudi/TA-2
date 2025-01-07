@@ -195,11 +195,11 @@ class BookingController extends Controller
             // $roundedDistance = floor($distance);
 
             // Tentukan extra_charge berdasarkan jarak
-            if ($roundedDistance < 25) {
+            if ($roundedDistance < 10) {
                 $extra_charge = 0;
             } else {
-                // $extra_charge = 7000 * ($roundedDistance - 25);
-                $extra_charge = 7000 * ($roundedDistance);
+                $extra_charge = 7000 * ($roundedDistance - 10);
+                // $extra_charge = 7000 * ($roundedDistance);
             }
 
             // Hitung jumlah hari antara departure_date dan return_date
@@ -213,10 +213,13 @@ class BookingController extends Controller
 
             // Ambil harga dari destination berdasarkan destination_id
             $destination_price = DB::table('destinations')->where('id', $destination_id)->value('price');
-            $total_destination_price = $destination_price * $jumlah_hari;
+            // $total_destination_price = $destination_price * $jumlah_hari;
+
+            // harga bus * jumlah hari
+            $total_bus_price = $bus_price * $jumlah_hari;
 
             // Hitung total_price (harga total)
-            $total_price = $bus_price + $total_destination_price + $extra_charge;
+            $total_price = $total_bus_price + $destination_price + $extra_charge;
             
             $validated['transaction_status'] = 'Pending';
 

@@ -12,6 +12,8 @@
           <li><a href="/" class="active">Home</a></li>
           <li><a href="/bookingpage">Booking</a></li>
           <li><a href="/about">About Us</a></li>
+          <li><a href="/listharga">Harga</a></li>
+          <!-- <li><a href="/maps">Maps</a></li> -->
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

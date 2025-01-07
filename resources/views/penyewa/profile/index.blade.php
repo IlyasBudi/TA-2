@@ -71,8 +71,15 @@
                                                     <p class="mb-0 meta">Total Belanja:</p>
                                                     <p class="fw-bold mb-0">Rp{{ number_format($transaction->total_price) }}</p>
                                                 </div>
+                                                <a href="https://wa.me/{{ $transaction->kantorcabang->phone_number }}"
+                                                class="mb-0 bg-primary px-2 py-1 rounded badge">
+                                                Hubungi Staff</a>
+                                                
                                                 <a href="/profile/transaction/{{ $transaction->id }}"
-                                                    class="btn btn-sm btn-primary">Detail Transaksi</a>
+                                                class="btn btn-sm btn-primary">Detail Transaksi</a>
+                                                <!-- <a href="https://wa.me/{{ $transaction->kantorcabang->phone_number }}"
+                                                    class="btn btn-sm btn-primary">Hubungi Staff</a> -->
+                                                
                                             </div>
                                         </div>
                                     @endforeach

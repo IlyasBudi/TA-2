@@ -38,9 +38,6 @@ class StaffController extends Controller
             $total_pendapatan = Transaction::where("kantor_cabang_id", $kantorcabang_id)
                 ->where('transaction_status', 'lunas')
                 ->whereDate('created_at', Carbon::today())
-                ->sum('total_price') - Transaction::where("kantor_cabang_id", $kantorcabang_id)
-                ->where('transaction_status', 'lunas')
-                ->whereDate('created_at', Carbon::today())
                 ->sum('total_price');
 
             return view("staff.dashboard", compact("total_bus", "total_transaction", "total_pendapatan"));

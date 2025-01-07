@@ -54,4 +54,22 @@ class PenyewaController extends Controller
         return redirect('/bookingpage');
     }
 
+    public function listHarga()
+    {
+        return view('penyewa.listharga');
+    }
+
+    public function maps()
+    {
+        $kantorcabangs = KantorCabang::all();
+        return view('penyewa.map', ['kantorcabangs' => $kantorcabangs]);
+    }
+
+    public function getRoute($id)
+    {
+        // menampilkan rute berdasarkan lokasi yang dipilih
+        $kantorcabangs = KantorCabang::where('id', $id)->first();
+        return view('penyewa.route', ['kantorcabangs' => $kantorcabangs]);
+    }
+
 }

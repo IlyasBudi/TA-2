@@ -212,7 +212,7 @@
                                 <div class="col-lg-6 mt-3">
                                     <h6 class="mb-3">Informasi Transaksi</h6>
                                     <p class="mb-1">{{ $transaction->kantorcabang->name }}</p>
-                                    <p class="mb-1">Pembayaran: {{ $transaction->transaction_status }}</p>
+                                    <p class="mb-1">Pembayaran: <strong>{{ $transaction->transaction_status }}</strong></p>
                                     <!-- <p class="mb-1">Pengiriman {{ $transaction->shipping_status }}</p> -->
                                     <!-- <p class="mb-1">Nama Pengirim {{ $transaction->nama_pengirim }}</p> -->
                                     <!-- <p class="mb-1">Total Harga Rp{{ number_format($transaction->total_price) }}</p> -->
