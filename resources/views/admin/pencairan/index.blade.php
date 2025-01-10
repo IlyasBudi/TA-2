@@ -82,7 +82,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $pencairan->kantorcabang->name }}</td>
-                                        <!-- <td>{{ $pencairan->staff->name }}</td> -->
+                                        
                                         <td>Rp{{ number_format($pencairan->total) }}</td>
                                         <td>{{ $pencairan->status }}</td>
                                         <td>{{ $pencairan->created_at }}</td>

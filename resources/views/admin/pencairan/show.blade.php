@@ -31,10 +31,10 @@
                                     <td>{{ $pencairan->kantorcabang->name }}</td>
 
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="col">Staff Kantor Cabang</th>
                                     <td>{{ $pencairan->kantorcabang->staff->name }}</td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <th scope="col">Nama Bank</th>
                                     <td>{{ $pencairan->rekening->bank_name }}</td>

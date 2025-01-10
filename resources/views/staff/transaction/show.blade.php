@@ -97,6 +97,10 @@
                                     <th>Total Harga</th>
                                     <td>Rp{{ number_format($transaction->total_price) }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>{{ $transaction->transaction_status }}</td>
+                                </tr>
 
                                 <tr>
                                     <th>Lokasi Penjemputan</th>

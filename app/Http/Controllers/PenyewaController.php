@@ -31,6 +31,12 @@ class PenyewaController extends Controller
         return view('penyewa.detailkantorcabang', ['kantorcabang' => $kantorcabang]);
     }
 
+    public function detailBus($id)
+    {
+        $bus = Bus::with('kantorcabang')->findOrFail($id);
+        return view('penyewa.detailbus', ['bus' => $bus]);
+    }
+
     // public function payment($id)
     // {
     //     $user_id = Auth::id();
@@ -70,6 +76,12 @@ class PenyewaController extends Controller
         // menampilkan rute berdasarkan lokasi yang dipilih
         $kantorcabangs = KantorCabang::where('id', $id)->first();
         return view('penyewa.route', ['kantorcabangs' => $kantorcabangs]);
+    }
+
+    public function kantorCabang()
+    {
+        $kantorcabangs = KantorCabang::all();
+        return view('penyewa.listkantorcabang', ['kantorcabangs' => $kantorcabangs]);
     }
 
 }

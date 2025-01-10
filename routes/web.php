@@ -223,8 +223,10 @@ Route::prefix('staff')->middleware('auth:staff')->group(
 // Penyewa
 Route::get('/', [PenyewaController::class, 'landingpage']);
 Route::get('/about', [PenyewaController::class, 'about']);
+Route::get('/kantorcabang', [PenyewaController::class, 'kantorcabang']);
 Route::get('/listharga', [PenyewaController::class, 'listHarga']);
 Route::get('/kantorcabang/{id}', [PenyewaController::class, 'detailkantorcabang']);
+Route::get('/bus/{id}', [PenyewaController::class, 'detailbus']);
 Route::get('/maps', [PenyewaController::class, 'maps']);
 Route::get('maps/{id}', [PenyewaController::class, 'getRoute'])->name('cek-rute');
 // Route::get('/bookingpage', [BookingController::class, 'bookingpage']);

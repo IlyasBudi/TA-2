@@ -90,14 +90,14 @@ class StaffController extends Controller
         {
             $staff_id = Auth::id();
             $kantorcabang = KantorCabang::where("staff_id", $staff_id)->first();
-            $pencairans = Pencairan::where('kantor_cabang_id', 'rekening')->where('kantor_cabang_id', $kantorcabang->id)->get();
+            $pencairans = Pencairan::with('kantorcabang', 'rekening')->where('kantor_cabang_id', $kantorcabang->id)->get();
 
             return view('staff.pencairan.index', compact('pencairans'));
         }
     
     public function detailPencairanStaff(string $id)
     {
-        $pencairan = Pencairan::with('kantor_cabang_id', 'rekening')->findOrFail($id);
+        $pencairan = Pencairan::with('kantorcabang', 'rekening')->findOrFail($id);
         return view('admin.pencairan.show', compact('pencairan'));
     }
 }

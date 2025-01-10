@@ -17,7 +17,7 @@ class PencairanController extends Controller
      */
     public function index()
     {
-        $pencairans = Pencairan::with('kantor_cabang', 'rekening')->get();
+        $pencairans = Pencairan::with('kantorcabang', 'rekening')->get();
         // Mengambil semua data kantor cabang dengan relasi staff, rekening kantor cabang, transaksi, dan detail transaksi
         $kantorcabangs = KantorCabang::with('staff', 'staff.rekening', 'transaction', 'transaction.detailtransaction')->get();
 
@@ -30,16 +30,14 @@ class PencairanController extends Controller
             $pendapatan_kantorcabang_hari_ini = Transaction::where('kantor_cabang_id', $kantorcabang->id)
                 ->where('transaction_status', 'lunas')
                 ->whereDate('created_at', Carbon::today())
-                ->sum('total_price') - Transaction::where('kantor_cabang_id', $kantorcabang->id)
-                ->where('transaction_status', 'lunas')
-                ->whereDate('created_at', Carbon::today())
                 ->sum('total_price');
 
+            // dd($pendapatan_kantorcabang_hari_ini);
             // Menambahkan total pendapatan kantor cabang ke total pendapatan dari semua kantor cabang pada hari ini
             $total_pendapatan_hari_ini += $pendapatan_kantorcabang_hari_ini;
 
             // Menambahkan total pendapatan kantor cabang pada hari ini ke dalam objek kantor cabang
-            $kantorcabangs->total_pendapatan_hari_ini = $pendapatan_kantorcabang_hari_ini;
+            $kantorcabang->total_pendapatan_hari_ini = $pendapatan_kantorcabang_hari_ini;
         }
 
         // Mengirimkan data ke view
@@ -60,9 +58,6 @@ class PencairanController extends Controller
 
         // menghitung total pendapatan kantor cabang hanya untuk hari ini
         $pendapatan_kantorcabang_hari_ini = Transaction::where("kantor_cabang_id", $id)
-            ->where('transaction_status', 'lunas')
-            ->whereDate('created_at', Carbon::today())
-            ->sum('total_price') - Transaction::where('kantor_cabang_id', $kantorcabang->id)
             ->where('transaction_status', 'lunas')
             ->whereDate('created_at', Carbon::today())
             ->sum('total_price');
@@ -116,7 +111,7 @@ class PencairanController extends Controller
      */
     public function show(string $id)
     {
-        $pencairan = Pencairan::with('kantor_cabang', 'rekening')->findOrFail($id);
+        $pencairan = Pencairan::with('kantorcabang', 'rekening')->findOrFail($id);
         return view('admin.pencairan.show', compact('pencairan'));
     }
 
@@ -125,8 +120,8 @@ class PencairanController extends Controller
      */
     public function edit(string $id)
     {
-        $pencairan = Pencairan::with('kantor_cabang', 'rekening')->findOrFail($id);
-        return view('admin.pencairan.show', compact('pencairan'));
+        $pencairan = Pencairan::with('kantorcabang', 'rekening')->findOrFail($id);
+        return view('admin.pencairan.edit', compact('pencairan'));
     }
 
     /**
@@ -134,7 +129,7 @@ class PencairanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pencairan = Pencairan::with('kantor_cabang', 'rekening')->findOrFail($id);
+        $pencairan = Pencairan::with('kantorcabang', 'rekening')->findOrFail($id);
         // validasi form
         $validated = $request->validate([
             "status" => "required",

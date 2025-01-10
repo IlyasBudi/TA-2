@@ -69,7 +69,7 @@
                                 @enderror
                             </div>
                             <div class="row mb-3">
-                                <label for="min_hari" class="col-sm-2 col-form-label">Minimal Penyewaan Hari</label>
+                                <label for="min_hari" class="col-sm-2 col-form-label">Minimal Sewa</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control @error('min_hari') is-invalid @enderror"
                                         name="min_hari" min="1">

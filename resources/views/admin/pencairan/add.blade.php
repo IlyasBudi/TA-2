@@ -39,7 +39,7 @@
                             <div class="row mb-3">
                                 <label for="name" class="col-sm-2 col-form-label">Nama Kantor Cabang</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="kantorcabang_id" type="hidden" value="{{ $kantorcabang->id }}">
+                                    <input class="form-control" name="kantor_cabang_id" type="hidden" value="{{ $kantorcabang->id }}">
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         value="{{ $kantorcabang->name }}" disabled>
                                 </div>
@@ -105,19 +105,4 @@
         </div>
     </section>
 @endsection
-@push('javascript')
-    <script>
-        // Ambil tombol submit berdasarkan ID
-        var submitButton = document.getElementById("submitButton");
 
-        // Periksa waktu saat ini
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-
-        // Jika waktu saat ini tidak berada dalam rentang 22:00 sampai 23:59, nonaktifkan tombol submit
-        if (hours < 22 || (hours == 23 && minutes > 59)) {
-            submitButton.disabled = true;
-        }
-    </script>
-@endpush

@@ -46,13 +46,13 @@
                                         value="{{ $pencairan->kantorcabang->name }}" disabled>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label for="name" class="col-sm-2 col-form-label">Nama staff Kantor Cabang</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         value="{{ $pencairan->staff->name }}" disabled>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mb-3">
                                 <label for="name" class="col-sm-2 col-form-label">Nama Bank</label>
                                 <div class="col-sm-10">

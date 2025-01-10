@@ -43,6 +43,7 @@
                                     <th scope="col">Kategori Bus</th>
                                     <th scope="col">Destinasi</th>
                                     <th scope="col">Tanggal Berangkat - Tanggal Pulang</th>
+                                    <th scope="col">Status</th>
                                     {{-- <th scope="col">Status Pembayaran</th> --}}
                                     {{-- <th scope="col">Tanggal</th> --}}
                                     <th scope="col">Aksi</th>
@@ -57,6 +58,7 @@
                                         <td>{{ $transaction->categorybus->name }}</td>
                                         <td>{{ $transaction->destination->name }}</td>
                                         <td>{{ $transaction->departure_date }} - {{ $transaction->return_date }}</td>
+                                        <td>{{ $transaction->transaction_status }}</td>
                                         {{-- <td>{{ $transaction->transaction_status }}</td> --}}
                                         {{-- <td>{{ $transaction->created_at }}</td> --}}
                                         <td>

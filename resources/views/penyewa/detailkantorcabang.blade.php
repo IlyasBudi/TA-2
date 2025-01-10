@@ -118,7 +118,7 @@
                 </div>
   
                 <h2 class="title">
-                  <a href="blog-details.html">{{ $bus->name }}</a>
+                  <a href="/bus/{{ $bus->id }}">{{ $bus->name }}</a>
                 </h2>
 
                 <p class="post-category">{{ $bus->description }}</p>
