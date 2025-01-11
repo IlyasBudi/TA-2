@@ -41,7 +41,7 @@
           <div class="container">
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-10">
-                <h1 class="pb-3">Booking</h1>
+                <h1 class="pb-3">Checkout</h1>
 
                 {{-- <div class="card"> --}}
                     <div class="card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">

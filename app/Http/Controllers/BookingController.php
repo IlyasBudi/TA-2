@@ -189,7 +189,7 @@ class BookingController extends Controller
             }
 
             // Hitung jarak antara kantor cabang dan titik penjemputan
-            $closestKantorCabang = KantorCabang::find($closestLocationId);
+            $closestKantorCabang = KantorCabang::find($kantorcabang_id);
             $roundedDistance = round($this->haversineDistance($latitude, $longitude, $closestKantorCabang->latitude, $closestKantorCabang->longitude));
             // $cekDistance = $this->haversineDistance($latitude, $longitude, $kantorcabang->latitude, $kantorcabang->longitude);
             // $roundedDistance = floor($distance);

@@ -127,7 +127,7 @@
                     
 
                     <div class="col-12">
-                        <label for="location" class="label-form">Lokasi Keberangkatan</label>
+                        <label for="location" class="label-form">Lokasi Penjemputan</label>
                         <p class="text-form">Klik lokasi pada map untuk menentukan titik Keberangkatan.</p>
                         {{-- <div class="col-sm-10"> --}}
                             <div id="map"></div>
