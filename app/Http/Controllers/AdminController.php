@@ -97,7 +97,7 @@ class AdminController extends Controller
             'longitude' => 'string',
             'latitude' => 'string',
         ]);
-
+        
         if ($request->hasFile('image')) {
             Storage::delete($kantorcabang->image);
 
@@ -122,19 +122,19 @@ class AdminController extends Controller
                 'latitude' => $validated['latitude'],
                 "staff_id" => $staff_id,
             ]);
-
+            
             return redirect('admin/kantorcabang')->with('success', 'Kantor Cabang berhasil diperbarui!');
         } catch (Exception $e) {
             return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
         }
     }
 
-    public function transaction()
-    {
-        $transaction = Booking::with(['user'])->get();
+    // public function transaction()
+    // {
+    //     $transaction = Booking::with(['user'])->get();
 
-        return view('admin.transaction.index', compact('transaction'));
-    }
+    //     return view('admin.transaction.index', compact('transaction'));
+    // }
 
     public function laporanAdmin()
     {

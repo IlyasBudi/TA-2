@@ -9,7 +9,7 @@ use App\Models\Transaction;
 use App\Models\Bus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\validation\Rule;
+use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
 class StaffController extends Controller
