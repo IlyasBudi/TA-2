@@ -44,9 +44,9 @@
                                         </td>
                                         <td>{{ $kantorcabang->address }}</td>
                                         <td>
-                                            <a href="/admin/kantorcabang/{{ $kantorcabang->id }}/edit" class="btn btn-warning"><i
+                                            <!-- <a href="/admin/kantorcabang/{{ $kantorcabang->id }}/edit" class="btn btn-warning"><i
                                                     class="bi bi-pencil-fill text-white"></i></a>
-                                            |
+                                            | -->
                                             <a href="/admin/kantorcabang/{{ $kantorcabang->id }}" class="btn btn-primary"><i
                                                     class="bi bi-eye-fill text-white"></i></a>
                                             {{-- |
