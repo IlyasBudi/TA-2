@@ -126,8 +126,8 @@
                                     <th scope="col">Nama Bus</th>
                                     <th scope="col">Category Seat</th>
                                     <th scope="col">Deskripsi</th>
-                                    <th scope="col">Gambar Bus</th>
                                     <th scope="col">Harga</th>
+                                    <th scope="col">Gambar Bus</th>
                                     <th scope="col">status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
