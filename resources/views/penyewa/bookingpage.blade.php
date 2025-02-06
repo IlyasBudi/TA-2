@@ -26,6 +26,9 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" rel="stylesheet">
 
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
     <style>
         #map {
             height: 560px;
@@ -132,6 +135,12 @@
                         {{-- <div class="col-sm-10"> --}}
                             <div id="map"></div>
                         {{-- </div> --}}
+                    </div>
+
+                    <div class="text-start">
+                        <p><strong>Note:</strong></p>
+                        <p>- Sistem akan otomatis mencari bus yang terdekat dari lokasi penjemputan.</p>
+                        <p>- Setiap transaksi hanya dapat digunakan untuk memesan satu unit bus. Jika ingin memesan lebih dari satu bus, silakan lakukan transaksi terpisah untuk setiap bus.</p>
                     </div>
 
                     <div class="col-12">
@@ -243,13 +252,36 @@
         $('#latitude').val(location.lat).keyup()
     });
 
+    // Tambahkan kotak pencarian dengan plugin Leaflet Control Geocoder
+    L.Control.geocoder({
+        defaultMarkGeocode: false // Agar tidak menambahkan marker otomatis
+    })
+        .on('markgeocode', function (e) {
+            const latlng = e.geocode.center;
+
+            // Update posisi peta dan marker
+            map.setView(latlng, 18);
+            marker.setLatLng(latlng);
+
+            // Tambahkan popup untuk menunjukkan alamat yang dicari
+            marker.bindPopup(e.geocode.name).openPopup();
+            
+            // Update nilai latitude dan longitude pada input text
+            document.getElementById('latitude').value = latlng.lat;
+            document.getElementById('longitude').value = latlng.lng;
+        })
+        .addTo(map);
+
     // selain itu dengan fungsi di bawah juga bisa mendapatkan nilai latitude dan longitude
     // dengan cara klik lokasi pada map maka nilai latitude dan longitudenya juga akan
     // langsung muncul pada input text location
 
     var loclng = document.querySelector("[name=longitude]");
+    var loclat = document.querySelector("[name=latitude]");
+    var marker;
+
     map.on("click", function(e) {
-        // var lat = e.latlng.lat;
+        var lat = e.latlng.lat;
         var lng = e.latlng.lng;
 
         if (!marker) {
@@ -257,21 +289,33 @@
         } else {
             marker.setLatLng(e.latlng);
         }
+
         loclng.value = lng;
+        loclat.value = lat;
+
+        // dapatkan alamat dari koordinat yang diklik
+        getAddress(lat, lng, function(address) {
+            marker.bindPopup(address).openPopup();
+        });
     });
 
-    var loclat = document.querySelector("[name=latitude]");
-    map.on("click", function(e) {
-        var lat = e.latlng.lat;
-        // var lng = e.latlng.lng;
-
-        if (!marker) {
-            marker = L.marker(e.latlng).addTo(map);
-        } else {
-            marker.setLatLng(e.latlng);
-        }
-        loclat.value =lat;
-    });
+    function getAddress(lat, lng, callback) {
+        var url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.display_name) {
+                    callback(data.display_name);
+                } else {
+                    callback("Address not found");
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching address:', error);
+                callback("Error fetching address");
+            });
+    }
+    
 </script>
 <script>
     var previousMarker = null;

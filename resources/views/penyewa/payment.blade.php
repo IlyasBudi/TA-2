@@ -198,6 +198,34 @@
     map.addLayer(marker);
 
     
+    function getAddress(lat, lon, callback) {
+        var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.display_name) {
+                    callback(data.display_name);
+                } else {
+                    callback("Alamat tidak ditemukan");
+                }
+            })
+            .catch(error => {
+                console.log("Error getting address:", error);
+                callback("Error mendapatkan alamat");
+            });
+    }
+
+    
+    var curLocation = [{{ $transaction->latitude }}, {{ $transaction->longitude }}];
+
+    
+    var marker = new L.marker(curLocation, { draggable: false }).addTo(map);
+
+    
+    getAddress(curLocation[0], curLocation[1], function(address) {
+        marker.bindPopup(`<b>Lokasi Penjemputan:</b><br>${address}`).openPopup();
+    });
 </script>
 
 <script type="text/javascript">

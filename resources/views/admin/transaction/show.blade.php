@@ -68,6 +68,10 @@
                                     <td>{{ $transaction->categorybus->name }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Nama Bus</th>
+                                    <td>{{ $transaction->bus->name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Destinasi</th>
                                     <td>{{ $transaction->destination->name }}</td>
                                 </tr>
@@ -257,21 +261,33 @@
     });
     map.addLayer(marker);
 
-    
-</script>
+    function getAddress(lat, lon, callback) {
+        var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const pickUpTimeInput = document.querySelector('input[name="pickup_time"]');
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.display_name) {
+                    callback(data.display_name);
+                } else {
+                    callback("Alamat tidak ditemukan");
+                }
+            })
+            .catch(error => {
+                console.log("Error getting address:", error);
+                callback("Error mendapatkan alamat");
+            });
+    }
+
     
-        pickUpTimeInput.addEventListener('change', function () {
-            const timeValue = this.value;
-            if (timeValue < "05:00") {
-                alert("Waktu penjemputan tidak bisa sebelum jam 05:00.");
-                // Opsional: Setel ulang nilai input atau atur ke nilai default
-                this.value = "05:00";
-            }
-        });
+    var curLocation = [{{ $transaction->latitude }}, {{ $transaction->longitude }}];
+
+    
+    var marker = new L.marker(curLocation, { draggable: false }).addTo(map);
+
+    
+    getAddress(curLocation[0], curLocation[1], function(address) {
+        marker.bindPopup(`<b>Lokasi Penjemputan:</b><br>${address}`).openPopup();
     });
 </script>
 @endpush
