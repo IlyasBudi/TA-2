@@ -23,6 +23,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Data Kantor Cabang</h5>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
@@ -44,14 +54,14 @@
                                         </td>
                                         <td>{{ $kantorcabang->address }}</td>
                                         <td>
-                                            <!-- <a href="/admin/kantorcabang/{{ $kantorcabang->id }}/edit" class="btn btn-warning"><i
+                                            <a href="/admin/kantorcabang/{{ $kantorcabang->id }}/edit" class="btn btn-warning"><i
                                                     class="bi bi-pencil-fill text-white"></i></a>
-                                            | -->
+                                            |
                                             <a href="/admin/kantorcabang/{{ $kantorcabang->id }}" class="btn btn-primary"><i
                                                     class="bi bi-eye-fill text-white"></i></a>
-                                            {{-- |
+                                            |
                                             <a href="/admin/kantorcabang/{{ $kantorcabang->id }}/delete" class="btn btn-danger"><i
-                                                    class="bi bi-trash3-fill text-white"></i></a> --}}
+                                                    class="bi bi-trash3-fill text-white"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -351,103 +351,6 @@
     }
 </script>
 
-<!-- <script>
-    // Minimal penyewaan 2 hari
-    document.addEventListener('DOMContentLoaded', function () {
-        const destinationSelect = document.getElementById('destination');
-        const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const returnDateInput = document.querySelector('input[name="return_date"]');
-        const bookingForm = document.querySelector('.booking-form');
-
-        bookingForm.addEventListener('submit', function (event) {
-            const destination = destinationSelect.value;
-            const departureDate = new Date(departureDateInput.value);
-            const returnDate = new Date(returnDateInput.value);
-
-            if (destination === 'Pelabuhan Ratu') {
-                const timeDifference = returnDate.getTime() - departureDate.getTime();
-                const dayDifference = timeDifference / (1000 * 3600 * 24);
-
-                if (dayDifference < 1) {
-                    event.preventDefault();
-                    alert('Minimal pemesanan untuk destinasi yang dipilih adalah 2 hari.');
-                }
-            }
-        });
-    });
-
-    // Minimal penyewaan 3 hari
-    document.addEventListener('DOMContentLoaded', function () {
-        const destinationSelect = document.getElementById('destination');
-        const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const returnDateInput = document.querySelector('input[name="return_date"]');
-        const bookingForm = document.querySelector('.booking-form');
-
-        bookingForm.addEventListener('submit', function (event) {
-            const destination = destinationSelect.value;
-            const departureDate = new Date(departureDateInput.value);
-            const returnDate = new Date(returnDateInput.value);
-
-            if (destination === 'Jogja' || destination === 'Semarang - Kudus' || destination === 'Malang' || destination === 'Dieng' || destination === 'Palembang') {
-                const timeDifference = returnDate.getTime() - departureDate.getTime();
-                const dayDifference = timeDifference / (1000 * 3600 * 24);
-
-                if (dayDifference < 2) {
-                    event.preventDefault();
-                    alert('Minimal pemesanan untuk destinasi yang dipilih adalah 3 hari.');
-                }
-            }
-        });
-    });
-
-    // Minimal penyewaan 4 hari
-    document.addEventListener('DOMContentLoaded', function () {
-        const destinationSelect = document.getElementById('destination');
-        const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const returnDateInput = document.querySelector('input[name="return_date"]');
-        const bookingForm = document.querySelector('.booking-form');
-
-        bookingForm.addEventListener('submit', function (event) {
-            const destination = destinationSelect.value;
-            const departureDate = new Date(departureDateInput.value);
-            const returnDate = new Date(returnDateInput.value);
-
-            if (destination === 'Ziarah') {
-                const timeDifference = returnDate.getTime() - departureDate.getTime();
-                const dayDifference = timeDifference / (1000 * 3600 * 24);
-
-                if (dayDifference < 3) {
-                    event.preventDefault();
-                    alert('Minimal pemesanan untuk destinasi yang dipilih adalah 4 hari.');
-                }
-            }
-        });
-    });
-
-    // Minimal penyewaan 7 hari
-    document.addEventListener('DOMContentLoaded', function () {
-        const destinationSelect = document.getElementById('destination');
-        const departureDateInput = document.querySelector('input[name="departure_date"]');
-        const returnDateInput = document.querySelector('input[name="return_date"]');
-        const bookingForm = document.querySelector('.booking-form');
-
-        bookingForm.addEventListener('submit', function (event) {
-            const destination = destinationSelect.value;
-            const departureDate = new Date(departureDateInput.value);
-            const returnDate = new Date(returnDateInput.value);
-
-            if (destination === 'Bali') {
-                const timeDifference = returnDate.getTime() - departureDate.getTime();
-                const dayDifference = timeDifference / (1000 * 3600 * 24);
-
-                if (dayDifference < 6) {
-                    event.preventDefault();
-                    alert('Minimal pemesanan untuk destinasi yang dipilih adalah 7 hari.');
-                }
-            }
-        });
-    });
-</script> -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const pickUpTimeInput = document.querySelector('input[name="pickup_time"]');
@@ -463,6 +366,28 @@
         departureDateInput.addEventListener('change', function () {
             const departureDate = this.value;
             returnDateInput.setAttribute('min', departureDate);
+            
+            // Jika tanggal keberangkatan adalah hari ini, periksa waktu penjemputan
+            if (departureDate === today) {
+                const currentTime = moment().tz("Asia/Jakarta").format('HH:mm');
+                pickUpTimeInput.setAttribute('min', currentTime);
+            } else {
+                pickUpTimeInput.removeAttribute('min');
+            }
+        });
+
+        pickUpTimeInput.addEventListener('change', function () {
+            const timeValue = this.value;
+            const departureDate = departureDateInput.value;
+
+            // Jika tanggal keberangkatan adalah hari ini, periksa waktu penjemputan
+            if (departureDate === today) {
+                const currentTime = moment().tz("Asia/Jakarta").add(2, 'hours').format('HH:mm');
+                if (timeValue < currentTime) {
+                    alert("Waktu penjemputan tidak bisa kurang dari 2 jam dari sekarang.");
+                    this.value = currentTime;
+                }
+            }
         });
     
         pickUpTimeInput.addEventListener('change', function () {

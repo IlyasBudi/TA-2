@@ -21,8 +21,14 @@ class TransactionController extends Controller
 
     public function destroy(string $id)
     {
-        Transaction::destroy($id);
-        return redirect('/admin/transaction');
+        $transaction = Transaction::findOrFail($id);
+
+        if ($transaction->transaction_status !== 'Lunas') {
+            $transaction->delete();
+            return redirect('/admin/transaction')->with('success', 'Transaksi berhasil dihapus.');
+        } else {
+            return redirect('/admin/transaction')->with('error', 'Transaksi dengan status lunas tidak dapat dihapus.');
+        }
     }
 
     public function show(string $id)

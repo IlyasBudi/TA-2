@@ -55,9 +55,21 @@
                         <h5 class="card-title">Edit Kantor Cabang</h5>
 
                         <!-- General Form Elements -->
-                        <form action="/staff/kantorcabang/{{ $kantorcabang->id }}" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/kantorcabang/{{ $kantorcabang->id }}" method="POST" enctype="multipart/form-data">
                             @method('put')
                             @csrf
+                            <!-- <div class="row mb-3">
+                                <label for="staff_id" class="col-sm-2 col-form-label">ID Staff</label>
+                                <div class="col-sm-10">
+                                    <input type="hidden" class="form-control @error('staff_id') is-invalid @enderror"
+                                        name="staff_id" value="{{ $kantorcabang->staff->id }}">
+                                </div>
+                                @error('staff_id')
+                                    <div class="invalid-feedback">
+                                        staff id tidak boleh kosong
+                                    </div>
+                                @enderror
+                            </div> -->
                             <div class="row mb-3">
                                 <label for="name" class="col-sm-2 col-form-label">Nama Kantor Cabang</label>
                                 <div class="col-sm-10">

@@ -26,7 +26,7 @@ class BookingController extends Controller
     private function generateUniqueCode()
     {
         do {
-            $code = 'TRANS-' . mt_rand(000, 999);
+            $code = 'TRANS-' . mt_rand(000, 9999);
         } while (Transaction::where('code', $code)->exists());
 
         return $code;
@@ -54,7 +54,7 @@ class BookingController extends Controller
 
     public function booking(Request $request)
     {
-        $code = 'TRANS-' . mt_rand(000, 999);
+        // $code = 'TRANS-' . mt_rand(000, 999);
 
         $validated = $request->validate([
             'code' => 'required',
@@ -226,7 +226,7 @@ class BookingController extends Controller
             try {
                 DB::beginTransaction();
                 $booking = Transaction::create([
-                    'code' => $code,
+                    'code' => $validated['code'],
                     // 'admin_id' => $admin_id,
                     'user_id' => $user_id,
                     'kantor_cabang_id' => $kantorcabang_id,

@@ -147,8 +147,12 @@
                                         <td>{{ $bus->status }}</td>
                                         <td>
                                             
+                                            <a href="/admin/kantorcabang/bus/{{ $bus->id }}/edit" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-fill text-white"></i></a>
                                             <a href="/admin/kantorcabang/bus/{{ $bus->id }}" class="btn btn-primary"><i
                                                     class="bi bi-eye-fill text-white"></i></a>
+                                            <a href="/admin/kantorcabang/bus/{{ $bus->id }}/delete" class="btn btn-danger"><i
+                                                    class="bi bi-trash3-fill text-white"></i></a>
                                             
                                         </td>
                                     </tr>
@@ -164,9 +168,8 @@
                                     <th scope="col">#</th>
                                     {{-- <th scope="col">Kode Destinasi</th> --}}
                                     <th scope="col">Nama Destinasi</th>
-                                    <th scope="col">Deskripsi</th>
-                                    <th scope="col">Gambar Destinasi</th>
                                     <th scope="col">Harga</th>
+                                    <th scope="col">Minimal Sewa</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -184,8 +187,12 @@
                                         </td> -->
                                         <td>
                                             
+                                            <a href="/admin/kantorcabang/destination/{{ $destination->id }}/edit" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-fill text-white"></i></a>
                                             <a href="/admin/kantorcabang/destination/{{ $destination->id }}" class="btn btn-primary"><i
                                                     class="bi bi-eye-fill text-white"></i></a>
+                                            <a href="/admin/kantorcabang/destination/{{ $destination->id }}/delete" class="btn btn-danger"><i
+                                                    class="bi bi-trash3-fill text-white"></i></a>
                                             
                                         </td>
                                     </tr>

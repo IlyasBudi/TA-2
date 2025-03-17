@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryBus;
 use App\Models\KantorCabang;
 use App\Models\Staff;
 use App\Models\Bus;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Storage;
 use Exception;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -38,6 +40,45 @@ class AdminController extends Controller
     {
         $staff = Staff::with(['kantorcabang', 'rekening'])->findOrFail($id);
         return view("admin.staff.show", compact("staff"));
+    }
+
+    public function editStaff($id)
+    {
+        $staff = Staff::findOrFail($id);
+        return view("admin.staff.edit", compact("staff"));
+    }
+
+    public function updateStaff(Request $request, $id)
+    {
+        $staff = Staff::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => ['string', 'max:100'],
+            'email' => ['string', 'email', 'max:100', Rule::unique('staff')->ignore($id)],
+            'phone_number' => ['string'],
+            'address' => ['string', 'max:65535'],
+        ]);
+
+        try {
+            Staff::where('id', $id)->update([
+                "name" => $validated["name"],
+                "email" => $validated["email"],
+                "phone_number" => $validated["phone_number"],
+                "address" => $validated["address"],
+            ]);
+
+            return redirect('admin/staff')->with('success', 'Staff berhasil diperbarui!');
+        } catch (Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
+        }
+    }
+
+    public function destroyStaff($id)
+    {
+        $staff = Staff::findOrFail($id);
+        $staff->delete();
+
+        return redirect('admin/staff')->with('success', 'Staff berhasil dihapus!');
     }
 
     // Penyewa
@@ -72,10 +113,104 @@ class AdminController extends Controller
         return view("admin.kantorcabang.busdetail", compact("bus"));
     }
 
+    public function editBus($id)
+    {
+        $categorybus = CategoryBus::all();
+        $bus = Bus::findOrFail($id);
+        return view("admin.kantorcabang.editbus", compact("bus", "categorybus"));
+    }
+
+    public function updateBus(Request $request, $id)
+    {
+        $bus = Bus::findOrFail($id);
+        $kantorcabang_id = $bus->kantor_cabang_id;
+
+        $validated = $request->validate([
+            'category_bus_id' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string|max:65535',
+            'image' => 'mimes:jpg,jpeg,png|max:5120',
+            'price' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+
+        if ($request->hasFile('image')) {
+            Storage::delete($bus->image);
+
+            $newImage['image'] = Storage::putFile('public/image', $request->file('image'));
+        } else {
+            $newImage = ['image' => $bus->image];
+        }
+
+        try {
+            Bus::where('id', $id)->update([
+                'category_bus_id' => $validated['category_bus_id'],
+                'name' => $validated['name'],
+                'description' => $validated['description'],
+                'image' => $newImage['image'],
+                'price' => $validated['price'],
+                'status' => $validated['status'],
+                'kantor_cabang_id' => $kantorcabang_id,
+            ]);
+
+            return redirect('admin/kantorcabang/' . $kantorcabang_id)->with('success', 'Bus berhasil diperbarui!');
+        } catch (Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
+        }
+    }
+
+    public function destroyBus($id)
+    {
+        $bus = Bus::findOrFail($id);
+        $kantorcabang_id = $bus->kantor_cabang_id;
+        $bus->delete();
+
+        return redirect('admin/kantorcabang/' . $kantorcabang_id)->with('success', 'Bus berhasil dihapus!');
+    }
+
     public function showDestination(Request $request, $id)
     {
         $destination = Destination::findOrFail($id);
         return view("admin.kantorcabang.destinationdetail", compact("destination"));
+    }
+
+    public function editDestination($id)
+    {
+        $destination = Destination::findOrFail($id);
+        return view("admin.kantorcabang.editdestination", compact("destination"));
+    }
+
+    public function updateDestination(Request $request, $id)
+    {
+        $destination = Destination::findOrFail($id);
+        $kantorcabang_id = $destination->kantor_cabang_id;
+
+        $validated = $request->validate([
+            "name" => "required|string",
+            "price" => "required|integer",
+            "min_hari" => "required|integer",
+        ]);
+
+        try {
+            Destination::where('id', $id)->update([
+                "name" => $validated["name"],
+                "price" => $validated["price"],
+                "min_hari" => $validated["min_hari"],
+            ]);
+
+            return redirect('admin/kantorcabang/' . $kantorcabang_id)->with('success', 'Destinasi berhasil diperbarui!');
+        } catch (Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
+        }
+    }
+
+    public function destroyDestination($id)
+    {
+        $destination = Destination::findOrFail($id);
+        $kantorcabang_id = $destination->kantor_cabang_id;
+        $destination->delete();
+
+        return redirect('admin/kantorcabang/' . $kantorcabang_id)->with('success', 'Destinasi berhasil dihapus!');
     }
 
     public function editKantorCabang($id)
@@ -96,6 +231,7 @@ class AdminController extends Controller
             // 'location' => 'string',
             'longitude' => 'string',
             'latitude' => 'string',
+            // 'staff_id' => 'string',
         ]);
         
         if ($request->hasFile('image')) {
@@ -127,6 +263,14 @@ class AdminController extends Controller
         } catch (Exception $e) {
             return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Periksa kembali data yang dimasukkan.']);
         }
+    }
+
+    public function destroyKantorCabang($id)
+    {
+        $kantorcabang = KantorCabang::findOrFail($id);
+        $kantorcabang->delete();
+
+        return redirect('admin/kantorcabang')->with('success', 'Kantor Cabang berhasil dihapus!');
     }
 
     // public function transaction()

@@ -21,6 +21,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Data Transaksi</h5>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
@@ -29,8 +39,9 @@
                                     <th scope="col">Kode Transaksi</th>
                                     <th scope="col">Nama Penyewa</th>
                                     <th scope="col">Kategori Bus</th>
+                                    <th scope="col">Destinasi</th>
                                     <th scope="col">Tanggal Keberangkatan - Kepulangan</th>
-                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -41,12 +52,18 @@
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->categorybus->name }}</td>
+                                        <td>{{ $item->destination->name }}</td>
                                         <td>{{ $item->departure_date }}|{{ $item->return_date }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ $item->transaction_status }}</td>
                                         <td><a href="/admin/transaction/{{ $item->id }}"
                                                 class="btn btn-primary"><i class="bi bi-eye-fill text-white"></i></a>
-                                                {{-- | <a href="/admin/transaction/{{ $item->id }}/delete" class="btn btn-danger"><i
-                                                    class="bi bi-trash3-fill text-white"></i></a> --}}
+                                        @if($item->transaction_status !== 'Pending')
+                                            | <a href="/admin/transaction/{{ $item->id }}/delete" class="btn btn-danger"><i
+                                                    class="bi bi-trash3-fill text-white"></i></a>
+                                        @else
+                                            <a href="/admin/transaction/{{ $item->id }}/delete" class="btn btn-danger"><i
+                                                    class="bi bi-trash3-fill text-white" ></i></a>
+                                        @endif
                                         </td>
                                     </tr>
                                 @endforeach

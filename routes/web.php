@@ -136,6 +136,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         // Staff
         Route::get('/staff', [AdminController::class, 'staff']);
         Route::get('/staff/{id}', [AdminController::class, 'showStaff']);
+        Route::get('/staff/{id}/edit', [AdminController::class, 'editStaff']);
+        Route::put('/staff/{id}', [AdminController::class, 'updateStaff']);
+        Route::get('/staff/{id}/delete', [AdminController::class, 'destroyStaff']);
         // Penyewa
         Route::get('/penyewa', [AdminController::class, 'penyewa']);
         Route::get('/penyewa/{id}', [AdminController::class, 'showPenyewa']);
@@ -146,10 +149,17 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/kantorcabang/destination/{id}', [AdminController::class, 'showDestination']);
         Route::get('/kantorcabang/{id}/edit', [AdminController::class, 'editKantorCabang']);
         Route::put('/kantorcabang/{id}', [AdminController::class, 'updateKantorCabang']);
+        Route::get('/kantorcabang/bus/{id}/edit', [AdminController::class, 'editBus']);
+        Route::put('/kantorcabang/bus/{id}', [AdminController::class, 'updateBus']);
+        Route::get('/kantorcabang/destination/{id}/edit', [AdminController::class, 'editDestination']);
+        Route::put('/kantorcabang/destination/{id}', [AdminController::class, 'updateDestination']);
+        Route::get('/kantorcabang/{id}/delete', [AdminController::class, 'destroyKantorCabang']);
+        Route::get('/kantorcabang/bus/{id}/delete', [AdminController::class, 'destroyBus']);
+        Route::get('/kantorcabang/destination/{id}/delete', [AdminController::class, 'destroyDestination']);
         // Transaksi
         Route::get('/transaction', [TransactionController::class, 'transaction']);
         Route::get('/transaction/{id}', [TransactionController::class, 'show']);
-        // Route::get('/transaction/{id}/delete', [TransactionController::class, 'destroy']);
+        Route::get('/transaction/{id}/delete', [TransactionController::class, 'destroy']);
 
         // LAPORAN
         Route::get('/laporan', [AdminController::class, 'laporanAdmin']);
