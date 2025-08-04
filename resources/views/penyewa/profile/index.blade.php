@@ -3,100 +3,176 @@
 @section('title', 'Profile')
 
 @section('content')
+    <!-- Page Header -->
+    <section class="pt-24 pb-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Profile Saya</h1>
+                <p class="text-gray-600">Kelola informasi pribadi dan riwayat transaksi Anda</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-10">
-                <h1 class="pb-3">Profile</h1>
+    <!-- Profile Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <!-- Profile Card -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8" data-aos="fade-up">
+                <div class="p-8">
+                    <!-- Profile Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">
+                                    {{ substr($profile->name, 0, 1) }}
+                                </span>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">{{ $profile->name }}</h2>
+                                <p class="text-gray-600">Member PO XYZ Pariwisata</p>
+                            </div>
+                        </div>
+                        
+                        <a href="/profile/{{ Auth::user()->id }}/edit" 
+                           class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-medium rounded-xl transition-colors duration-200">
+                            <i class="fas fa-edit mr-2"></i>
+                            Edit Profile
+                        </a>
+                    </div>
 
-                {{-- <div class="card"> --}}
-                    <div class="card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        @method('put')
-                        @csrf
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">{{ $profile->name }}</h3>
-                            <a href="/profile/{{ Auth::user()->id }}/edit" class="p-2 rounded shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
-                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path
-                                        d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
-                                </svg>
-                            </a>
+                    <!-- Profile Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">Email</p>
+                                    <p class="font-medium text-gray-900">{{ $profile->email }}</p>
+                                </div>
+                            </div>
                         </div>
-                        {{-- <div class="meta">
-                            <p class="mb-0">email</p>
-                            <p class="mb-0">phone number</p>
-                        </div> --}}
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td>{{ $profile->email }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nomor Telepon</th>
-                                        <td>{{ $profile->phone_number }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Alamat Lengkap</th>
-                                        <td>{{ $profile->address }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">Telepon</p>
+                                    <p class="font-medium text-gray-900">{{ $profile->phone_number ?: 'Belum diisi' }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="tab-pane fade show active p-3  id="one" role="tabpanel" aria-labelledby="one-tab">
-                                @if ($profile->transaction->isNotEmpty())
-                                    <h5>Transaksi</h5>
-                                    <p class="card-text">Daftar semua transaksi yang pernah kamu lakukan</p>
-                                    @foreach ($profile->transaction as $transaction)
-                                        <div class="my-3 p-4 rounded shadow">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <p class="fw-bold mb-0">{{ $transaction->code }}</p>
-                                                    <p class="mb-0">{{ $transaction->created_at }}</p>
-                                                </div>
-                                                <p class="mb-0 bg-dark px-2 py-1 rounded badge">
-                                                {{ $transaction->transaction_status }}</p>
-                                            </div>
-                                            <hr>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <p class="mb-0 meta">Total Belanja:</p>
-                                                    <p class="fw-bold mb-0">Rp{{ number_format($transaction->total_price) }}</p>
-                                                </div>
-                                                <a href="https://wa.me/{{ $transaction->kantorcabang->phone_number }}"
-                                                class="mb-0 bg-primary px-2 py-1 rounded badge">
-                                                Hubungi Staff</a>
-                                                
-                                                <a href="/profile/transaction/{{ $transaction->id }}"
-                                                class="btn btn-sm btn-primary">Detail Transaksi</a>
-                                                <!-- <a href="https://wa.me/{{ $transaction->kantorcabang->phone_number }}"
-                                                    class="btn btn-sm btn-primary">Hubungi Staff</a> -->
-                                                
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <p class="text-center">Kamu belum memiliki transaksi</p>
-                                @endif
+
+                        <div class="bg-gray-50 rounded-xl p-4 md:col-span-2 lg:col-span-1">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-sm text-gray-600">Alamat</p>
+                                    <p class="font-medium text-gray-900 break-words">{{ $profile->address ?: 'Belum diisi' }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                {{-- </div> --}}
-
-              </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Transaction History -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900">Riwayat Transaksi</h3>
+                        <div class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-lg text-sm font-medium">
+                            {{ $profile->transaction->count() }} Transaksi
+                        </div>
+                    </div>
+
+                    @if ($profile->transaction->isNotEmpty())
+                        <div class="space-y-6">
+                            @foreach ($profile->transaction as $transaction)
+                                <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow duration-200">
+                                    <!-- Transaction Header -->
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                                        <div>
+                                            <h4 class="font-bold text-gray-900 mb-1">{{ $transaction->code }}</h4>
+                                            <p class="text-sm text-gray-500">
+                                                <i class="fas fa-calendar mr-1"></i>
+                                                {{ $transaction->created_at->format('d M Y, H:i') }}
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="mt-2 sm:mt-0">
+                                            @php
+                                                $statusColors = [
+                                                    'pending' => 'bg-yellow-100 text-yellow-800',
+                                                    'success' => 'bg-green-100 text-green-800',
+                                                    'failed' => 'bg-red-100 text-red-800',
+                                                    'processing' => 'bg-blue-100 text-blue-800'
+                                                ];
+                                                $statusColor = $statusColors[$transaction->transaction_status] ?? 'bg-gray-100 text-gray-800';
+                                            @endphp
+                                            <span class="px-3 py-1 rounded-full text-sm font-medium {{ $statusColor }}">
+                                                {{ ucfirst($transaction->transaction_status) }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Transaction Details -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-sm text-gray-600">Destinasi</p>
+                                            <p class="font-medium text-gray-900">{{ $transaction->destination->name ?? 'N/A' }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-600">Bus</p>
+                                            <p class="font-medium text-gray-900">{{ $transaction->bus->name ?? 'N/A' }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-600">Total Harga</p>
+                                            <p class="font-bold text-indigo-600">Rp{{ number_format($transaction->total_price) }}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <a href="/profile/transaction/{{ $transaction->id }}" 
+                                           class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200">
+                                            <i class="fas fa-eye mr-2"></i>
+                                            Detail Transaksi
+                                        </a>
+                                        
+                                        <a href="https://wa.me/{{ $transaction->kantorcabang->phone_number ?? '' }}" 
+                                           target="_blank"
+                                           class="flex-1 text-center bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200">
+                                            <i class="fab fa-whatsapp mr-2"></i>
+                                            Hubungi Staff
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <!-- Empty State -->
+                        <div class="text-center py-12">
+                            <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-receipt text-gray-400 text-3xl"></i>
+                            </div>
+                            <h4 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Transaksi</h4>
+                            <p class="text-gray-600 mb-6">Anda belum memiliki riwayat transaksi. Mulai petualangan Anda dengan memesan bus sekarang!</p>
+                            <a href="/bookingpage" 
+                               class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-plus mr-2"></i>
+                                Mulai Booking
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
-       
-    </div><!-- End Page Title -->
-  
-    
+    </section>
 @endsection

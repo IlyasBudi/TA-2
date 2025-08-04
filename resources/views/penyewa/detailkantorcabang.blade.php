@@ -3,214 +3,279 @@
 @section('title', 'Detail Kantor Cabang')
 
 @push('before-style')
-    <!-- pada section styles menambahkan style css untuk menampilkan plugin leaflet  -->
-    <!-- {{-- cdn css leaflet  --}} -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
         crossorigin="" />
 
-    <!-- {{-- cdn js leaflet --}} -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
 
-    <!-- {{-- cdn leaflet fullscreen js dan css --}} -->
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
-    <!-- {{-- cdn leaflet search --}} -->
     <link rel="stylesheet" href="{{ asset('css/leaflet-search.css') }}">
     <script src="{{ asset('js/leaflet-search.js') }}"></script>
 
-    <!-- cdn leafle current location -->
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" rel="stylesheet">
 
     <style>
         #map {
-            height: 310px;
-            width: 560px;
-            z-index: 0;
+            height: 350px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
     </style>
 @endpush
 
 @section('content')
-
-    <!-- Page Title -->
-    <div class="page-title-details" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-8">
-                <p class="mb-0">Kantor Cabang</p>
-                <h1>{{ $kantorcabang->name }}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        {{-- <nav class="breadcrumbs">
-          <div class="container">
-            <ol>
-              <li><a href="index.html">Home</a></li>
-              <li class="current">Services Details</li>
-            </ol>
-          </div>
-        </nav> --}}
-    </div><!-- End Page Title -->
-  
-      <!-- Service Details Section -->
-    <section id="kantorcabang-details" class="kantorcabang-details section">
-  
-        <div class="container">
-  
-          <div class="row gy-5">
-  
-            <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-
-              <img src="{{ Storage::url($kantorcabang->image) }}" height="480" height="720" class="img-fluid services-img">
-              <h4>- Nama</h4>
-              <p>
+    <!-- Page Header -->
+    <section class="pt-24 pb-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <p class="text-indigo-600 font-medium mb-2">Kantor Cabang</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4" data-aos="fade-up">
                 {{ $kantorcabang->name }}
-              </p>
-              <h4>- Nomor Telepon</h4>
-              <p>
-                {{ $kantorcabang->phone_number }}
-              </p>
-              <h4>- Alamat</h4>
-              <p>
-                {{ $kantorcabang->address }}
-              </p>
-              <h4>- Lokasi</h4>
-              <div id="map"></div>
-              {{-- <p>
-                {{ $kantorcabang->longitude }} , {{ $kantorcabang->latitude }}
-              </p> --}}
-            </div>
-  
-          </div>
-  
+            </h1>
         </div>
-  
-    </section><!-- /Service Details Section -->
+    </section>
 
-    <!-- Recent Posts Section -->
-    <section id="recent-posts" class="recent-posts section">
-
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>bus</h2>
-          {{-- <p>Temukan destinasi populer di seluruh dunia dengan layanan kami dan nikmati pengalaman liburan yang tak terlupakan.</p> --}}
-        </div><!-- End Section Title -->
-  
-        <div class="container">
-
-          <div class="row gy-4">
-  
-            @if ($kantorcabang->bus->isNotEmpty())
-            @foreach ($kantorcabang->bus as $bus)
-
-            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <article>
-  
-                <div class="post-img">
-                  <img src="{{ Storage::url($bus->image) }}" height="240" width="720" alt="" class="img-fluid">
+    <!-- Office Details -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up">
+                <!-- Office Image -->
+                <div class="relative h-96 overflow-hidden">
+                    <img src="{{ Storage::url($kantorcabang->image) }}" 
+                         alt="{{ $kantorcabang->name }}" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-  
-                <h2 class="title">
-                  <a href="/bus/{{ $bus->id }}">{{ $bus->name }}</a>
-                </h2>
 
-                <p class="post-category">{{ $bus->description }}</p>
-  
-              </article>
-            </div><!-- End post list item -->
-            @endforeach
-            @else
-            <p class="text-center">Kantor Cabang ini belum memiliki Bus</p>
-             @endif
-          </div><!-- End recent posts list -->
-          
-          
+                <!-- Office Info -->
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Left Column - Office Details -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                                    <i class="fas fa-building text-indigo-500 mr-2"></i>
+                                    Nama Kantor
+                                </h3>
+                                <p class="text-gray-700 bg-gray-50 p-4 rounded-xl">{{ $kantorcabang->name }}</p>
+                            </div>
 
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                                    <i class="fas fa-phone text-indigo-500 mr-2"></i>
+                                    Nomor Telepon
+                                </h3>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <a href="tel:{{ $kantorcabang->phone_number }}" 
+                                       class="text-indigo-600 hover:text-indigo-800 font-medium">
+                                        {{ $kantorcabang->phone_number }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                                    <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                                    Alamat
+                                </h3>
+                                <p class="text-gray-700 bg-gray-50 p-4 rounded-xl leading-relaxed">{{ $kantorcabang->address }}</p>
+                            </div>
+
+                            <!-- Contact Actions -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="tel:{{ $kantorcabang->phone_number }}" 
+                                   class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200 text-center">
+                                    <i class="fas fa-phone mr-2"></i>
+                                    Telepon
+                                </a>
+                                <a href="https://wa.me/{{ $kantorcabang->phone_number }}" 
+                                   target="_blank"
+                                   class="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200 text-center">
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Map -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fas fa-map text-indigo-500 mr-2"></i>
+                                Lokasi
+                            </h3>
+                            <div id="map" class="rounded-xl"></div>
+                            <p class="text-xs text-gray-500 mt-2">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Klik pada marker untuk melihat informasi lengkap
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-  
-    </section><!-- /Recent Posts Section -->
+    </section>
+
+    <!-- Bus Fleet Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Armada Bus Tersedia
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Bus-bus yang tersedia di kantor cabang {{ $kantorcabang->name }}
+                </p>
+            </div>
+
+            @if ($kantorcabang->bus->isNotEmpty())
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach ($kantorcabang->bus as $index => $bus)
+                    <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="{{ Storage::url($bus->image) }}" 
+                                 alt="{{ $bus->name }}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            
+                            <!-- Status Badge -->
+                            @if($bus->status == 'available')
+                                <div class="absolute top-3 right-3">
+                                    <span class="px-2 py-1 bg-green-500 text-white rounded-lg text-xs font-medium">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Tersedia
+                                    </span>
+                                </div>
+                            @else
+                                <div class="absolute top-3 right-3">
+                                    <span class="px-2 py-1 bg-red-500 text-white rounded-lg text-xs font-medium">
+                                        <i class="fas fa-times-circle mr-1"></i>
+                                        Tidak Tersedia
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+                        
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
+                                <a href="/bus/{{ $bus->id }}">{{ $bus->name }}</a>
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $bus->description }}</p>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-indigo-600 font-medium">{{ $bus->categoryBus->name ?? 'N/A' }}</span>
+                                <a href="/bus/{{ $bus->id }}" 
+                                   class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                    Lihat Detail
+                                    <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            @else
+                <!-- Empty State -->
+                <div class="text-center py-16" data-aos="fade-up">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bus text-gray-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-gray-900 mb-2">Belum Ada Bus Tersedia</h3>
+                    <p class="text-gray-600 mb-6">Kantor cabang ini belum memiliki armada bus yang terdaftar.</p>
+                    <a href="/bookingpage" 
+                       class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200">
+                        <i class="fas fa-search mr-2"></i>
+                        Cari Bus Lain
+                    </a>
+                </div>
+            @endif
+        </div>
+    </section>
 @endsection
 
 @push('after-scripts')
-{{-- <script src="{{ asset('v1/vendor/select2/js/select2.full.min.js') }}"></script> --}}
-
 <script>
-    // membuat variabel untuk load attribute dan url pada map
+    // Map configuration
     var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        mbUrl =
-        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaWx5YXMzMTciLCJhIjoiY2x4cTd2YXN6MHR2bzJqc2g5ZnJzbzBhcSJ9.4C6RKZ06Bi7b-l5tYqwfQg';
+        mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaWx5YXMzMTciLCJhIjoiY2x4cTd2YXN6MHR2bzJqc2g5ZnJzbzBhcSJ9.4C6RKZ06Bi7b-l5tYqwfQg';
 
-    // membuat var satellite, dark, dan streets agar layer map kita punya beberapa opsi tampilan yang bisa kita ubah 
+    // Map layers
     var satellite = L.tileLayer(mbUrl, {
-            id: 'mapbox/satellite-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            attribution: mbAttr
-        }),
-        street1 = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-            maxZoom: 20,
-            attribution: mbAttr
-        }),
-        streets = L.tileLayer(mbUrl, {
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            attribution: mbAttr
-        });
+        id: 'mapbox/satellite-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: mbAttr
+    }),
+    street1 = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        maxZoom: 20,
+        attribution: mbAttr
+    }),
+    streets = L.tileLayer(mbUrl, {
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: mbAttr
+    });
 
-    // mendefinisikan var map. Menambahkan opsi seperti center untuk menentukan latitude dan longitude,
-    // mengantur zoom map saat di load dan memuat layer yang di inginkan.
-    // Untuk nilai dari latitude longitude bisa disesuaikan dengan lokasi yang di inginkan 
-    // nilai latitude dan longitude bisa di ambil dari google map
+    // Initialize map
     var map = L.map('map', {
         center: [{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}],
         zoom: 16,
-        // maxZoom: 24,
         layers: [streets]
     });
 
-    // set baselayer yang ingin digunakan
+    // Base layers
     var baseLayers = {
-        //"Grayscale": grayscale,
         "Streets": streets,
-        "Streets2": street1
+        "Google Streets": street1,
+        "Satellite": satellite
     };
 
+    // Add controls
     L.control.fullscreen({
-        position: 'bottomright'
+        position: 'topright'
     }).addTo(map);
 
-
-    // set overlayer yang ingin digunakan
-    // var overlays = {
-    //     "Streets": street1,
-    //     "Streets2": streets
-    // };
-
-    // menambahkan baselayer dan overlays tadi ke dalam control dan di tampilkan ke tag map
-    // L.control.layers(baseLayers, overlays).addTo(map);
     L.control.layers(baseLayers).addTo(map);
 
-
-    // set koordinat lokasi ke dalam curLocation yang mana nilai dari curLocation juga akan
-    // digunakan untuk menampilkan marker pada map
+    // Office marker
     var curLocation = [{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}];
     map.attributionControl.setPrefix(false);
 
-    var marker = new L.marker(curLocation, {
-        draggable: 'false',
+    // Custom marker icon
+    var customIcon = L.divIcon({
+        html: '<div class="w-10 h-10 bg-indigo-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center"><i class="fas fa-building text-white text-sm"></i></div>',
+        className: 'custom-marker',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
     });
-    map.addLayer(marker);
 
-    
+    var marker = new L.marker(curLocation, {
+        draggable: false,
+        icon: customIcon
+    }).addTo(map);
+
+    // Marker popup
+    marker.bindPopup(`
+        <div class="p-3 min-w-[200px]">
+            <h4 class="font-semibold text-indigo-600 mb-2">
+                <i class="fas fa-building mr-1"></i>
+                {{ $kantorcabang->name }}
+            </h4>
+            <p class="text-sm text-gray-600 mb-2">{{ $kantorcabang->address }}</p>
+            <div class="flex items-center text-sm text-gray-500">
+                <i class="fas fa-phone mr-1"></i>
+                <span>{{ $kantorcabang->phone_number }}</span>
+            </div>
+        </div>
+    `).openPopup();
 </script>
 @endpush

@@ -1,250 +1,143 @@
 @extends('penyewa.layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Edit Profile')
 
 @section('content')
-
-@section('styles')
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-    <style>
-        h5 {
-            font-size: 1.28571429em;
-            font-weight: 700;
-            line-height: 1.2857em;
-            margin: 0;
-        }
-
-        .card {
-            font-size: 1em;
-            overflow: hidden;
-            padding: 0;
-            border: none;
-            border-radius: .28571429rem;
-            box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-        }
-
-        .card-block {
-            font-size: 1em;
-            position: relative;
-            margin: 0;
-            padding: 1em;
-            border: none;
-            border-top: 1px solid rgba(34, 36, 38, .1);
-            box-shadow: none;
-        }
-
-        .card-img-top {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .card-title {
-            font-size: 1.28571429em;
-            font-weight: 700;
-            line-height: 1.2857em;
-        }
-
-        .card-text {
-            clear: both;
-            margin-top: .5em;
-            color: rgba(0, 0, 0, .68);
-        }
-
-        .card-footer {
-            font-size: 1em;
-            position: static;
-            top: 0;
-            left: 0;
-            max-width: 100%;
-            padding: .75em 1em;
-            border-top: 1px solid rgba(0, 0, 0, 0.3) !important;
-            background: #fff;
-        }
-
-        .card-inverse .btn {
-            border: 1px solid rgba(0, 0, 0, .05);
-        }
-
-        .profile {
-            position: absolute;
-            top: -12px;
-            display: inline-block;
-            overflow: hidden;
-            box-sizing: border-box;
-            width: 25px;
-            height: 25px;
-            margin: 0;
-            border: 1px solid #fff;
-            border-radius: 50%;
-        }
-
-        .profile-avatar {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-
-        .profile-inline {
-            position: relative;
-            top: 0;
-            display: inline-block;
-        }
-
-        .profile-inline~.card-title {
-            display: inline-block;
-            margin-left: 4px;
-            vertical-align: top;
-        }
-
-        .text-bold {
-            font-weight: 700;
-        }
-
-        .meta {
-            font-size: 1em;
-            color: rgba(0, 0, 0, .4);
-        }
-
-        .meta a {
-            text-decoration: none;
-            color: rgba(0, 0, 0, .4);
-        }
-
-        .meta a:hover {
-            color: rgba(0, 0, 0, .87);
-        }
-
-        /* Tabs Card */
-        .tab-card {
-            border: 1px solid #eee;
-        }
-
-        .tab-card-header {
-            background: none;
-        }
-
-        /* Default mode */
-        .tab-card-header>.nav-tabs {
-            border: none;
-            margin: 0px;
-        }
-
-        .tab-card-header>.nav-tabs>li {
-            margin-right: 2px;
-        }
-
-        .tab-card-header>.nav-tabs>li>a {
-            border: 0;
-            border-bottom: 2px solid transparent;
-            margin-right: 0;
-            color: #737373;
-            padding: 2px 15px;
-        }
-
-        .tab-card-header>.nav-tabs>li>a.show {
-            border-bottom: 2px solid #007bff;
-            color: #007bff;
-        }
-
-        .tab-card-header>.nav-tabs>li>a:hover {
-            color: #007bff;
-        }
-
-        .tab-card-header>.tab-content {
-            padding-bottom: 0;
-        }
-
-        .form-label {
-            display: flex;
-            justify-content: flex-start;
-            padding-bottom: 5px;
-            font-size: 20px;
-            font-weight: 500;
-        }
-    </style>
-
-@endsection
-
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-10">
-                <h1 class="pb-3">Edit Profile</h1>
-
-                @if (session('success'))
-                <div class="alert alert-success">
-                {{ session('success') }}
-                </div>
-                @endif
-
-                @if (session('error'))
-                <div class="alert alert-danger">
-                {{ session('error') }}
-                </div>
-                @endif
-
-                        <form method="POST" action="{{ url('/profile/' . $user->id) }}">
-                            @method('put')
-                            @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="name" aria-describedby="nameHelp" value="{{ $user->name }}">
-                                @error('name')
-                                    <div id="nameHelp" class="form-text">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" id="email" aria-describedby="emailHelp" value="{{ $user->email }}">
-                                @error('email')
-                                    <div id="emailHelp" class="form-text">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="phone_number" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
-                                    name="phone_number" id="phone_number" aria-describedby="phone_numberHelp"
-                                    value="{{ $user->phone_number }}">
-                                @error('phone_number')
-                                    <div id="phone_numberHelp" class="form-text">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Alamat Lengkap</label>
-                                <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address"
-                                    aria-describedby="addressHelp">{{ $user->address }}</textarea>
-                                @error('address')
-                                    <div id="addressHelp" class="form-text">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 mt-5 ">
-                                <button class="w-100 booking-submit" type="submit">Simpan</button>
-                            </div>
-                        </form>
-
-              </div>
+    <!-- Page Header -->
+    <section class="pt-24 pb-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6">
+            <div class="text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Edit Profile</h1>
+                <p class="text-gray-600">Perbarui informasi profil Anda</p>
             </div>
-          </div>
         </div>
-       
-    </div><!-- End Page Title -->
-  
-    
+    </section>
+
+    <!-- Edit Form -->
+    <section class="py-12 bg-white">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6">
+            <!-- Alert Messages -->
+            @if (session('success'))
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl" data-aos="fade-up">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <p class="text-green-700 font-medium">{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl" data-aos="fade-up">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+                        <p class="text-red-700 font-medium">{{ session('error') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            <!-- Form Card -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up">
+                <div class="p-8">
+                    <form method="POST" action="{{ url('/profile/' . $user->id) }}" class="space-y-6">
+                        @method('put')
+                        @csrf
+
+                        <!-- Name Field -->
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-user mr-2 text-indigo-500"></i>
+                                Nama Lengkap
+                            </label>
+                            <input type="text" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('name') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror"
+                                   name="name" 
+                                   id="name" 
+                                   value="{{ old('name', $user->name) }}"
+                                   placeholder="Masukkan nama lengkap">
+                            @error('name')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-envelope mr-2 text-indigo-500"></i>
+                                Email Address
+                            </label>
+                            <input type="email" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('email') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror"
+                                   name="email" 
+                                   id="email" 
+                                   value="{{ old('email', $user->email) }}"
+                                   placeholder="Masukkan email address">
+                            @error('email')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Phone Number Field -->
+                        <div>
+                            <label for="phone_number" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-phone mr-2 text-indigo-500"></i>
+                                Nomor Telepon
+                            </label>
+                            <input type="text" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('phone_number') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror"
+                                   name="phone_number" 
+                                   id="phone_number" 
+                                   value="{{ old('phone_number', $user->phone_number) }}"
+                                   placeholder="Masukkan nomor telepon">
+                            @error('phone_number')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Address Field -->
+                        <div>
+                            <label for="address" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2 text-indigo-500"></i>
+                                Alamat Lengkap
+                            </label>
+                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('address') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror" 
+                                      name="address" 
+                                      id="address" 
+                                      rows="4"
+                                      placeholder="Masukkan alamat lengkap">{{ old('address', $user->address) }}</textarea>
+                            @error('address')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex gap-4 pt-6">
+                            <button type="submit" 
+                                    class="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-save mr-2"></i>
+                                Simpan Perubahan
+                            </button>
+                            
+                            <a href="/profile/{{ $user->id }}" 
+                               class="flex-1 text-center border-2 border-gray-300 hover:border-indigo-300 text-gray-700 hover:text-indigo-600 font-semibold px-6 py-3 rounded-xl transition-all duration-300">
+                                <i class="fas fa-times mr-2"></i>
+                                Batal
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

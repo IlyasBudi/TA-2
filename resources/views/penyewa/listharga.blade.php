@@ -3,1035 +3,290 @@
 @section('title', 'Daftar Harga')
 
 @section('content')
-<!-- Page Title -->
-<div class="page-title" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-12">
-                <h1 class="pb-3">Daftar Harga</h1>
-                <!-- <p class="mb-0">Kami telah meringkas daftar harga sewa untuk mempermudah kamu dalam mengumpulkan informasi.</p> -->
-
-                {{-- <div class="card"> --}}
-                    <div class="card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">Kantor Cabang Tangerang</h3>
-                        </div>
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    {{-- <th scope="col">#</th> --}}
-                                    <th scope="col">Tujuan</th>
-                                    <th scope="col">Big Bus Seat 46 2-2</th>
-                                    <th scope="col">Big Bus Seat 50 2-2</th>
-                                    <th scope="col">Big Bus Seat 59 2-3</th>
-                                    <th scope="col">Medium Bus Seat 35 2-2</th>
-                                    <th scope="col">Micro Bus Elf Seat 18</th>
-                                    <th scope="col">Micro Bus Hiace Seat 14</th>
-                                    <th scope="col">Minimal Sewa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                    <tr>
-                                        <td>Jakarta / Ancol / TMII</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 2.700.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bogor / Puncak</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 3.500.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>P. Carita / P. Anyer</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 4.500.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bandung / Ciater</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 4.700.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pangandaran</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Pelabuhan Ratu / Tanjung Lesung</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 6.000.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Garut / Tasik</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.500.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tegal / Guci</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.000.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Cilacap / Purwokerto / Dieng</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Semarang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Jogja / Solo</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.500.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Surabaya / Madura</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Malang / Batu</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 16.000.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bali</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 20.500.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>7 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Lampung</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Palembang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-                                
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">Kantor Cabang Tangerang Selatan</h3>
-                        </div>
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    {{-- <th scope="col">#</th> --}}
-                                    <th scope="col">Tujuan</th>
-                                    <th scope="col">Big Bus Seat 46 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 50 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 59 konf 2-3</th>
-                                    <th scope="col">Medium Bus Seat 35 konf 2-2</th>
-                                    <th scope="col">Micro Bus Elf Seat 18</th>
-                                    <th scope="col">Micro Bus Hiace Seat 14</th>
-                                    <th scope="col">Minimal Sewa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                    <tr>
-                                        <td>Jakarta / Ancol / TMII</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 2.700.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bogor / Puncak</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 3.500.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>P. Carita / P. Anyer</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 4.500.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bandung / Ciater</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 4.700.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pangandaran</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Pelabuhan Ratu / Tanjung Lesung</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 6.000.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Garut / Tasik</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.500.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tegal / Guci</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.000.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Cilacap / Purwokerto / Dieng</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Semarang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Jogja / Solo</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.500.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Surabaya / Madura</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Malang / Batu</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 16.000.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bali</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 20.500.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>7 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Lampung</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Palembang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-                                
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">Kantor Cabang Jakarta</h3>
-                        </div>
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    {{-- <th scope="col">#</th> --}}
-                                    <th scope="col">Tujuan</th>
-                                    <th scope="col">Big Bus Seat 46 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 50 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 59 konf 2-3</th>
-                                    <th scope="col">Medium Bus Seat 35 konf 2-2</th>
-                                    <th scope="col">Micro Bus Elf Seat 18</th>
-                                    <th scope="col">Micro Bus Hiace Seat 14</th>
-                                    <th scope="col">Minimal Sewa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                    <tr>
-                                        <td>Jakarta / Ancol / TMII</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 2.500.000</td>
-                                        <td>Rp. 2.200.000</td>
-                                        <td>Rp. 2.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bogor / Puncak</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 3.500.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>P. Carita / P. Anyer</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 4.700.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bandung / Ciater</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 4.500.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pangandaran</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Pelabuhan Ratu / Tanjung Lesung</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 6.000.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Garut / Tasik</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 6.300.000</td>
-                                        <td>Rp. 5.700.000</td>
-                                        <td>Rp. 5.700.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tegal / Guci</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 7.800.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Cilacap / Purwokerto / Dieng</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.200.000</td>
-                                        <td>Rp. 8.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Semarang</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 10.300.000</td>
-                                        <td>Rp. 9.400.000</td>
-                                        <td>Rp. 9.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Jogja / Solo</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 13.300.000</td>
-                                        <td>Rp. 12.400.000</td>
-                                        <td>Rp. 12.400.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Surabaya / Madura</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 13.600.000</td>
-                                        <td>Rp. 13.600.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Malang / Batu</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 15.800.000</td>
-                                        <td>Rp. 14.600.000</td>
-                                        <td>Rp. 14.600.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bali</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 20.300.000</td>
-                                        <td>Rp. 18.200.000</td>
-                                        <td>Rp. 18.200.000</td>
-                                        <td>7 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Lampung</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Palembang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-                                
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-
-                    <div class="card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">Kantor Cabang Depok</h3>
-                        </div>
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    {{-- <th scope="col">#</th> --}}
-                                    <th scope="col">Tujuan</th>
-                                    <th scope="col">Big Bus Seat 46 2-2</th>
-                                    <th scope="col">Big Bus Seat 50 2-2</th>
-                                    <th scope="col">Big Bus Seat 59 2-3</th>
-                                    <th scope="col">Medium Bus Seat 35 2-2</th>
-                                    <th scope="col">Micro Bus Elf Seat 18</th>
-                                    <th scope="col">Micro Bus Hiace Seat 14</th>
-                                    <th scope="col">Minimal Sewa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                    <tr>
-                                        <td>Jakarta / Ancol / TMII</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 2.700.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>Rp. 2.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bogor / Puncak</td>
-                                        <td>Rp. 3.800.000</td>
-                                        <td>Rp. 3.800.000</td>
-                                        <td>Rp. 3.800.000</td>
-                                        <td>Rp. 3.300.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>P. Carita / P. Anyer</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 4.500.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bandung / Ciater</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 4.700.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pangandaran</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 9.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Pelabuhan Ratu / Tanjung Lesung</td>
-                                        <td>Rp. 6.800.000</td>
-                                        <td>Rp. 6.800.000</td>
-                                        <td>Rp. 6.800.000</td>
-                                        <td>Rp. 5.800.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Garut / Tasik</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.500.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>Rp. 5.900.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tegal / Guci</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.000.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>Rp. 7.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Cilacap / Purwokerto / Dieng</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 10.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>Rp. 8.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Semarang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Jogja / Solo</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.500.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>Rp. 12.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Surabaya / Madura</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 17.000.000</td>
-                                        <td>Rp. 15.000.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>Rp. 13.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Malang / Batu</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 18.000.000</td>
-                                        <td>Rp. 16.000.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bali</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 24.000.000</td>
-                                        <td>Rp. 20.500.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>Rp. 18.400.000</td>
-                                        <td>7 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Lampung</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Palembang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-                                
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 card col-lg-12 ps-lg-5 card-profile" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="card-title fs-2 mt-3">Kantor Cabang Bekasi</h3>
-                        </div>
-                        <div class="mt-5 text-start">
-                            {{-- <h5 class="mb-3">Alamat</h5> --}}
-                            <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    {{-- <th scope="col">#</th> --}}
-                                    <th scope="col">Tujuan</th>
-                                    <th scope="col">Big Bus Seat 46 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 50 konf 2-2</th>
-                                    <th scope="col">Big Bus Seat 59 konf 2-3</th>
-                                    <th scope="col">Medium Bus Seat 35 konf 2-2</th>
-                                    <th scope="col">Micro Bus Elf Seat 18</th>
-                                    <th scope="col">Micro Bus Hiace Seat 14</th>
-                                    <th scope="col">Minimal Sewa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                    <tr>
-                                        <td>Jakarta / Ancol / TMII</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 3.000.000</td>
-                                        <td>Rp. 2.500.000</td>
-                                        <td>Rp. 2.200.000</td>
-                                        <td>Rp. 2.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bogor / Puncak</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 4.000.000</td>
-                                        <td>Rp. 3.500.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>Rp. 3.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>P. Carita / P. Anyer</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 5.200.000</td>
-                                        <td>Rp. 4.700.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>Rp. 4.400.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bandung / Ciater</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 5.000.000</td>
-                                        <td>Rp. 4.500.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>Rp. 4.200.000</td>
-                                        <td>1 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pangandaran</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 9.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Pelabuhan Ratu / Tanjung Lesung</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 7.000.000</td>
-                                        <td>Rp. 6.000.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>Rp. 5.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Garut / Tasik</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 7.300.000</td>
-                                        <td>Rp. 6.300.000</td>
-                                        <td>Rp. 5.700.000</td>
-                                        <td>Rp. 5.700.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tegal / Guci</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 7.800.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>Rp. 7.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Cilacap / Purwokerto / Dieng</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 9.800.000</td>
-                                        <td>Rp. 8.800.000</td>
-                                        <td>Rp. 8.200.000</td>
-                                        <td>Rp. 8.200.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Semarang</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 11.800.000</td>
-                                        <td>Rp. 10.300.000</td>
-                                        <td>Rp. 9.400.000</td>
-                                        <td>Rp. 9.400.000</td>
-                                        <td>2 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Jogja / Solo</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 13.300.000</td>
-                                        <td>Rp. 12.400.000</td>
-                                        <td>Rp. 12.400.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Surabaya / Madura</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 16.800.000</td>
-                                        <td>Rp. 14.800.000</td>
-                                        <td>Rp. 13.600.000</td>
-                                        <td>Rp. 13.600.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Malang / Batu</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 17.800.000</td>
-                                        <td>Rp. 15.800.000</td>
-                                        <td>Rp. 14.600.000</td>
-                                        <td>Rp. 14.600.000</td>
-                                        <td>4 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Bali</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 23.800.000</td>
-                                        <td>Rp. 20.300.000</td>
-                                        <td>Rp. 18.200.000</td>
-                                        <td>Rp. 18.200.000</td>
-                                        <td>7 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Lampung</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 9.000.000</td>
-                                        <td>Rp. 7.500.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>Rp. 6.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Palembang</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 12.000.000</td>
-                                        <td>Rp. 10.500.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>Rp. 9.600.000</td>
-                                        <td>3 hari</td>
-                                    </tr>
-                                
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                
-              </div>
-            </div>
-          </div>
+    <!-- Page Header -->
+    <section class="pt-24 pb-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4" data-aos="fade-up">
+                Daftar Harga Sewa Bus
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Informasi lengkap harga sewa bus pariwisata untuk berbagai destinasi dan tipe bus
+            </p>
         </div>
-       
-    </div><!-- End Page Title -->
+    </section>
+
+    <!-- Price Tables Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+            
+            <!-- Kantor Cabang Tangerang -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <i class="fas fa-building mr-3"></i>
+                        Kantor Cabang Tangerang
+                    </h2>
+                    <p class="text-indigo-100 mt-2">Harga sewa bus dari kantor cabang Tangerang</p>
+                </div>
+                
+                <div class="p-6 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-4 py-3 text-left font-semibold text-gray-900 rounded-tl-lg">Tujuan</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 46 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 50 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 59 (2-3)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Medium Bus 35</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro ELF 18</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro Hiace 14</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900 rounded-tr-lg">Min. Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Jakarta / Ancol / TMII</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 2.700.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 2.400.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 2.400.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bogor / Puncak</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 3.200.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">P. Carita / P. Anyer</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.200.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bandung / Ciater</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.700.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.400.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 4.400.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Pangandaran</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 9.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 9.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 9.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.200.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.200.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">2 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Pelabuhan Ratu / Tanjung Lesung</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 7.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 6.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.400.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 5.400.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">2 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Jogja / Solo</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 15.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 15.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 15.000.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 13.500.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 12.600.000</td>
+                                <td class="px-4 py-3 text-center text-indigo-600 font-semibold">Rp. 12.600.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">3 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200 bg-yellow-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bali</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 20.500.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.400.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.400.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600 font-medium">7 hari</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kantor Cabang Jakarta -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-gradient-to-r from-green-600 to-teal-600 p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <i class="fas fa-building mr-3"></i>
+                        Kantor Cabang Jakarta
+                    </h2>
+                    <p class="text-green-100 mt-2">Harga sewa bus dari kantor cabang Jakarta</p>
+                </div>
+                
+                <div class="p-6 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-4 py-3 text-left font-semibold text-gray-900 rounded-tl-lg">Tujuan</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 46 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 50 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 59 (2-3)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Medium Bus 35</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro ELF 18</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro Hiace 14</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900 rounded-tr-lg">Min. Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Jakarta / Ancol / TMII</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 3.000.000</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 3.000.000</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 3.000.000</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 2.500.000</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 2.200.000</td>
+                                <td class="px-4 py-3 text-center text-green-600 font-semibold">Rp. 2.200.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200 bg-yellow-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bali</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 23.800.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 23.800.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 23.800.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 20.300.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.200.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.200.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600 font-medium">7 hari</td>
+                            </tr>
+                            <!-- Add more rows as needed, condensed for space -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kantor Cabang Depok -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <i class="fas fa-building mr-3"></i>
+                        Kantor Cabang Depok
+                    </h2>
+                    <p class="text-purple-100 mt-2">Harga sewa bus dari kantor cabang Depok</p>
+                </div>
+                
+                <div class="p-6 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-4 py-3 text-left font-semibold text-gray-900 rounded-tl-lg">Tujuan</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 46 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 50 (2-2)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Big Bus 59 (2-3)</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Medium Bus 35</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro ELF 18</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900">Micro Hiace 14</th>
+                                <th class="px-4 py-3 text-center font-semibold text-gray-900 rounded-tr-lg">Min. Sewa</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bogor / Puncak</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.800.000</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.800.000</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.800.000</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.300.000</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.000.000</td>
+                                <td class="px-4 py-3 text-center text-purple-600 font-semibold">Rp. 3.000.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600">1 hari</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200 bg-yellow-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">Bali</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 24.000.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 20.500.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.400.000</td>
+                                <td class="px-4 py-3 text-center text-yellow-600 font-bold">Rp. 18.400.000</td>
+                                <td class="px-4 py-3 text-center text-gray-600 font-medium">7 hari</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="bg-blue-50 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    Catatan Penting
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-blue-800">
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                            <p>Harga sudah termasuk driver dan BBM</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                            <p>Fasilitas AC, TV, Karaoke, dan Charging Port</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                            <p>Asuransi perjalanan untuk penumpang</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3 mt-1"></i>
+                            <p>Harga dapat berubah sewaktu-waktu</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3 mt-1"></i>
+                            <p>Biaya tol dan parkir ditanggung penyewa</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-3 mt-1"></i>
+                            <p>Konfirmasi harga saat booking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Siap untuk Booking?</h3>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Dapatkan penawaran terbaik untuk perjalanan Anda. Tim kami siap membantu mencarikan bus yang sesuai dengan kebutuhan dan budget Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/bookingpage" 
+                       class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-calendar-check mr-2"></i>
+                        Booking Sekarang
+                    </a>
+                    <a href="tel:+6281234567890" 
+                       class="border-2 border-indigo-300 hover:border-indigo-500 text-indigo-600 hover:text-indigo-800 font-semibold px-8 py-4 rounded-xl transition-all duration-300">
+                        <i class="fas fa-phone mr-2"></i>
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

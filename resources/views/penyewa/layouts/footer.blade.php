@@ -1,60 +1,128 @@
-<footer id="footer" class="footer position-relative light-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="/" class="logo d-flex align-items-center">
-            <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="">
-            {{-- <span class="sitename">Append</span> --}}
-          </a>
-          <p>Po XYZ adalah perusahaan penyewaan bus pariwisata yang berdiri di Indonesia untuk memenuhi kebutuhan transportasi masyarakat yang mengutamakan kenyamanan, keselamatan, dan pelayanan terbaik.</p>
-          <div class="social-links d-flex mt-4">
-            {{-- <a href=""><i class="bi bi-youtube"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a> --}}
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Menus</h4>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About us</a></li>
-            <li><a href="/bookingpage">Booking</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Account</h4>
-          <ul>
-            <li><a href="/register">Sign Up</a></li>
-            <li><a href="/login">Sign In</a></li>
-            <li><a href="/logout">Logout</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>Jl. Kyai Maja, RT.004/RW.002, Panunggangan, Kec. Pinang, Kota Tangerang, Banten 15143</p>
-          {{-- <p>New York, NY 535022</p>
-          <p>United States</p> --}}
-          <p class="mt-4"><strong>Phone:</strong> <span>+62 812 3456 7890</span></p>
-          <p><strong>Email:</strong> <span>poxyz@gmail.com</span></p>
-        </div>
-
-      </div>
+<footer class="bg-gray-900 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl"></div>
     </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="sitename">Po XYZ</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+    
+    <!-- Main Footer Content -->
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            
+            <!-- Company Info -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex items-center space-x-3">
+                    <!-- <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" 
+                         alt="PO XYZ" class="h-10"> -->
+                    <div>
+                        <h3 class="text-xl font-bold text-white">PO XYZ</h3>
+                        <p class="text-sm text-gray-400">Pariwisata Terpercaya</p>
+                    </div>
+                </div>
+                
+                <p class="text-gray-300 leading-relaxed max-w-md">
+                    Perusahaan penyewaan bus pariwisata terkemuka di Indonesia yang mengutamakan 
+                    kenyamanan, keselamatan, dan pelayanan terbaik untuk setiap perjalanan Anda.
+                </p>
+                
+                <!-- Social Media -->
+                <div class="flex space-x-4">
+                    <a href="#" 
+                       class="group w-10 h-10 bg-gray-800 hover:bg-gradient-to-br hover:from-pink-500 hover:to-orange-400 rounded-lg flex items-center justify-center transition-all duration-300">
+                        <i class="fab fa-instagram text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                    </a>
+                    <a href="#" 
+                       class="group w-10 h-10 bg-gray-800 hover:bg-green-500 rounded-lg flex items-center justify-center transition-all duration-300">
+                        <i class="fab fa-whatsapp text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                    </a>
+                    <a href="#" 
+                       class="group w-10 h-10 bg-gray-800 hover:bg-blue-500 rounded-lg flex items-center justify-center transition-all duration-300">
+                        <i class="fab fa-facebook text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-semibold text-white">Menu</h4>
+                <nav class="space-y-3">
+                    <a href="/" 
+                       class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
+                        Home
+                    </a>
+                    <a href="/about" 
+                       class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
+                        About Us
+                    </a>
+                    <a href="/bookingpage" 
+                       class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
+                        Booking
+                    </a>
+                    <a href="/listharga" 
+                       class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
+                        Daftar Harga
+                    </a>
+                    <a href="/maps" 
+                       class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
+                        Maps
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-semibold text-white">Kontak</h4>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-5 h-5 text-indigo-400 mt-0.5">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Jl. Kyai Maja, RT.004/RW.002<br>
+                            Panunggangan, Kec. Pinang<br>
+                            Kota Tangerang, Banten 15143
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <div class="w-5 h-5 text-indigo-400">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="tel:+6281234567890" 
+                           class="text-gray-300 hover:text-indigo-400 transition-colors duration-200 text-sm">
+                            +62 812 3456 7890
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <div class="w-5 h-5 text-indigo-400">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:poxyz@gmail.com" 
+                           class="text-gray-300 hover:text-indigo-400 transition-colors duration-200 text-sm">
+                            poxyz@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
+    <!-- Bottom Bar -->
+    <div class="relative border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+                <p class="text-gray-400 text-sm">
+                    &copy; {{ date('Y') }} PO XYZ Pariwisata. Semua hak dilindungi.
+                </p>
+                <p class="text-gray-500 text-sm">
+                    Dibuat dengan <span class="text-red-400">♥</span> oleh 
+                    <a href="https://bootstrapmade.com/" 
+                       class="text-indigo-400 hover:text-indigo-300 transition-colors duration-200">
+                        BootstrapMade
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
 </footer>
