@@ -382,9 +382,11 @@ class BookingController extends Controller
 
     private function createNotification($transaction)
     {
+        $customerName = $transaction->user ? $transaction->user->name : 'Unknown Customer';
+        
         AppNotification::create([
             'title' => 'Pembayaran Berhasil',
-            'message' => "Transaksi {$transaction->code} telah dibayar lunas oleh {$transaction->user->name}",
+            'message' => "Transaksi {$transaction->code} telah dibayar lunas oleh {$customerName}",
             'icon' => 'bi-check-circle text-success',
             'transaction_code' => $transaction->code,
         ]);

@@ -17,7 +17,11 @@
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             @php
-              $unreadCount = \App\Models\Notification::where('is_read', false)->count();
+              try {
+                $unreadCount = \App\Models\Notification::where('is_read', false)->count();
+              } catch (\Exception $e) {
+                $unreadCount = 0;
+              }
             @endphp
             @if($unreadCount > 0)
               <span class="badge bg-primary badge-number">{{ $unreadCount }}</span>
@@ -38,7 +42,11 @@
             </li>
 
             @php
-              $recentNotifications = \App\Models\Notification::orderBy('created_at', 'desc')->limit(5)->get();
+              try {
+                $recentNotifications = \App\Models\Notification::orderBy('created_at', 'desc')->limit(5)->get();
+              } catch (\Exception $e) {
+                $recentNotifications = collect();
+              }
             @endphp
 
             @forelse($recentNotifications as $notification)
