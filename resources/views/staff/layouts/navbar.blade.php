@@ -16,71 +16,63 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            @php
+              $unreadCount = \App\Models\Notification::where('is_read', false)->count();
+            @endphp
+            @if($unreadCount > 0)
+              <span class="badge bg-primary badge-number">{{ $unreadCount }}</span>
+            @endif
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              @if($unreadCount > 0)
+                You have {{ $unreadCount }} new notification{{ $unreadCount > 1 ? 's' : '' }}
+              @else
+                No new notifications
+              @endif
+              <a href="/staff/notifications"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+            @php
+              $recentNotifications = \App\Models\Notification::orderBy('created_at', 'desc')->limit(5)->get();
+            @endphp
 
+            @forelse($recentNotifications as $notification)
+            <li class="notification-item" data-id="{{ $notification->id }}">
+              <i class="{{ $notification->icon }}"></i>
+              <div>
+                <h4>{{ $notification->title }}</h4>
+                <p>{{ $notification->message }}</p>
+                <p>{{ $notification->created_at->diffForHumans() }}</p>
+              </div>
+              @if(!$notification->is_read)
+                <button class="btn btn-sm btn-link mark-read-btn" onclick="markAsRead({{ $notification->id }})">
+                  <i class="bi bi-check"></i>
+                </button>
+              @endif
+            </li>
+            @if(!$loop->last)
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            @endif
+            @empty
             <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
               <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
+                <p>No notifications yet.</p>
               </div>
             </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
+            @endforelse
 
             <li>
               <hr class="dropdown-divider">
             </li>
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="/staff/notifications">Show all notifications</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
@@ -138,3 +130,39 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
+
+  <script>
+    function markAsRead(notificationId) {
+        fetch(`/staff/notifications/${notificationId}/mark-read`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Hide the mark read button
+                const button = event.target.closest('.mark-read-btn');
+                if (button) {
+                    button.style.display = 'none';
+                }
+                
+                // Update badge count
+                const badge = document.querySelector('.badge-number');
+                if (badge) {
+                    let count = parseInt(badge.textContent) - 1;
+                    if (count <= 0) {
+                        badge.style.display = 'none';
+                    } else {
+                        badge.textContent = count;
+                    }
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error marking notification as read:', error);
+        });
+    }
+  </script>
