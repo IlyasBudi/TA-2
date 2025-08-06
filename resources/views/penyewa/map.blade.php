@@ -63,14 +63,14 @@
     <section class="py-12 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <!-- Map Controls Info -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" data-aos="fade-up">
-                <div class="bg-blue-50 rounded-xl p-6 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" data-aos="fade-up">
+                <!-- <div class="bg-blue-50 rounded-xl p-6 text-center">
                     <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
                         <i class="fas fa-search-location text-white"></i>
                     </div>
                     <h3 class="font-semibold text-gray-900 mb-2">Cari Lokasi</h3>
                     <p class="text-sm text-gray-600">Gunakan kontrol pencarian di peta untuk menemukan lokasi</p>
-                </div>
+                </div> -->
                 
                 <div class="bg-green-50 rounded-xl p-6 text-center">
                     <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">

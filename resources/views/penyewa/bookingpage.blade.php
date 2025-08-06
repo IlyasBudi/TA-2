@@ -138,7 +138,7 @@
                                     Waktu Penjemputan
                                 </label>
                                 <input type="time" name="pickup_time" min="05:00" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200" required>
-                                <p class="text-xs text-gray-500 mt-1">Minimal waktu penjemputan jam 05:00</p>
+                                <p class="text-xs text-gray-500 mt-1">Waktu penjemputan mulai dari jam 05:00</p>
                             </div>
                         </div>
 
