@@ -16,6 +16,7 @@ use App\Http\Controllers\StaffTransactionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\NotificationController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -227,6 +228,12 @@ Route::prefix('staff')->middleware('auth:staff')->group(
         // PENCAIRAN
         Route::get('/pencairan', [StaffController::class, 'pencairanStaff']);
         Route::get('/pencairan/{id}', [StaffController::class, 'detailPencairanStaff']);
+        
+        // NOTIFICATIONS
+        Route::get('/notifications', [NotificationController::class, 'index']);
+        Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markAsRead']);
+        Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead']);
+        Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount']);
     }
 );
 

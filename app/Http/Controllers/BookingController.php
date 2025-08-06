@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use DateTime;
 use Exception;
 use App\Models\Transaction;
+use App\Models\Notification as AppNotification;
 use Midtrans\Snap;
 use Midtrans\Config;
 use Midtrans\Notification;
@@ -354,11 +355,13 @@ class BookingController extends Controller
                 } else {
                     $transaction->transaction_status = 'SUCCESS';
                     $transaction->update(['transaction_status' => 'Lunas']);
+                    $this->createNotification($transaction);
                 }
             }
         } else if ($status == 'settlement') {
             $transaction->transaction_status = 'SUCCESS';
             $transaction->update(['transaction_status' => 'Lunas']);
+            $this->createNotification($transaction);
         } else if ($status == 'pending') {
             $transaction->transaction_status = 'PENDING';
             $transaction->update(['transaction_status' => 'Pending']);
@@ -375,6 +378,18 @@ class BookingController extends Controller
 
         // Simpan transaksi
         $transaction->save();
+    }
+
+    private function createNotification($transaction)
+    {
+        $customerName = $transaction->user ? $transaction->user->name : 'Unknown Customer';
+        
+        AppNotification::create([
+            'title' => 'Pembayaran Berhasil',
+            'message' => "Transaksi {$transaction->code} telah dibayar lunas oleh {$customerName}",
+            'icon' => 'bi-check-circle text-success',
+            'transaction_code' => $transaction->code,
+        ]);
     }
 
     public function destroy(string $id)
