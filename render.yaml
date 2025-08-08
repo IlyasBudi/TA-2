@@ -1,0 +1,59 @@
+services:
+  - type: web
+    name: laravel-web
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        value: https://YOUR-SERVICE.onrender.com
+
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "21936"
+      - key: DB_DATABASE
+        value: defaultdb
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        sync: false
+
+      - key: DB_SSL
+        value: "true"
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/aiven-ca.pem
+
+  - type: private_service
+    name: php-fpm
+    env: docker
+    dockerfilePath: ./Dockerfile.phpfpm
+    dockerCommand: php-fpm -F
+    envVars:
+      # duplikasi ENV penting di sini juga
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "21936"
+      - key: DB_DATABASE
+        value: defaultdb
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SSL
+        value: "true"
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/aiven-ca.pem

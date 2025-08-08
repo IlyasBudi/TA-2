@@ -43,7 +43,7 @@
 
             @php
               try {
-                $recentNotifications = \App\Models\Notification::orderBy('created_at', 'desc')->limit(5)->get();
+                $recentNotifications = \App\Models\Notification::orderBy('created_at', 'desc')->limit(2)->get();
               } catch (\Exception $e) {
                 $recentNotifications = collect();
               }
@@ -173,4 +173,189 @@
             console.error('Error marking notification as read:', error);
         });
     }
+  </script>
+
+  <!-- Tambahkan script polling di sini -->
+  <script>
+  let notificationPollingInterval;
+
+  // Fungsi untuk memulai polling
+  function startNotificationPolling() {
+      // Cek notifikasi setiap 30 detik
+      notificationPollingInterval = setInterval(function() {
+          checkForNewNotifications();
+      }, 1000); // 1 detik
+  }
+
+  // Fungsi untuk mengecek notifikasi baru
+  function checkForNewNotifications() {
+      fetch('/staff/notifications/unread-count')
+          .then(response => response.json())
+          .then(data => {
+              updateNotificationBadge(data.count);
+              
+              if (data.count > 0) {
+                  loadRecentNotifications();
+              }
+          })
+          .catch(error => {
+              console.log('Error checking notifications:', error);
+          });
+  }
+
+  // Fungsi untuk update badge
+  function updateNotificationBadge(count) {
+      const badge = document.querySelector('.badge-number');
+      const headerText = document.querySelector('.dropdown-header');
+      
+      if (count > 0) {
+          if (badge) {
+              badge.textContent = count;
+              badge.style.display = 'inline';
+          } else {
+              // Buat badge baru jika belum ada
+              const bellIcon = document.querySelector('.bi-bell').parentNode;
+              const newBadge = document.createElement('span');
+              newBadge.className = 'badge bg-primary badge-number';
+              newBadge.textContent = count;
+              bellIcon.appendChild(newBadge);
+          }
+          
+          // Update header dropdown
+          if (headerText) {
+              headerText.innerHTML = `You have ${count} new notification${count > 1 ? 's' : ''} <a href="/staff/notifications"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>`;
+          }
+      } else {
+          if (badge) {
+              badge.style.display = 'none';
+          }
+          
+          if (headerText) {
+              headerText.innerHTML = 'No new notifications <a href="/staff/notifications"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>';
+          }
+      }
+  }
+
+  // Fungsi untuk load notifikasi terbaru
+  function loadRecentNotifications() {
+      fetch('/staff/notifications/recent')
+          .then(response => response.json())
+          .then(data => {
+              updateNotificationDropdown(data.notifications);
+          })
+          .catch(error => {
+              console.log('Error loading recent notifications:', error);
+          });
+  }
+
+  // Fungsi untuk update dropdown content
+  function updateNotificationDropdown(notifications) {
+      const dropdownMenu = document.querySelector('.dropdown-menu.notifications');
+      
+      // Hapus item notifikasi lama (kecuali header dan footer)
+      const existingItems = dropdownMenu.querySelectorAll('.notification-item');
+      existingItems.forEach(item => item.remove());
+      
+      const existingDividers = dropdownMenu.querySelectorAll('.dropdown-divider');
+      existingDividers.forEach(divider => divider.remove());
+      
+      // Tambahkan notifikasi baru
+      const headerElement = dropdownMenu.querySelector('.dropdown-header');
+      const footerElement = dropdownMenu.querySelector('.dropdown-footer');
+      
+      if (notifications.length > 0) {
+          notifications.forEach((notification, index) => {
+              // Buat divider
+              const divider = document.createElement('li');
+              divider.innerHTML = '<hr class="dropdown-divider">';
+              footerElement.parentNode.insertBefore(divider, footerElement);
+              
+              // Buat item notifikasi
+              const notificationItem = document.createElement('li');
+              notificationItem.className = 'notification-item';
+              notificationItem.setAttribute('data-id', notification.id);
+              
+              notificationItem.innerHTML = `
+                  <i class="${notification.icon}"></i>
+                  <div>
+                      <h4>${notification.title}</h4>
+                      <p>${notification.message}</p>
+                      <p>${timeAgo(notification.created_at)}</p>
+                  </div>
+                  ${!notification.is_read ? `<button class="btn btn-sm btn-link mark-read-btn" onclick="markAsRead(${notification.id})"><i class="bi bi-check"></i></button>` : ''}
+              `;
+              
+              footerElement.parentNode.insertBefore(notificationItem, footerElement);
+          });
+      } else {
+          // Jika tidak ada notifikasi
+          const divider = document.createElement('li');
+          divider.innerHTML = '<hr class="dropdown-divider">';
+          footerElement.parentNode.insertBefore(divider, footerElement);
+          
+          const noNotification = document.createElement('li');
+          noNotification.className = 'notification-item';
+          noNotification.innerHTML = '<div><p>No notifications yet.</p></div>';
+          footerElement.parentNode.insertBefore(noNotification, footerElement);
+      }
+      
+      // Tambahkan divider sebelum footer
+      const finalDivider = document.createElement('li');
+      finalDivider.innerHTML = '<hr class="dropdown-divider">';
+      footerElement.parentNode.insertBefore(finalDivider, footerElement);
+  }
+
+  // Fungsi helper untuk format waktu
+  function timeAgo(dateString) {
+      const now = new Date();
+      const past = new Date(dateString);
+      const diffInSeconds = Math.floor((now - past) / 1000);
+      
+      if (diffInSeconds < 60) return 'just now';
+      if (diffInSeconds < 3600) return Math.floor(diffInSeconds / 60) + ' minutes ago';
+      if (diffInSeconds < 86400) return Math.floor(diffInSeconds / 3600) + ' hours ago';
+      return Math.floor(diffInSeconds / 86400) + ' days ago';
+  }
+
+  // Update existing markAsRead function
+  function markAsRead(notificationId) {
+      fetch(`/staff/notifications/${notificationId}/mark-read`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              // Hide the mark read button
+              const button = event.target.closest('.mark-read-btn');
+              if (button) {
+                  button.style.display = 'none';
+              }
+              
+              // Refresh notification count
+              checkForNewNotifications();
+          }
+      })
+      .catch(error => {
+          console.error('Error marking notification as read:', error);
+      });
+  }
+
+  // Mulai polling saat halaman dimuat
+  document.addEventListener('DOMContentLoaded', function() {
+      startNotificationPolling();
+      
+      // Cek notifikasi langsung saat halaman dimuat
+      checkForNewNotifications();
+  });
+
+  // Hentikan polling saat halaman akan ditutup
+  window.addEventListener('beforeunload', function() {
+      if (notificationPollingInterval) {
+          clearInterval(notificationPollingInterval);
+      }
+  });
   </script>

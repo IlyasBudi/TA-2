@@ -27,7 +27,7 @@
             @foreach($notifications as $notification)
             <div class="notification-card card mb-3 {{ $notification->is_read ? 'read' : 'unread' }}" data-id="{{ $notification->id }}">
               <div class="card-body">
-                <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center">
                   <i class="{{ $notification->icon }} me-3" style="font-size: 1.5rem;"></i>
                   <div class="flex-grow-1">
                     <h6 class="card-title mb-1">{{ $notification->title }}</h6>

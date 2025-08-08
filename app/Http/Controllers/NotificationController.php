@@ -37,4 +37,16 @@ class NotificationController extends Controller
         
         return response()->json(['count' => $count]);
     }
+
+    public function getRecent()
+{
+    $notifications = Notification::orderBy('created_at', 'desc')
+        ->limit(2)
+        ->get();
+        
+    return response()->json([
+        'notifications' => $notifications
+    ]);
+}
+    
 }

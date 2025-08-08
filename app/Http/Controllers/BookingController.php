@@ -282,6 +282,8 @@ class BookingController extends Controller
                 // get Snap Payment Page URL
                 $snapToken = Snap::getSnapToken($params);
 
+                $this->createNotification($transaction);
+
                 // Commit the transaction and decrement stock only if it was successful
                 DB::commit();
     
@@ -343,7 +345,6 @@ class BookingController extends Controller
         $order_id = $notification->order_id;
 
         // Cari transaksi berdasarkan ID
-        // $transaction = Transaction::findOrFail($order_id);
         $transaction = Transaction::where('code', $order_id)->firstOrFail();
 
         // Handle notification status
@@ -355,13 +356,11 @@ class BookingController extends Controller
                 } else {
                     $transaction->transaction_status = 'SUCCESS';
                     $transaction->update(['transaction_status' => 'Lunas']);
-                    $this->createNotification($transaction);
                 }
             }
         } else if ($status == 'settlement') {
             $transaction->transaction_status = 'SUCCESS';
             $transaction->update(['transaction_status' => 'Lunas']);
-            $this->createNotification($transaction);
         } else if ($status == 'pending') {
             $transaction->transaction_status = 'PENDING';
             $transaction->update(['transaction_status' => 'Pending']);
@@ -378,18 +377,29 @@ class BookingController extends Controller
 
         // Simpan transaksi
         $transaction->save();
+        
+        // Buat notifikasi untuk semua status transaksi yang berhasil diupdate
+        // $this->createNotification($transaction);
     }
 
     private function createNotification($transaction)
     {
-        $customerName = $transaction->user ? $transaction->user->name : 'Unknown Customer';
-        
-        AppNotification::create([
-            'title' => 'Pembayaran Berhasil',
-            'message' => "Transaksi {$transaction->code} telah dibayar lunas oleh {$customerName}",
-            'icon' => 'bi-check-circle text-success',
-            'transaction_code' => $transaction->code,
-        ]);
+        try {
+            $customerName = $transaction->user ? $transaction->user->name : 'Unknown Customer';
+            
+            $notification = AppNotification::create([
+                'title' => 'Booking Baru',
+                'message' => "Pemesanan baru telah dibuat oleh pengguna {$customerName} dengan kode transaksi {$transaction->code}. Silakan cek halaman transaksi dan proses pemesanannya.",
+                'icon' => 'bi-check-circle text-success',
+                'transaction_code' => $transaction->code,
+                'is_read' => false,
+            ]);
+            
+            \Log::info('Notifikasi berhasil dibuat: ', $notification->toArray());
+            
+        } catch (\Exception $e) {
+            \Log::error('Error membuat notifikasi: ' . $e->getMessage());
+        }
     }
 
     public function destroy(string $id)

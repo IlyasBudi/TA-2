@@ -234,6 +234,9 @@ Route::prefix('staff')->middleware('auth:staff')->group(
         Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markAsRead']);
         Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead']);
         Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount']);
+        // Route baru untuk polling notifikasi
+        Route::get('/staff/notifications/recent', [NotificationController::class, 'getRecent']);
+        Route::get('/staff/notifications/unread-count', [NotificationController::class, 'getUnreadCount']);
     }
 );
 

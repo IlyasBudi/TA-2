@@ -1,0 +1,9 @@
+FROM php:8.2-fpm-alpine
+RUN docker-php-ext-install pdo pdo_mysql
+WORKDIR /var/www/html
+COPY --from=composer:2 /app ./
+COPY certs/aiven-ca.pem /etc/ssl/certs/aiven-ca.pem
+RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel \
+ && chown -R laravel:laravel storage bootstrap/cache /etc/ssl/certs/aiven-ca.pem
+USER laravel
+CMD ["php-fpm", "-F"]
