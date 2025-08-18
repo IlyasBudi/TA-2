@@ -17,11 +17,112 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- Bootstrap Icons -->
   <link href="{{ asset('/niceadmin') }}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Vite CSS -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  
+  <!-- Custom Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f4ff',
+              100: '#e0e8ff', 
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#4154f1',
+              600: '#3730a3',
+              700: '#312e81',
+              800: '#1e1b4b',
+              900: '#1e1a5c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS -->
+  <style>
+    .auth-gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .auth-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .auth-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .auth-input:focus {
+      border-color: #4154f1;
+      box-shadow: 0 0 0 4px rgba(65, 84, 241, 0.1);
+    }
+    
+    .auth-button {
+      width: 100%;
+      background: linear-gradient(135deg, #4154f1 0%, #2c3cdd 100%);
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      border: none;
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+    
+    .auth-button:hover {
+      background: linear-gradient(135deg, #2c3cdd 0%, #1e2ab8 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(65, 84, 241, 0.3);
+    }
+    
+    .auth-link {
+      color: #4154f1;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .auth-link:hover {
+      color: #2c3cdd;
+      text-decoration: underline;
+    }
+    
+    .auth-alert-error {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .auth-alert-success {
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 
 <body class="auth-gradient-bg">
