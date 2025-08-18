@@ -28,6 +28,9 @@
         <!-- Template Main CSS File -->
         <link href="{{ asset('/niceadmin') }}/assets/css/style.css" rel="stylesheet">
 
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
         <link href="{{ asset('v1/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
         @stack('before-style')
         <link href="{{ asset('v1/css/style.css') }}" rel="stylesheet">

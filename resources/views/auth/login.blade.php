@@ -29,6 +29,9 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('/niceadmin') }}/assets/css/style.css" rel="stylesheet">
 
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
