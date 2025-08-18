@@ -6,7 +6,9 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProfileController extends Controller
@@ -70,4 +72,39 @@ class ProfileController extends Controller
             $pdf = PDF::loadView('penyewa.profile.pdf', compact('transaction', 'details'));
             return $pdf->stream('invoice_sewa.pdf');
         }
+
+    public function changePassword(Request $request, $id)
+    {
+        // Mendapatkan data user
+        $user = User::findOrFail($id);
+
+        // Pastikan user hanya bisa mengubah password miliknya sendiri
+        if (Auth::user()->id != $user->id) {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        // Validasi data yang diterima dari formulir
+        $validated = $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        // Verifikasi password lama
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Password lama tidak sesuai.']);
+        }
+
+        try {
+            // Update password baru
+            $user->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+
+            // Notifikasi session jika berhasil
+            return redirect()->back()->with('success', 'Password berhasil diubah!');
+        } catch (\Exception $e) {
+            // Notifikasi session jika gagal
+            return redirect()->back()->with('error', 'Gagal mengubah password. Silakan coba lagi.');
+        }
+    }
 }

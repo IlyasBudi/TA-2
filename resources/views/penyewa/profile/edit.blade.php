@@ -138,6 +138,87 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Change Password Card -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mt-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-8">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                            <i class="fas fa-lock mr-3 text-indigo-500"></i>
+                            Ubah Password
+                        </h3>
+                        <p class="text-gray-600">Pastikan password baru Anda aman dan mudah diingat</p>
+                    </div>
+
+                    <form method="POST" action="{{ route('profile.change-password', $user->id) }}" class="space-y-6">
+                        @method('put')
+                        @csrf
+
+                        <!-- Current Password Field -->
+                        <div>
+                            <label for="current_password" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-unlock-alt mr-2 text-indigo-500"></i>
+                                Password Lama
+                            </label>
+                            <input type="password" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('current_password') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror"
+                                   name="current_password" 
+                                   id="current_password" 
+                                   placeholder="Masukkan password lama"
+                                   required>
+                            @error('current_password')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- New Password Field -->
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-lock mr-2 text-indigo-500"></i>
+                                Password Baru
+                            </label>
+                            <input type="password" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 @error('password') border-red-300 focus:ring-red-500 focus:border-red-500 @enderror"
+                                   name="password" 
+                                   id="password" 
+                                   placeholder="Masukkan password baru"
+                                   required>
+                            @error('password')
+                                <p class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Confirm New Password Field -->
+                        <div>
+                            <label for="password_confirmation" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-check-circle mr-2 text-indigo-500"></i>
+                                Konfirmasi Password Baru
+                            </label>
+                            <input type="password" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                                   name="password_confirmation" 
+                                   id="password_confirmation" 
+                                   placeholder="Ulangi password baru"
+                                   required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-6">
+                            <button type="submit" 
+                                    class="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-key mr-2"></i>
+                                Ubah Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 @endsection

@@ -219,6 +219,7 @@ Route::prefix('staff')->middleware('auth:staff')->group(
         // PROFILE
         Route::get("/profile/{id}",[StaffController::class, "staffProfile"]);
         Route::put("/profile/{id}", [StaffController::class, "staffUpdate"]);
+        Route::put("/profile/{id}/change-password", [StaffController::class, "changePassword"])->name('staff.change-password');
         
         // LAPORAN
         Route::get('/laporan', [LaporanController::class, 'index']);
@@ -262,6 +263,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/profile/transaction/{transaction}/pdf', [ProfileController::class, 'exportPdf'])->name('profile.transaction.pdf');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::put('/profile/{id}', [ProfileController::class, 'updateProfile']);
+    Route::put('/profile/{id}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
 });
 
 
