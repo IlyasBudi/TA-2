@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Login</title>
+  <title>Reset Password</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,6 +28,91 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('/niceadmin') }}/assets/css/style.css" rel="stylesheet">
+
+  <!-- Custom CSS for Modern Auth -->
+  <style>
+    .auth-card {
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: none;
+      overflow: hidden;
+    }
+    
+    .auth-card .card-body {
+      padding: 3rem 2.5rem;
+    }
+    
+    .auth-logo {
+      margin-bottom: 2rem;
+    }
+    
+    .auth-title {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    .auth-subtitle {
+      color: #7f8c8d;
+      margin-bottom: 2rem;
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #e9ecef;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: #4154f1;
+      box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4154f1 0%, #2c3cdd 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(65, 84, 241, 0.3);
+    }
+    
+    .auth-links a {
+      color: #4154f1;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-links a:hover {
+      color: #2c3cdd;
+      text-decoration: underline;
+    }
+    
+    .section.register {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .input-group-text {
+      border-radius: 10px 0 0 10px;
+    }
+    
+    .input-group .form-control:not(:last-child) {
+      border-radius: 0 10px 10px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .auth-card .card-body {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -55,74 +140,79 @@
                 </a>
               </div><!-- End Logo -->
 
-              <div class="card mb-3">
+              <div class="card mb-3 auth-card">
 
                 <div class="card-body">
 
-                  <div class="pt-4 text-center pb-2">
-                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="">
-                    <h5 class="card-title text-center pb-0 fs-4">Selamat Datang Kembali</h5>
-                    <p class="text-center small">Masukan datamu untuk melanjutkan perjalananmu</p>
+                  <div class="pt-4 text-center pb-2 auth-logo">
+                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="" class="mb-3">
+                    <h5 class="auth-title">Reset Password</h5>
+                    <p class="auth-subtitle">Masukan password baru untuk akun Anda</p>
                   </div>
 
                   @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
+                    <div class="alert alert-danger rounded-3">
+                      <ul class="mb-0">
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                          <li>{{ $error }}</li>
                         @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session()->has('status'))
-                    <div class="alert alert-success">
-                        {{ session()->get('status') }}
+                      </ul>
                     </div>
-                @endif
+                  @endif
+                  
+                  @if (session()->has('status'))
+                    <div class="alert alert-success rounded-3">
+                      {{ session()->get('status') }}
+                    </div>
+                  @endif
 
                   <form class="row g-3 needs-validation" method="POST" action="{{ route('password.update') }}">
                     @csrf
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Email</label>
-                      <div class="input-group has-validation">
-                        {{-- <span class="input-group-text" id="inputGroupPrepend">@</span> --}}
-                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" required>
-                        @error('email')
-                        <div id="emailHelp" class="form-text">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="yourPassword" required>
-                      @error('password')
-                      <div id="passwordHelp" class="form-text">{{ $message }}</div>
-                      @enderror
-                    </div>
-
-                    <div class="col-12">
-                        <label for="yourPassword" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" required>
-                        {{-- <div class="invalid-feedback">Please enter your password!</div> --}}
-                        @error('password_confirmation')
-                        <div id="passwordConfirmationHelp" class="form-text">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    {{-- <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </div> --}}
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <div class="col-12 text-center">
-                      <a class="small mb-0" href="{{ route('password.request') }}">Lupa Password?</a>
+                    <input type="hidden" name="token" value="{{ request()->route('token') }}">
                     
-                      <p class="small mb-0">Belum punya akun? <a href="{{ route('penyewaregister') }}">buat akun baru</a></p>
+                    <div class="col-12">
+                      <label for="email" class="form-label fw-semibold">Email</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-envelope"></i></span>
+                        <input type="email" name="email" class="form-control border-start-0 @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email Anda" value="{{ old('email', request()->email) }}" required style="border-left: none;">
+                        @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="password" class="form-label fw-semibold">Password Baru</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock"></i></span>
+                        <input type="password" name="password" class="form-control border-start-0 @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password baru" required style="border-left: none;">
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="password_confirmation" class="form-label fw-semibold">Konfirmasi Password Baru</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" name="password_confirmation" class="form-control border-start-0 @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Ulangi password baru" required style="border-left: none;">
+                        @error('password_confirmation')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                      <button class="btn btn-primary w-100" type="submit">
+                        <i class="bi bi-arrow-clockwise me-2"></i>Reset Password
+                      </button>
+                    </div>
+                    
+                    <div class="col-12 text-center auth-links">
+                      <a class="small mb-0" href="{{ route('login') }}">
+                        <i class="bi bi-arrow-left me-1"></i>Kembali ke Login
+                      </a>
                     </div>
                   </form>
 

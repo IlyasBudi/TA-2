@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+  <title>Daftar Akun Baru</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,6 +28,91 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('/niceadmin') }}/assets/css/style.css" rel="stylesheet">
+
+  <!-- Custom CSS for Modern Auth -->
+  <style>
+    .auth-card {
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: none;
+      overflow: hidden;
+    }
+    
+    .auth-card .card-body {
+      padding: 3rem 2.5rem;
+    }
+    
+    .auth-logo {
+      margin-bottom: 2rem;
+    }
+    
+    .auth-title {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    .auth-subtitle {
+      color: #7f8c8d;
+      margin-bottom: 2rem;
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #e9ecef;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: #4154f1;
+      box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4154f1 0%, #2c3cdd 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(65, 84, 241, 0.3);
+    }
+    
+    .auth-links a {
+      color: #4154f1;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-links a:hover {
+      color: #2c3cdd;
+      text-decoration: underline;
+    }
+    
+    .section.register {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .input-group-text {
+      border-radius: 10px 0 0 10px;
+    }
+    
+    .input-group .form-control:not(:last-child) {
+      border-radius: 0 10px 10px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .auth-card .card-body {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -55,88 +140,102 @@
                 </a>
               </div><!-- End Logo -->
 
-              <div class="card mb-3">
+              <div class="card mb-3 auth-card">
 
                 <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    {{-- <img src="{{ asset('/landingpagetemplate') }}/assets/images/baru/logo-hr.svg" alt=""> --}}
-                    <h5 class="card-title text-center pb-0 fs-4">Buat Akun Baru</h5>
-                    <p class="text-center small">Masukan datamu untuk buat akun baru</p>
+                  <div class="pt-4 pb-2 text-center auth-logo">
+                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="" class="mb-3">
+                    <h5 class="auth-title">Buat Akun Baru</h5>
+                    <p class="auth-subtitle">Masukan datamu untuk buat akun baru</p>
                   </div>
+
+                  @if ($errors->any())
+                    <div class="alert alert-danger rounded-3">
+                      <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
 
                   <form class="row g-3 needs-validation" method="POST" action="{{ route('do.penyewaregister') }}">
                     @csrf
                     <div class="col-12">
-                      <label for="name" class="form-label">Nama</label>
-                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="yourName" required>
-                      @error('name')
-                      <div id="nameHelp" class="form-text">{{ $message }}</div>
-                      @enderror
-                    </div>
-
-                    <div class="col-12">
-                      <label for="email" class="form-label">Email</label>
-                      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="yourEmail" required>
-                      {{-- <div class="invalid-feedback">Please enter a valid Email adddress!</div> --}}
-                      @error('email')
-                      <div id="emailHelp" class="form-text">{{ $message }}</div>
-                      @enderror
-                    </div>
-
-                    <div class="col-12">
-                      <label for="phone_number" class="form-label">Nomor Telepon</label>
+                      <label for="name" class="form-label fw-semibold">Nama Lengkap</label>
                       <div class="input-group has-validation">
-                        
-                        <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" required>
-                        {{-- <div class="invalid-feedback">Please input phone number.</div> --}}
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-person"></i></span>
+                        <input type="text" name="name" class="form-control border-start-0 @error('name') is-invalid @enderror" id="yourName" placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required style="border-left: none;">
+                        @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="email" class="form-label fw-semibold">Email</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-envelope"></i></span>
+                        <input type="email" name="email" class="form-control border-start-0 @error('email') is-invalid @enderror" id="yourEmail" placeholder="Masukkan alamat email" value="{{ old('email') }}" required style="border-left: none;">
+                        @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="phone_number" class="form-label fw-semibold">Nomor Telepon</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-telephone"></i></span>
+                        <input type="text" name="phone_number" class="form-control border-start-0 @error('phone_number') is-invalid @enderror" id="phone_number" placeholder="Masukkan nomor telepon" value="{{ old('phone_number') }}" required style="border-left: none;">
                         @error('phone_number')
-                        <div id="phone_numberHelp" class="form-text">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="address" class="form-label">Alamat</label>
-                          
-                          <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="address" required>
-                          {{-- <div class="invalid-feedback">Please input address.</div> --}}
-                          @error('address')
-                          <div id="addressHelp" class="form-text">{{ $message }}</div>
-                          @enderror
-                       
+                      <label for="address" class="form-label fw-semibold">Alamat</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-geo-alt"></i></span>
+                        <input type="text" name="address" class="form-control border-start-0 @error('address') is-invalid @enderror" id="address" placeholder="Masukkan alamat lengkap" value="{{ old('address') }}" required style="border-left: none;">
+                        @error('address')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="yourPassword" required>
-                      {{-- <div class="invalid-feedback">Please enter your password!</div> --}}
-                      @error('password')
-                      <div id="passwordHelp" class="form-text">{{ $message }}</div>
-                      @enderror
+                      <label for="yourPassword" class="form-label fw-semibold">Password</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock"></i></span>
+                        <input type="password" name="password" class="form-control border-start-0 @error('password') is-invalid @enderror" id="yourPassword" placeholder="Masukkan password" required style="border-left: none;">
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="yourPassword" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" required>
-                        {{-- <div class="invalid-feedback">Please enter your password!</div> --}}
+                      <label for="password_confirmation" class="form-label fw-semibold">Konfirmasi Password</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" name="password_confirmation" class="form-control border-start-0 @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Ulangi password" required style="border-left: none;">
                         @error('password_confirmation')
-                        <div id="passwordConfirmationHelp" class="form-text">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                      </div>
                     </div>
 
-                    {{-- <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
-                    </div> --}}
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Daftar</button>
+                    <div class="col-12 mt-4">
+                      <button class="btn btn-primary w-100" type="submit">
+                        <i class="bi bi-person-plus me-2"></i>Daftar Sekarang
+                      </button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Sudah punya akun? <a href="{{ route('login') }}">Log in</a></p>
+                    
+                    <div class="col-12 text-center auth-links">
+                      <p class="small mb-0">Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a></p>
                     </div>
                   </form>
 
