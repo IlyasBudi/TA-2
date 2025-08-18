@@ -9,7 +9,9 @@ use App\Models\Transaction;
 use App\Models\Bus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 use Carbon\Carbon;
 
 class StaffController extends Controller
@@ -99,5 +101,40 @@ class StaffController extends Controller
     {
         $pencairan = Pencairan::with('kantorcabang', 'rekening')->findOrFail($id);
         return view('admin.pencairan.show', compact('pencairan'));
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        // Mendapatkan data staff
+        $staff = Staff::findOrFail($id);
+
+        // Pastikan staff hanya bisa mengubah password miliknya sendiri
+        if (Auth::user()->id != $staff->id) {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        // Validasi data yang diterima dari formulir
+        $validated = $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        // Verifikasi password lama
+        if (!Hash::check($validated['current_password'], $staff->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Password lama tidak sesuai.']);
+        }
+
+        try {
+            // Update password baru
+            $staff->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+
+            // Notifikasi session jika berhasil
+            return redirect()->back()->with('success', 'Password berhasil diubah!');
+        } catch (\Exception $e) {
+            // Notifikasi session jika gagal
+            return redirect()->back()->with('error', 'Gagal mengubah password. Silakan coba lagi.');
+        }
     }
 }
