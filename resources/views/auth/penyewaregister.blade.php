@@ -17,263 +17,192 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
   <link href="{{ asset('/niceadmin') }}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="{{ asset('/niceadmin') }}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="{{ asset('/niceadmin') }}/assets/css/style.css" rel="stylesheet">
-
-  <!-- Custom CSS for Modern Auth -->
-  <style>
-    .auth-card {
-      border-radius: 15px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      border: none;
-      overflow: hidden;
-    }
-    
-    .auth-card .card-body {
-      padding: 3rem 2.5rem;
-    }
-    
-    .auth-logo {
-      margin-bottom: 2rem;
-    }
-    
-    .auth-title {
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 0.5rem;
-    }
-    
-    .auth-subtitle {
-      color: #7f8c8d;
-      margin-bottom: 2rem;
-    }
-    
-    .form-control {
-      border-radius: 10px;
-      border: 2px solid #e9ecef;
-      padding: 0.75rem 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .form-control:focus {
-      border-color: #4154f1;
-      box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #4154f1 0%, #2c3cdd 100%);
-      border: none;
-      border-radius: 10px;
-      padding: 0.75rem 2rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(65, 84, 241, 0.3);
-    }
-    
-    .auth-links a {
-      color: #4154f1;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    
-    .auth-links a:hover {
-      color: #2c3cdd;
-      text-decoration: underline;
-    }
-    
-    .section.register {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-    }
-    
-    .input-group-text {
-      border-radius: 10px 0 0 10px;
-    }
-    
-    .input-group .form-control:not(:last-child) {
-      border-radius: 0 10px 10px 0;
-    }
-    
-    @media (max-width: 768px) {
-      .auth-card .card-body {
-        padding: 2rem 1.5rem;
-      }
-    }
-  </style>
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Vite CSS -->
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="auth-gradient-bg">
+  <main class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-lg">
+      <!-- Logo Section -->
+      <div class="text-center mb-8">
+        <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="Logo" class="mx-auto mb-4 h-16">
+      </div>
 
-  <main>
-    <div class="container">
-
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-              <div class="d-flex justify-content-center py-4">
-                <a href="" class="logo d-flex align-items-center w-auto">
-                  <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="">
-                  
-                </a>
-              </div><!-- End Logo -->
-
-              <div class="card mb-3 auth-card">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2 text-center auth-logo">
-                    <img src="{{ asset('/penyewatemplate') }}/assets/img/baru2/logo-xyz.svg" alt="" class="mb-3">
-                    <h5 class="auth-title">Buat Akun Baru</h5>
-                    <p class="auth-subtitle">Masukan datamu untuk buat akun baru</p>
-                  </div>
-
-                  @if ($errors->any())
-                    <div class="alert alert-danger rounded-3">
-                      <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                        @endforeach
-                      </ul>
-                    </div>
-                  @endif
-
-                  <form class="row g-3 needs-validation" method="POST" action="{{ route('do.penyewaregister') }}">
-                    @csrf
-                    <div class="col-12">
-                      <label for="name" class="form-label fw-semibold">Nama Lengkap</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-person"></i></span>
-                        <input type="text" name="name" class="form-control border-start-0 @error('name') is-invalid @enderror" id="yourName" placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required style="border-left: none;">
-                        @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="email" class="form-label fw-semibold">Email</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-envelope"></i></span>
-                        <input type="email" name="email" class="form-control border-start-0 @error('email') is-invalid @enderror" id="yourEmail" placeholder="Masukkan alamat email" value="{{ old('email') }}" required style="border-left: none;">
-                        @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="phone_number" class="form-label fw-semibold">Nomor Telepon</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-telephone"></i></span>
-                        <input type="text" name="phone_number" class="form-control border-start-0 @error('phone_number') is-invalid @enderror" id="phone_number" placeholder="Masukkan nomor telepon" value="{{ old('phone_number') }}" required style="border-left: none;">
-                        @error('phone_number')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="address" class="form-label fw-semibold">Alamat</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-geo-alt"></i></span>
-                        <input type="text" name="address" class="form-control border-start-0 @error('address') is-invalid @enderror" id="address" placeholder="Masukkan alamat lengkap" value="{{ old('address') }}" required style="border-left: none;">
-                        @error('address')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label fw-semibold">Password</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock"></i></span>
-                        <input type="password" name="password" class="form-control border-start-0 @error('password') is-invalid @enderror" id="yourPassword" placeholder="Masukkan password" required style="border-left: none;">
-                        @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="password_confirmation" class="form-label fw-semibold">Konfirmasi Password</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text border-end-0" style="background: transparent; border-right: none;"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" name="password_confirmation" class="form-control border-start-0 @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Ulangi password" required style="border-left: none;">
-                        @error('password_confirmation')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12 mt-4">
-                      <button class="btn btn-primary w-100" type="submit">
-                        <i class="bi bi-person-plus me-2"></i>Daftar Sekarang
-                      </button>
-                    </div>
-                    
-                    <div class="col-12 text-center auth-links">
-                      <p class="small mb-0">Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a></p>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
-
-              {{-- <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div> --}}
-
-            </div>
-          </div>
+      <!-- Auth Card -->
+      <div class="auth-card p-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">Buat Akun Baru</h1>
+          <p class="text-gray-600">Masukan datamu untuk buat akun baru</p>
         </div>
 
-      </section>
+        <!-- Error Messages -->
+        @if ($errors->any())
+          <div class="auth-alert-error">
+            <ul class="list-none m-0 p-0">
+              @foreach ($errors->all() as $error)
+                <li class="flex items-center">
+                  <i class="bi bi-exclamation-circle mr-2"></i>
+                  {{ $error }}
+                </li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
 
+        <!-- Registration Form -->
+        <form method="POST" action="{{ route('do.penyewaregister') }}" class="space-y-6">
+          @csrf
+          
+          <!-- Name Field -->
+          <div>
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-person mr-1"></i>
+              Nama Lengkap
+            </label>
+            <input 
+              type="text" 
+              name="name" 
+              id="name" 
+              class="auth-input @error('name') border-red-300 @enderror" 
+              placeholder="Masukkan nama lengkap" 
+              value="{{ old('name') }}"
+              required 
+              autofocus
+            >
+            @error('name')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Email Field -->
+          <div>
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-envelope mr-1"></i>
+              Email
+            </label>
+            <input 
+              type="email" 
+              name="email" 
+              id="email" 
+              class="auth-input @error('email') border-red-300 @enderror" 
+              placeholder="Masukkan alamat email" 
+              value="{{ old('email') }}"
+              required
+            >
+            @error('email')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Phone Number Field -->
+          <div>
+            <label for="phone_number" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-telephone mr-1"></i>
+              Nomor Telepon
+            </label>
+            <input 
+              type="text" 
+              name="phone_number" 
+              id="phone_number" 
+              class="auth-input @error('phone_number') border-red-300 @enderror" 
+              placeholder="Masukkan nomor telepon" 
+              value="{{ old('phone_number') }}"
+              required
+            >
+            @error('phone_number')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Address Field -->
+          <div>
+            <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-geo-alt mr-1"></i>
+              Alamat
+            </label>
+            <input 
+              type="text" 
+              name="address" 
+              id="address" 
+              class="auth-input @error('address') border-red-300 @enderror" 
+              placeholder="Masukkan alamat lengkap" 
+              value="{{ old('address') }}"
+              required
+            >
+            @error('address')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-lock mr-1"></i>
+              Password
+            </label>
+            <input 
+              type="password" 
+              name="password" 
+              id="password" 
+              class="auth-input @error('password') border-red-300 @enderror" 
+              placeholder="Masukkan password" 
+              required
+            >
+            @error('password')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div>
+            <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 mb-2">
+              <i class="bi bi-lock-fill mr-1"></i>
+              Konfirmasi Password
+            </label>
+            <input 
+              type="password" 
+              name="password_confirmation" 
+              id="password_confirmation" 
+              class="auth-input @error('password_confirmation') border-red-300 @enderror" 
+              placeholder="Ulangi password" 
+              required
+            >
+            @error('password_confirmation')
+              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="auth-button">
+            <i class="bi bi-person-plus mr-2"></i>
+            Daftar Sekarang
+          </button>
+
+          <!-- Links -->
+          <div class="text-center mt-6">
+            <p class="text-sm text-gray-600">
+              Sudah punya akun? 
+              <a href="{{ route('login') }}" class="auth-link font-semibold">
+                Masuk di sini
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-8">
+        <p class="text-white text-sm opacity-75">
+          © {{ date('Y') }} PT. XYZ. All rights reserved.
+        </p>
+      </div>
     </div>
-  </main><!-- End #main -->
-
-  {{-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> --}}
-
-  <!-- Vendor JS Files -->
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/quill/quill.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="{{ asset('/niceadmin') }}/assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{{ asset('/niceadmin') }}/assets/js/main.js"></script>
-
+  </main>
 </body>
 
 </html>
