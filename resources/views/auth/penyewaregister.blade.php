@@ -9,8 +9,8 @@
 <body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-pink-50 flex items-center justify-center p-6">
   <div class="w-full max-w-2xl bg-white/80 backdrop-blur rounded-2xl shadow-xl p-8">
     <div class="flex items-center gap-4 mb-6">
-      <div class="w-12 h-12 rounded-xl bg-indigo-600/10 flex items-center justify-center">
-        <span class="font-bold text-indigo-600">TA</span>
+      <div class="w-12 h-12 rounded-xl flex items-center justify-center">
+        <img data-v-89d4a657="" class="app-modal-icon__icon-image" srcset="https://img.icons8.com/?size=64&amp;id=tZuAOUGm9AuS&amp;format=png 1x, https://img.icons8.com/?size=128&amp;id=tZuAOUGm9AuS&amp;format=png 2x" alt="User Default" width="64" height="64">
       </div>
       <div>
         <h1 class="text-2xl font-bold text-gray-900">Buat Akun Penyewa</h1>

@@ -11,8 +11,8 @@
     <!-- Left / Brand -->
     <div class="hidden md:flex items-center justify-center p-10">
       <div class="max-w-md text-center">
-        <div class="mx-auto mb-8 w-16 h-16 rounded-2xl bg-indigo-600/10 flex items-center justify-center">
-          <span class="text-2xl font-bold text-indigo-600">TA</span>
+        <div class="mx-auto mb-8 w-16 h-16 rounded-2xl flex items-center justify-center">
+          <img data-v-89d4a657="" class="app-modal-icon__icon-image" srcset="https://img.icons8.com/?size=64&amp;id=tZuAOUGm9AuS&amp;format=png 1x, https://img.icons8.com/?size=128&amp;id=tZuAOUGm9AuS&amp;format=png 2x" alt="User Default" width="64" height="64">
         </div>
         <h1 class="text-3xl font-bold text-gray-900">Selamat Datang Kembali</h1>
         <p class="mt-3 text-gray-600">Masuk untuk melanjutkan perjalananmu.</p>
