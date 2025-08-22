@@ -59,7 +59,7 @@ class="fixed w-full top-0 z-50 transition-all duration-500">
                 
                 <a href="/listharga" 
                    class="relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 group {{ request()->is('listharga') ? 'text-indigo-600' : 'text-gray-700 hover:text-indigo-600' }}">
-                    <span class="relative z-10">Harga</span>
+                    <span class="relative z-10">Pricing</span>
                     @if(request()->is('listharga'))
                         <div class="absolute inset-0 bg-indigo-50 rounded-lg"></div>
                     @endif
