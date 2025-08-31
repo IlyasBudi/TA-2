@@ -282,7 +282,8 @@ class BookingController extends Controller
                 // get Snap Payment Page URL
                 $snapToken = Snap::getSnapToken($params);
 
-                $this->createNotification($transaction);
+                // cek notifikasi
+                // $this->createNotification($transaction);
 
                 // Commit the transaction and decrement stock only if it was successful
                 DB::commit();
@@ -379,7 +380,7 @@ class BookingController extends Controller
         $transaction->save();
         
         // Buat notifikasi untuk semua status transaksi yang berhasil diupdate
-        // $this->createNotification($transaction);
+        $this->createNotification($transaction);
     }
 
     private function createNotification($transaction)

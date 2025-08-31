@@ -3,13 +3,14 @@
 @section('title', 'Rute Perjalanan')
 
 @push('before-style')
-    <!-- Leaflet CSS -->
+{{-- untuk cdn yang di load pada view RouteSpot ini selain cdn dari leaflet js dan leflet fullscreen
+    kita juga me-load cdn leaflet routing machine untuk menampilkan rute dari lokasi kita ke lokasi spot
+    yang kita pilih --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
         crossorigin="" />
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
@@ -126,181 +127,152 @@
 @endsection
 
 @push('after-scripts')
-<script>
-    // Map configuration
-    var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVvbmFsZGkxNSIsImEiOiJjbHIydWN4Z2oxNW1rMnhsbWpoYW5lbDIwIn0._QV7HJJnzCin4a0O6VExWQ';
+    <script>
+        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            mbUrl =
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVvbmFsZGkxNSIsImEiOiJjbHIydWN4Z2oxNW1rMnhsbWpoYW5lbDIwIn0._QV7HJJnzCin4a0O6VExWQ';
 
-    // Map layers
-    var satellite = L.tileLayer(mbUrl, {
-        id: 'mapbox/satellite-v9',
-        tileSize: 512,
-        zoomOffset: -1,
-        attribution: mbAttr
-    }),
-    dark = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        attribution: mbAttr
-    }),
-    streets = L.tileLayer(mbUrl, {
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        attribution: mbAttr
-    });
+        var satellite = L.tileLayer(mbUrl, {
+                id: 'mapbox/satellite-v9',
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: mbAttr
+            }),
+            dark = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                attribution: mbAttr
+            }),
+            streets = L.tileLayer(mbUrl, {
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: mbAttr
+            });
 
-    // Check geolocation support
-    if (!navigator.geolocation) {
-        console.log("Browser doesn't support geolocation");
-        alert("Browser Anda tidak mendukung geolocation. Silakan gunakan browser yang lebih modern.");
-    } else {
-        navigator.geolocation.getCurrentPosition(getPosition, showError);
-    }
 
-    // Initialize map
-    var data{{ $kantorcabangs->id }} = L.layerGroup();
-    var map = L.map('map', {
-        center: [{{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}],
-        fullscreenControl: {
-            pseudoFullscreen: false
-        },
-        zoom: 10,
-        layers: [dark, data{{ $kantorcabangs->id }}]
-    });
-
-    // Base layers
-    var baseLayers = {
-        "Streets": dark,
-        "Satellite": satellite,
-    };
-
-    // Overlay layers
-    var overlays = {
-        "{{ $kantorcabangs->name }}": data{{ $kantorcabangs->id }},
-    };
-
-    L.control.layers(baseLayers, overlays).addTo(map);
-
-    // Office marker
-    var officeIcon = L.divIcon({
-        html: '<div class="w-12 h-12 bg-indigo-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center"><i class="fas fa-building text-white"></i></div>',
-        className: 'custom-marker',
-        iconSize: [48, 48],
-        iconAnchor: [24, 24]
-    });
-
-    L.marker([{{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}], { icon: officeIcon })
-    .bindPopup(`
-        <div class="p-3 min-w-[250px]">
-            <img src="{{ Storage::url($kantorcabangs->image) }}" class="w-full h-32 object-cover rounded-lg mb-3">
-            <h4 class="font-semibold text-gray-900 mb-2">{{ $kantorcabangs->name }}</h4>
-            <p class="text-sm text-gray-600 mb-3">{{ $kantorcabangs->address }}</p>
-            <a href="/kantorcabang/{{ $kantorcabangs->id }}" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white text-center py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-200 w-full">
-                <i class="fas fa-info-circle mr-1"></i>Detail Kantor Cabang
-            </a>
-        </div>
-    `).addTo(map);
-
-    var marker, circle, latPos, longPos;
-
-    function getPosition(position) {
-        latPos = position.coords.latitude;
-        longPos = position.coords.longitude;
-        var accuracy = position.coords.accuracy;
-
-        if (marker) {
-            map.removeLayer(circle);
+        // untuk mendapatkan lokasi user kita akan menggunakan navigator object dari html5
+        // seperti di bawah
+        if (!navigator.geolocation) {
+            console.log("Browser doesn't support");
+        } else {
+            console.log(navigator.geolocation.getCurrentPosition(getPosition));
         }
 
-        // User location marker
-        var userIcon = L.divIcon({
-            html: '<div class="w-10 h-10 bg-green-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center animate-pulse"><i class="fas fa-user text-white text-sm"></i></div>',
+        var data{{ $kantorcabangs->id }} = L.layerGroup();
+
+        // fungsi ini untuk menampilkan map secara penuh pada browser
+        var map = L.map('map', {
+            center: [{{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}],
+            fullscreenControl: {
+                pseudoFullscreen: false
+            },
+            zoom: 10,
+            layers: [dark, data{{ $kantorcabangs->id }}]
+        });
+
+        // mengatur baselayer
+        var baseLayers = {
+            "Streets": dark,
+            "Streets2": streets,
+            "Satellite": satellite,
+        };
+
+        // mengatur overlayers
+        var overlays = {
+            "{{ $kantorcabangs->name }}": data{{ $kantorcabangs->id }},
+        };
+
+        // Office marker
+        var officeIcon = L.divIcon({
+            html: '<div class="w-12 h-12 bg-indigo-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center"><i class="fas fa-building text-white"></i></div>',
             className: 'custom-marker',
-            iconSize: [40, 40],
-            iconAnchor: [20, 20]
+            iconSize: [48, 48],
+            iconAnchor: [24, 24]
         });
 
-        marker = L.marker([latPos, longPos], { icon: userIcon });
-        circle = L.circle([latPos, longPos], {
-            radius: accuracy,
-            color: '#10b981',
-            fillColor: '#10b981',
-            fillOpacity: 0.1
-        });
-
-        var featureGroup = L.featureGroup([marker, circle])
-            .bindPopup(`
-                <div class="p-2 text-center">
-                    <h4 class="font-semibold text-green-600 mb-1">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
-                        Lokasi Anda
+        L.control.layers(baseLayers, overlays).addTo(map);
+        L.marker([{{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}], { icon: officeIcon }).bindPopup(
+            
+            `
+                <div class="p-3 min-w-[200px]">
+                    <h4 class="font-semibold text-indigo-600 mb-2">
+                        <i class="fas fa-building mr-1"></i>
+                        {{ $kantorcabangs->name }}
                     </h4>
-                    <p class="text-sm text-gray-600">Akurasi: ±${Math.round(accuracy)}m</p>
+                    <p class="text-sm text-gray-600 mb-2">{{ $kantorcabangs->address }}</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-phone mr-1"></i>
+                        <span>{{ $kantorcabangs->phone_number }}</span>
+                    </div>
                 </div>
-            `)
-            .addTo(map);
+            `
+        ).addTo(map);
 
-        map.fitBounds(featureGroup.getBounds());
 
-        // Create routing control
-        L.Routing.control({
-            waypoints: [
-                L.latLng(latPos, longPos),
-                L.latLng({{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}),
-            ],
-            lineOptions: {
-                styles: [{
-                    color: '#4f46e5',
-                    opacity: 0.8,
-                    weight: 6
-                }]
-            },
-            createMarker: function() {
-                return null; // Don't create default markers
-            },
-            routeWhileDragging: true,
-            geocoder: L.Control.Geocoder.nominatim(),
-            addWaypoints: false,
-            draggableWaypoints: false,
-            fitSelectedRoutes: true,
-            showAlternatives: true
-        }).addTo(map);
-    }
+        // Untuk bagian ini kita akan membuat function untuk mendapatkan lokasi koordinat user 
+        // membuat variabel marker, circle,latPos (latitude position user),longPos(longitude position user)
+        var marker, circle, latPos, longPos
 
-    function showError(error) {
-        var errorMessage = "";
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                errorMessage = "Akses lokasi ditolak. Silakan izinkan akses lokasi untuk melihat rute.";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                errorMessage = "Informasi lokasi tidak tersedia.";
-                break;
-            case error.TIMEOUT:
-                errorMessage = "Permintaan lokasi timeout.";
-                break;
-            default:
-                errorMessage = "Terjadi kesalahan yang tidak diketahui.";
-                break;
+        function getPosition(position) {
+            // console.log("ini latitudenya", position.coords.latitude);
+            // console.log("ini longitudenya", position.coords.longitude);
+
+            // pada var latPos, longPos dan accuracy kita akan mengambil nilai latitude longitude dan accuracy
+            // dengan sintaks position.coords di bawah kemudian memasukkannya pada variabel yang sudah di definisikan
+
+            var latPos = position.coords.latitude
+            var longPos = position.coords.longitude
+            var accuracy = position.coords.accuracy
+
+            if (marker) {
+                map.removeLayer(circle)
+            }
+
+            // User location marker
+            var userIcon = L.divIcon({
+                html: '<div class="w-10 h-10 bg-green-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center animate-pulse"><i class="fas fa-user text-white text-sm"></i></div>',
+                className: 'custom-marker',
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+            });
+
+            // Kemudian membuat marker dan circle dari masing-masing nilai dari variabel latPos dan longPos
+            // yang sudah kita definisikan diatas
+            marker = L.marker([latPos, longPos])
+            circle = L.circle([latPos, longPos]), {
+                radius: accuracy
+            }
+
+            // membuat featureGrooup sehinggankita bisa menambahkan beberapa opsi pada layer
+            // seperti di bawah kita menambahkan marker, circle, dan popup untuk di tampilkan pada peta
+            var featureGroup = L.featureGroup([marker, circle])
+                .bindPopup("<div class='text-center'><p><b>Lokasi Kamu Disini</b></p></div>")
+                .addTo(map)
+            map.fitBounds(featureGroup.getBounds())
+
+            // Setelah itu buat routing control untuk memuat waypoint (latitude dan longitude) 
+            // yang pertama waypoint dari lokasi kita dan yang kedua waypoint lokasi tujuan
+            // yang mana nilainya kita dapatkan dari $kantorcabangs->latitude dan $kantorcabangs->longitude
+
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(latPos, longPos),
+                    L.latLng({{ $kantorcabangs->latitude }}, {{ $kantorcabangs->longitude }}),
+                ],
+                // mengatur warna dan ukuran garis penghubung antara lokasi user dan tujuan
+                lineOptions: {
+                    styles: [{
+                        color: 'green',
+                        opacity: 1,
+                        weight: 3
+                    }]
+                },
+                createMarker: function() {
+                    return null
+                }
+            }).addTo(map);
+
         }
-        
-        // Show error message
-        var errorDiv = document.createElement('div');
-        errorDiv.className = 'bg-red-50 border border-red-200 rounded-xl p-4 mx-4 mt-4';
-        errorDiv.innerHTML = `
-            <div class="flex items-start space-x-3">
-                <i class="fas fa-exclamation-triangle text-red-500 mt-1"></i>
-                <div>
-                    <h3 class="font-semibold text-red-900 mb-1">Error Lokasi</h3>
-                    <p class="text-red-800 text-sm">${errorMessage}</p>
-                </div>
-            </div>
-        `;
-        
-        document.querySelector('#map').parentNode.insertBefore(errorDiv, document.querySelector('#map'));
-        
-        console.log("Geolocation error: " + errorMessage);
-    }
-</script>
+    </script>
 @endpush

@@ -74,7 +74,8 @@
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-sm text-gray-600">Alamat</p>
-                                    <p class="font-medium text-gray-900 break-words">{{ $profile->address ?: 'Belum diisi' }}</p>
+                                    <!-- <p class="font-medium text-gray-900 break-words">{{ $profile->address ?: 'Belum diisi' }}</p> -->
+                                     <p class="font-medium text-gray-900 break-words">RT.006/RW.001, Cikokol, Tangerang, Tangerang City, Banten 15117</p>
                                 </div>
                             </div>
                         </div>
@@ -88,13 +89,13 @@
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-2xl font-bold text-gray-900">Riwayat Transaksi</h3>
                         <div class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-lg text-sm font-medium">
-                            {{ $profile->transaction->count() }} Transaksi
+                            {{ $transactions->total() ?? 0 }} Transaksi
                         </div>
                     </div>
 
-                    @if ($profile->transaction->isNotEmpty())
+                    @if ($transactions && $transactions->count() > 0)
                         <div class="space-y-6">
-                            @foreach ($profile->transaction as $transaction)
+                            @foreach ($transactions as $transaction)
                                 <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow duration-200">
                                     <!-- Transaction Header -->
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
@@ -156,6 +157,61 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        <!-- Light Theme Pagination -->
+                        @if ($transactions->hasPages())
+                            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                                <!-- Results Info -->
+                                <div class="text-sm text-gray-500">
+                                    Showing {{ $transactions->firstItem() }} to {{ $transactions->lastItem() }} of {{ $transactions->total() }} results
+                                </div>
+
+                                <!-- Pagination Controls -->
+                                <div class="flex items-center">
+                                    <div class="bg-white border border-gray-200 rounded-lg px-1 py-1 flex items-center space-x-1 shadow-sm">
+                                        {{-- Previous Page Link --}}
+                                        @if ($transactions->onFirstPage())
+                                            <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                                                <i class="fas fa-chevron-left text-sm"></i>
+                                            </span>
+                                        @else
+                                            <a href="{{ $transactions->previousPageUrl() }}" 
+                                               class="px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded transition-colors duration-200">
+                                                <i class="fas fa-chevron-left text-sm"></i>
+                                            </a>
+                                        @endif
+
+                                        {{-- Page Numbers --}}
+                                        @php
+                                            $start = max(1, $transactions->currentPage() - 2);
+                                            $end = min($transactions->lastPage(), $transactions->currentPage() + 2);
+                                        @endphp
+
+                                        @for ($page = $start; $page <= $end; $page++)
+                                            @if ($page == $transactions->currentPage())
+                                                <span class="px-3 py-2 bg-gray-200 text-gray-800 rounded font-medium">{{ $page }}</span>
+                                            @else
+                                                <a href="{{ $transactions->url($page) }}" 
+                                                   class="px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 rounded transition-colors duration-200">{{ $page }}</a>
+                                            @endif
+                                        @endfor
+
+                                        {{-- Next Page Link --}}
+                                        @if ($transactions->hasMorePages())
+                                            <a href="{{ $transactions->nextPageUrl() }}" 
+                                               class="px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded transition-colors duration-200">
+                                                <i class="fas fa-chevron-right text-sm"></i>
+                                            </a>
+                                        @else
+                                            <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                                                <i class="fas fa-chevron-right text-sm"></i>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                     @else
                         <!-- Empty State -->
                         <div class="text-center py-12">

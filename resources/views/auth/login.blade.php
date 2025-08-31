@@ -31,14 +31,14 @@
         <p class="text-lg text-gray-600 leading-relaxed">Masuk untuk melanjutkan perjalanan wisata terbaik Anda bersama kami.</p>
         
         <!-- Decorative illustration placeholder -->
-        <div class="mt-8 relative">
+        <!-- <div class="mt-8 relative">
           <div class="w-full h-64 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl flex items-center justify-center shadow-lg">
             <div class="text-center">
               <i class="fas fa-route text-indigo-400 text-6xl mb-4"></i>
               <p class="text-indigo-600 font-medium">Perjalanan Menanti</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

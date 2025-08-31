@@ -189,20 +189,20 @@
     });
 
     // Add office markers
-    @foreach ($kantorcabangs as $item)
-        L.marker([{{ $item->latitude }}, {{ $item->longitude }}], {
+    @foreach ($kantorcabangs as $kantorcabang)
+        L.marker([{{ $kantorcabang->latitude }}, {{ $kantorcabang->longitude }}], {
             icon: officeIcon
         })
         .bindPopup(`
             <div class="p-2 min-w-[250px]">
-                <img src="{{ Storage::url($item->image) }}" class="w-full h-32 object-cover rounded-lg mb-3">
-                <h4 class="font-semibold text-gray-900 mb-2">{{ $item->name }}</h4>
-                <p class="text-sm text-gray-600 mb-3">{{ Str::limit($item->address, 100) }}</p>
+                <img src="{{ Storage::url($kantorcabang->image) }}" class="w-full h-32 object-cover rounded-lg mb-3">
+                <h4 class="font-semibold text-gray-900 mb-2">{{ $kantorcabang->name }}</h4>
+                <p class="text-sm text-gray-600 mb-3">{{ Str::limit($kantorcabang->address, 100) }}</p>
                 <div class="flex space-x-2">
-                    <a href="{{ route('cek-rute', $item->id) }}" class="flex-1 bg-green-500 hover:bg-green-600 text-white text-center py-2 px-3 rounded-lg text-xs font-medium transition-colors duration-200">
+                    <a href="{{ route('cek-rute', $kantorcabang->id) }}" class="flex-1 bg-green-500 hover:bg-green-600 text-white text-center py-2 px-3 rounded-lg text-xs font-medium transition-colors duration-200">
                         <i class="fas fa-route mr-1"></i>Lihat Rute
                     </a>
-                    <a href="/kantorcabang/{{ $item->id }}" class="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-center py-2 px-3 rounded-lg text-xs font-medium transition-colors duration-200">
+                    <a href="/kantorcabang/{{ $kantorcabang->id }}" class="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-center py-2 px-3 rounded-lg text-xs font-medium transition-colors duration-200">
                         <i class="fas fa-info-circle mr-1"></i>Detail
                     </a>
                 </div>

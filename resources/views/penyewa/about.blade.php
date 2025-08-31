@@ -149,37 +149,127 @@
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                     Kunjungi kantor cabang kami yang tersebar di berbagai lokasi untuk mendapatkan informasi lengkap terkait pemesanan bus pariwisata.
                 </p>
+                
+                <!-- Branch Count -->
+                <div class="mt-6">
+                    <span class="inline-flex items-center px-4 py-2 bg-indigo-50 text-indigo-600 rounded-lg text-sm font-medium">
+                        <i class="fas fa-building mr-2"></i>
+                        {{ $kantorcabangs->total() ?? 0 }} Kantor Cabang
+                    </span>
+                </div>
             </div>
 
-            <!-- Branches Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($kantorcabangs as $index => $kantorcabang)
-                <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ Storage::url($kantorcabang->image) }}" 
-                             alt="{{ $kantorcabang->name }}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
-                            <a href="/kantorcabang/{{ $kantorcabang->id }}">{{ $kantorcabang->name }}</a>
-                        </h3>
-                        <div class="flex items-start space-x-2 text-gray-600">
-                            <i class="fas fa-map-marker-alt text-indigo-500 mt-1 flex-shrink-0"></i>
-                            <p class="text-sm leading-relaxed">
-                                {{ substr($kantorcabang->address, 0, 80) }}{{ strlen($kantorcabang->address) > 80 ? '...' : '' }}
-                            </p>
+            @if ($kantorcabangs && $kantorcabangs->count() > 0)
+                <!-- Branches Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach ($kantorcabangs as $index => $kantorcabang)
+                    <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="{{ Storage::url($kantorcabang->image) }}" 
+                                 alt="{{ $kantorcabang->name }}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
-                        <a href="/kantorcabang/{{ $kantorcabang->id }}" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium text-sm mt-4">
-                            Lihat Detail
-                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
+                                <a href="/kantorcabang/{{ $kantorcabang->id }}">{{ $kantorcabang->name }}</a>
+                            </h3>
+                            <div class="flex items-start space-x-2 text-gray-600 mb-4">
+                                <i class="fas fa-map-marker-alt text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p class="text-sm leading-relaxed">
+                                    {{ substr($kantorcabang->address, 0, 80) }}{{ strlen($kantorcabang->address) > 80 ? '...' : '' }}
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <a href="/kantorcabang/{{ $kantorcabang->id }}" 
+                                   class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                    Lihat Detail
+                                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                </a>
+                                
+                                @if ($kantorcabang->phone_number)
+                                <a href="https://wa.me/{{ $kantorcabang->phone_number }}" 
+                                   target="_blank"
+                                   class="inline-flex items-center text-green-600 hover:text-green-800 text-sm">
+                                    <i class="fab fa-whatsapp mr-1"></i>
+                                    Kontak
+                                </a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
+
+                <!-- Light Theme Pagination -->
+                @if ($kantorcabangs->hasPages())
+                    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                        <!-- Results Info -->
+                        <div class="text-sm text-gray-500">
+                            Showing {{ $kantorcabangs->firstItem() }} to {{ $kantorcabangs->lastItem() }} of {{ $kantorcabangs->total() }} kantor cabang
+                        </div>
+
+                        <!-- Pagination Controls -->
+                        <div class="flex items-center">
+                            <div class="bg-white border border-gray-200 rounded-lg px-1 py-1 flex items-center space-x-1 shadow-sm">
+                                {{-- Previous Page Link --}}
+                                @if ($kantorcabangs->onFirstPage())
+                                    <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                                        <i class="fas fa-chevron-left text-sm"></i>
+                                    </span>
+                                @else
+                                    <a href="{{ $kantorcabangs->previousPageUrl() }}" 
+                                       class="px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded transition-colors duration-200">
+                                        <i class="fas fa-chevron-left text-sm"></i>
+                                    </a>
+                                @endif
+
+                                {{-- Page Numbers --}}
+                                @php
+                                    $start = max(1, $kantorcabangs->currentPage() - 2);
+                                    $end = min($kantorcabangs->lastPage(), $kantorcabangs->currentPage() + 2);
+                                @endphp
+
+                                @for ($page = $start; $page <= $end; $page++)
+                                    @if ($page == $kantorcabangs->currentPage())
+                                        <span class="px-3 py-2 bg-gray-700 text-white rounded font-medium">{{ $page }}</span>
+                                    @else
+                                        <a href="{{ $kantorcabangs->url($page) }}" 
+                                           class="px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded transition-colors duration-200">{{ $page }}</a>
+                                    @endif
+                                @endfor
+
+                                {{-- Next Page Link --}}
+                                @if ($kantorcabangs->hasMorePages())
+                                    <a href="{{ $kantorcabangs->nextPageUrl() }}" 
+                                       class="px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded transition-colors duration-200">
+                                        <i class="fas fa-chevron-right text-sm"></i>
+                                    </a>
+                                @else
+                                    <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                                        <i class="fas fa-chevron-right text-sm"></i>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+            @else
+                <!-- Empty State -->
+                <div class="text-center py-12">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-building text-gray-400 text-3xl"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Kantor Cabang</h4>
+                    <p class="text-gray-600 mb-6">Informasi kantor cabang akan segera tersedia. Hubungi customer service untuk informasi lebih lanjut.</p>
+                    <a href="/bookingpage" 
+                       class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-phone mr-2"></i>
+                        Hubungi Kami
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

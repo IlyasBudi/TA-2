@@ -14,21 +14,56 @@ class PenyewaController extends Controller
 {
     public function landingpage()
     {
-        $kantorcabangs = KantorCabang::all();
+        // $kantorcabangs = KantorCabang::all();
+        $kantorcabangs = KantorCabang::latest()->take(6)->get();
         return view("penyewa.landingpage", ["kantorcabangs" => $kantorcabangs]);
     }
 
-    public function about()
+    public function about(Request $request)
     {
-        $kantorcabangs = KantorCabang::all();
-        return view("penyewa.about", ["kantorcabangs" => $kantorcabangs]);
+        // Ambil page size dari query (?per_page=), batasi agar wajar
+        $perPage = (int) $request->get('per_page', 6);     // default 6 per halaman
+        $perPage = max(3, min($perPage, 50));              // clamp 3–50
+
+        // Jika butuh urutan tertentu, silakan ganti orderBy sesuai kebutuhan
+        $kantorcabangs = KantorCabang::orderBy('created_at', 'asc')
+            ->paginate($perPage)              // atau ->simplePaginate($perPage)
+            ->withQueryString();              // pertahankan query string (per_page, filter, dll)
+
+        return view('penyewa.about', compact('kantorcabangs'));
     }
 
-    public function detailKantorCabang($id)
+    public function detailKantorCabang(Request $request, $id)
     {
-        // $bus = bus::all();
-        $kantorcabang = KantorCabang::with('bus','destination' , 'staff')->findOrFail($id);
-        return view('penyewa.detailkantorcabang', ['kantorcabang' => $kantorcabang]);
+        // ukuran halaman (boleh override via query string)
+        $busPerPage  = max(1, (int) $request->get('bus_per_page', 10));
+        $destPerPage = max(1, (int) $request->get('dest_per_page', 6));
+        $staffPerPage= max(1, (int) $request->get('staff_per_page', 6));
+
+        // ambil kantor cabang + hitung total item tiap relasi (opsional untuk badge)
+        $kantorcabang = KantorCabang::query()
+            ->findOrFail($id)
+            ->loadCount(['bus', 'destination', 'staff']);
+
+        // paginate tiap relasi (tidak bisa lewat with, harus query relasinya)
+        $buses = $kantorcabang->bus()               // sesuaikan: ->with('tipe') dst kalau perlu
+            ->latest('created_at')
+            ->paginate($busPerPage, ['*'], 'bus_page')
+            ->withQueryString();
+
+        $destinations = $kantorcabang->destination() // sesuaikan eager lain kalau perlu
+            ->latest('created_at')
+            ->paginate($destPerPage, ['*'], 'dest_page')
+            ->withQueryString();
+
+        $staffs = $kantorcabang->staff()
+            ->latest('created_at')
+            ->paginate($staffPerPage, ['*'], 'staff_page')
+            ->withQueryString();
+
+        return view('penyewa.detailkantorcabang', compact(
+            'kantorcabang', 'buses', 'destinations', 'staffs'
+        ));
     }
 
     public function detailBus($id)

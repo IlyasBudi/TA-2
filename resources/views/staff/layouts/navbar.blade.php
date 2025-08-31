@@ -184,7 +184,7 @@
       // Cek notifikasi setiap 30 detik
       notificationPollingInterval = setInterval(function() {
           checkForNewNotifications();
-      }, 1000); // 1 detik
+      }, 500000); // 1 menit, (1000 = 1 detik)
   }
 
   // Fungsi untuk mengecek notifikasi baru

@@ -13,13 +13,21 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProfileController extends Controller
 {
-    public function profile()
+    public function profile(Request $request)
     {
-        $profile = User::with(['transaction' => function ($query) {
-            $query->with('detailtransaction')->orderBy('created_at', 'desc');
-        }])->findOrFail(Auth::user()->id);
+        $perPage = (int) $request->get('per_page', 10);
 
-        return view('penyewa.profile.index', compact("profile"));
+        // Ambil profil user
+        $profile = Auth::user(); // atau: User::findOrFail(Auth::id());
+
+        // Paginate transaksi milik user + eager load detail
+        $transactions = $profile->transaction() // nama relasi mengikuti punyamu
+            ->with('detailtransaction')
+            ->latest('created_at')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return view('penyewa.profile.index', compact('profile', 'transactions'));
     }
 
     public function editProfile()
