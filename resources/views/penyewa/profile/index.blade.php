@@ -74,8 +74,7 @@
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-sm text-gray-600">Alamat</p>
-                                    <!-- <p class="font-medium text-gray-900 break-words">{{ $profile->address ?: 'Belum diisi' }}</p> -->
-                                     <p class="font-medium text-gray-900 break-words">RT.006/RW.001, Cikokol, Tangerang, Tangerang City, Banten 15117</p>
+                                    <p class="font-medium text-gray-900 break-words">{{ $profile->address ?: 'Belum diisi' }}</p>
                                 </div>
                             </div>
                         </div>

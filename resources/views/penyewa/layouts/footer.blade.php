@@ -60,7 +60,7 @@
                     </a>
                     <a href="/listharga" 
                        class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">
-                        Daftar Harga
+                        Pricing
                     </a>
                     <a href="/maps" 
                        class="block text-gray-300 hover:text-indigo-400 transition-colors duration-200">

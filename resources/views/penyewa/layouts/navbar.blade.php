@@ -167,7 +167,11 @@ class="fixed w-full top-0 z-50 transition-all duration-500">
             </a>
             <a href="/listharga" 
                class="block px-3 py-2 rounded-lg text-base font-medium {{ request()->is('listharga') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' }} transition-colors duration-200">
-                Harga
+                Pricing
+            </a>
+            <a href="/maps" 
+               class="block px-3 py-2 rounded-lg text-base font-medium {{ request()->is('maps') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' }} transition-colors duration-200">
+                Maps
             </a>
         </div>
     </div>
